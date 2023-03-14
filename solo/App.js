@@ -9,6 +9,7 @@ const Stack = createStackNavigator();
 const App = () => {
 
 
+
   return (
     <NavigationContainer>
       <View style={styles.container}>
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    height: 50,
     justifyContent: 'center',
   },
 });
