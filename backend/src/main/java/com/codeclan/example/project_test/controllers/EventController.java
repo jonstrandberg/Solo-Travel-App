@@ -24,7 +24,12 @@ public class EventController {
 
 //  Get all Events
     @GetMapping(value = "/events")
-    public ResponseEntity<List<Event>> getAllEvents(){
+    public ResponseEntity<List<Event>> getAllEvents(
+            @RequestParam(name = "location_id", required = false) Long id
+    ){
+        if (id != null){
+            return new ResponseEntity<>(eventRepository.findByLocationId(id), HttpStatus.OK);
+        }
         return new ResponseEntity<>(eventRepository.findAll(), HttpStatus.OK);
     }
 
