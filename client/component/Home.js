@@ -23,18 +23,8 @@ const Home = ({ navigation }) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => <Text>{item.name}, {item.country.name}</Text>}
       />
-      <Header navigation={navigation} />
     </View>
   );
 }
-
-const Header = ({ navigation }) => {
-  return (
-    <View>
-      <Text onPress={() => navigation.navigate('Home')}>Home</Text>
-      <Text onPress={() => navigation.navigate('Event')}>Event</Text>
-    </View>
-  );
-};
 
 export default Home
