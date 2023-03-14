@@ -21,7 +21,7 @@ public class EventController {
     @Autowired
     EventRepository eventRepository;
 
-//  Get All Events
+//  Get all Events
     @GetMapping(value = "/events")
     public ResponseEntity<List<Event>> getAllEvents(){
         return new ResponseEntity<>(eventRepository.findAll(), HttpStatus.OK);
