@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native'
 
-const Home = ({ navigation }) => {
+const Home = () => {
   const [location, setLocation] = useState([])
+  const navigation = useNavigation();
 
   useEffect(() => {
     getLocations()
@@ -16,15 +18,23 @@ const Home = ({ navigation }) => {
       })
   }
 
+  const handleCityPress = (city) => {
+    navigation.navigate('CityDetails', { city });
+  };
+
   return (
     <View>
       <FlatList
         data={location}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Text>{item.name}, {item.country.name}</Text>}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => handleCityPress(item)}>
+            <Text>{item.name}, {item.country.name}</Text>
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
 }
 
-export default Home
+export default Home;
