@@ -150,6 +150,14 @@ public class EventController {
         return ResponseEntity.ok(updatedEvent);
     }
 
+    //  Delete Event by ID
+    @DeleteMapping(value = "/events/{id}")
+    public ResponseEntity deleteEvent(@PathVariable Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
 
+        eventRepository.delete(event);
+        return ResponseEntity.noContent().build();
+    }
 
 }
