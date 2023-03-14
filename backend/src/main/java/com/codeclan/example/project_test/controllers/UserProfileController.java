@@ -1,6 +1,6 @@
 package com.codeclan.example.project_test.controllers;
 
-import com.codeclan.example.project_test.models.Event;
+import com.codeclan.example.project_test.models.Location;
 import com.codeclan.example.project_test.models.UserProfile;
 import com.codeclan.example.project_test.repositories.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +96,7 @@ public class UserProfileController {
         return ResponseEntity.ok(updatedUserProfile);
     }
 
-    //  Sets age
+    //  Sets Age
     @PutMapping("/user_profiles/{id}/set_age")
     public ResponseEntity<UserProfile> setAge(
             @PathVariable long id,
@@ -113,7 +113,7 @@ public class UserProfileController {
         return ResponseEntity.ok(updatedUserProfile);
     }
 
-    //  Sets avatar url
+    //  Sets Avatar URL
     @PutMapping("/user_profiles/{id}/set_avatar_url")
     public ResponseEntity<UserProfile> setAvatarUrl(
             @PathVariable long id,
@@ -124,6 +124,23 @@ public class UserProfileController {
                 .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
 
         updatedUserProfile.setAvatarUrl(avatarUrl.get("new"));
+
+        userProfileRepository.save(updatedUserProfile);
+
+        return ResponseEntity.ok(updatedUserProfile);
+    }
+
+    //  Sets Location
+    @PutMapping("/user_profiles/{id}/set_location")
+    public ResponseEntity<UserProfile> setLocation(
+            @PathVariable long id,
+            @RequestBody HashMap<String, Location> location) {
+
+        UserProfile updatedUserProfile = userProfileRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
+
+        updatedUserProfile.setLocation(location.get("new"));
 
         userProfileRepository.save(updatedUserProfile);
 
