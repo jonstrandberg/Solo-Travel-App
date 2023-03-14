@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.rmi.ServerException;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -43,6 +45,22 @@ public class EventController {
         } else {
             throw new ServerException("error: could not create new event");
         }
+    }
+
+    @PutMapping("/events/{id}/set_title")
+    public ResponseEntity<Event> setEventTitle(
+            @PathVariable long id,
+            @RequestBody HashMap<String, LocalDateTime> date) {
+
+        Event updateEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Event Not Found: " + id));
+
+        updateEvent.setDate(date.get("new"));
+
+        eventRepository.save(updateEvent);
+
+        return ResponseEntity.ok(updateEvent);
     }
 
 
