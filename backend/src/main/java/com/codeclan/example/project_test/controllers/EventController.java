@@ -47,21 +47,21 @@ public class EventController {
         }
     }
 
-    @PutMapping("/events/{id}/set_title")
-    public ResponseEntity<Event> setEventTitle(
-            @PathVariable long id,
-            @RequestBody HashMap<String, LocalDateTime> date) {
-
-        Event updateEvent = eventRepository
-                .findById(id)
-                .orElseThrow(() -> new RuntimeException("Event Not Found: " + id));
-
-        updateEvent.setDate(date.get("new"));
-
-        eventRepository.save(updateEvent);
-
-        return ResponseEntity.ok(updateEvent);
-    }
+//    @PutMapping("/events/{id}/set_title")
+//    public ResponseEntity<Event> setEventTitle(
+//            @PathVariable long id,
+//            @RequestBody HashMap<String, LocalDateTime> date) {
+//
+//        Event updateEvent = eventRepository
+//                .findById(id)
+//                .orElseThrow(() -> new RuntimeException("Event Not Found: " + id));
+//
+//        updateEvent.setDate(date.get("new"));
+//
+//        eventRepository.save(updateEvent);
+//
+//        return ResponseEntity.ok(updateEvent);
+//    }
 
 
 
