@@ -10,4 +10,5 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findByLocationId(Long Id);
+    List<Event> findBySignUpListUserProfileId(Long Id);
 }

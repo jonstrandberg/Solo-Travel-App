@@ -22,13 +22,17 @@ public class EventController {
     @Autowired
     EventRepository eventRepository;
 
-//  Get all Events
+//  Get all Events, Get all Events a user is attending, Get all Events for a location
     @GetMapping(value = "/events")
     public ResponseEntity<List<Event>> getAllEvents(
-            @RequestParam(name = "location_id", required = false) Long id
+            @RequestParam(name = "user_profile_id", required = false) Long userProfileId,
+            @RequestParam(name = "location_id", required = false) Long locationId
     ){
-        if (id != null){
-            return new ResponseEntity<>(eventRepository.findByLocationId(id), HttpStatus.OK);
+        if (userProfileId != null){
+            return new ResponseEntity<>(eventRepository.findBySignUpListUserProfileId(userProfileId), HttpStatus.OK);
+        }
+        if (locationId != null){
+            return new ResponseEntity<>(eventRepository.findByLocationId(locationId), HttpStatus.OK);
         }
         return new ResponseEntity<>(eventRepository.findAll(), HttpStatus.OK);
     }

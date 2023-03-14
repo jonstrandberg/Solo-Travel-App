@@ -22,10 +22,10 @@ public class UserProfileController {
     //  Get all UserProfiles
     @GetMapping(value = "/user_profiles")
     public ResponseEntity<List<UserProfile>> getAllUserProfiles(
-            @RequestParam(name = "location_id", required = false) Long id
+            @RequestParam(name = "location_id", required = false) Long locationId
     ){
-        if (id != null) {
-            return new ResponseEntity<>(userProfileRepository.findByLocationId(id), HttpStatus.OK);
+        if (locationId != null) {
+            return new ResponseEntity<>(userProfileRepository.findByLocationId(locationId), HttpStatus.OK);
         }
         return new ResponseEntity<>(userProfileRepository.findAll(), HttpStatus.OK);
     }
