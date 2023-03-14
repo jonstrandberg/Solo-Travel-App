@@ -90,6 +90,18 @@ public class DataLoader implements ApplicationRunner {
         Country egypt = new Country("Egypt");
         countryRepository.save(egypt);
 
+        Country portugal = new Country("Portugal");
+        countryRepository.save(portugal);
+
+        Country austria = new Country("Austria");
+        countryRepository.save(austria);
+
+        Country italy = new Country("Italy");
+        countryRepository.save(italy);
+
+        Country sweden = new Country("Sweden");
+        countryRepository.save(sweden);
+
 //      Locations
         Location edinburgh = new Location("Edinburgh", scotland);
         locationRepository.save(edinburgh);
@@ -99,6 +111,25 @@ public class DataLoader implements ApplicationRunner {
 
         Location munich = new Location("Munich", germany);
         locationRepository.save(munich);
+
+        Location porto = new Location("Porto", portugal);
+        locationRepository.save(porto);
+
+        Location lisbon = new Location("Lisbon", portugal);
+        locationRepository.save(lisbon);
+
+        Location vienna = new Location("Vienna", austria);
+        locationRepository.save(vienna);
+
+        Location cairo = new Location("Cairo", egypt);
+        locationRepository.save(cairo);
+
+        Location stockholm = new Location("Stockholm", sweden);
+        locationRepository.save(stockholm);
+
+        Location rome = new Location("Rome", italy);
+        locationRepository.save(rome);
+
 
         // Users
         UserProfile user1 = new UserProfile("Johnny Sweden", "sweden.png", "Gothernberg", "Scotland", 37, munich);
@@ -125,6 +156,24 @@ public class DataLoader implements ApplicationRunner {
 
         Event event4 = new Event("Pub Crawl", "20:00", "3 hours", "A famous tour across the Grassmarket and Cowgate", edinburgh, "19-03-2023");
         eventRepository.save(event4);
+
+        Event event5 = new Event("Carnaval de Lisboa", "14:00", "6 hours", "A colorful celebration of Portuguese culture", lisbon, "21-03-2023");
+        eventRepository.save(event5);
+
+        Event event6 = new Event("Vienna Ball Season", "19:00", "8 hours", "A formal event featuring ballroom dancing and live music", vienna, "22-03-2023");
+        eventRepository.save(event6);
+
+        Event event7 = new Event("Pyramids of Giza Sound and Light Show", "19:00", "2 hours", "Experience the history of the pyramids through a unique light and sound show", cairo, "23-03-2023");
+        eventRepository.save(event7);
+
+        Event event8 = new Event("Stockholm Marathon", "09:00", "6 hours", "A scenic run through the streets of Stockholm", stockholm, "24-03-2023");
+        eventRepository.save(event8);
+
+        Event event9 = new Event("Rome International Film Festival", "18:00", "4 hours", "A showcase of international films in the heart of Rome", rome, "25-03-2023");
+        eventRepository.save(event9);
+
+        Event event10 = new Event("Porto Wine Festival", "12:00", "8 hours", "Sample the famous port wine of Porto while enjoying live music and entertainment", porto, "26-03-2023");
+        eventRepository.save(event10);
 
         // Sign Ups
         SignUp signUp1 = new SignUp(user1, event1);
