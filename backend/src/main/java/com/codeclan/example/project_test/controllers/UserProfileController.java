@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.rmi.ServerException;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -43,4 +44,90 @@ public class UserProfileController {
             throw new ServerException("error: could not create new user profile");
         }
     }
+
+    //  Sets Display Name
+    @PutMapping("/user_profiles/{id}/set_display_name")
+    public ResponseEntity<UserProfile> setDisplayName(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> displayName) {
+
+        UserProfile updatedUserProfile = userProfileRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
+
+        updatedUserProfile.setDisplayName(displayName.get("new"));
+
+        userProfileRepository.save(updatedUserProfile);
+
+        return ResponseEntity.ok(updatedUserProfile);
+    }
+
+    //  Sets Home Town
+    @PutMapping("/user_profiles/{id}/set_home_town")
+    public ResponseEntity<UserProfile> setHomeTown(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> homeTown) {
+
+        UserProfile updatedUserProfile = userProfileRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
+
+        updatedUserProfile.setHomeTown(homeTown.get("new"));
+
+        userProfileRepository.save(updatedUserProfile);
+
+        return ResponseEntity.ok(updatedUserProfile);
+    }
+
+    //  Sets Nationality
+    @PutMapping("/user_profiles/{id}/set_nationality")
+    public ResponseEntity<UserProfile> setNationality(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> nationality) {
+
+        UserProfile updatedUserProfile = userProfileRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
+
+        updatedUserProfile.setNationality(nationality.get("new"));
+
+        userProfileRepository.save(updatedUserProfile);
+
+        return ResponseEntity.ok(updatedUserProfile);
+    }
+
+    //  Sets age
+    @PutMapping("/user_profiles/{id}/set_age")
+    public ResponseEntity<UserProfile> setAge(
+            @PathVariable long id,
+            @RequestBody HashMap<String, Integer> age) {
+
+        UserProfile updatedUserProfile = userProfileRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
+
+        updatedUserProfile.setAge(age.get("new"));
+
+        userProfileRepository.save(updatedUserProfile);
+
+        return ResponseEntity.ok(updatedUserProfile);
+    }
+
+    //  Sets avatar url
+    @PutMapping("/user_profiles/{id}/set_avatar_url")
+    public ResponseEntity<UserProfile> setAvatarUrl(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> avatarUrl) {
+
+        UserProfile updatedUserProfile = userProfileRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
+
+        updatedUserProfile.setAvatarUrl(avatarUrl.get("new"));
+
+        userProfileRepository.save(updatedUserProfile);
+
+        return ResponseEntity.ok(updatedUserProfile);
+    }
+
 }
