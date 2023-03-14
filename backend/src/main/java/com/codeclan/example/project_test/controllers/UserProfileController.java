@@ -47,7 +47,7 @@ public class UserProfileController {
 
     //  Sets Display Name
     @PutMapping("/user_profiles/{id}/set_display_name")
-    public ResponseEntity<UserProfile> setDisplayName(
+    public ResponseEntity<UserProfile> setUserProfileDisplayName(
             @PathVariable long id,
             @RequestBody HashMap<String, String> displayName) {
 
@@ -64,7 +64,7 @@ public class UserProfileController {
 
     //  Sets Home Town
     @PutMapping("/user_profiles/{id}/set_home_town")
-    public ResponseEntity<UserProfile> setHomeTown(
+    public ResponseEntity<UserProfile> setUserProfileHomeTown(
             @PathVariable long id,
             @RequestBody HashMap<String, String> homeTown) {
 
@@ -81,7 +81,7 @@ public class UserProfileController {
 
     //  Sets Nationality
     @PutMapping("/user_profiles/{id}/set_nationality")
-    public ResponseEntity<UserProfile> setNationality(
+    public ResponseEntity<UserProfile> setUserProfileNationality(
             @PathVariable long id,
             @RequestBody HashMap<String, String> nationality) {
 
@@ -98,7 +98,7 @@ public class UserProfileController {
 
     //  Sets Age
     @PutMapping("/user_profiles/{id}/set_age")
-    public ResponseEntity<UserProfile> setAge(
+    public ResponseEntity<UserProfile> setUserProfileAge(
             @PathVariable long id,
             @RequestBody HashMap<String, Integer> age) {
 
@@ -115,7 +115,7 @@ public class UserProfileController {
 
     //  Sets Avatar URL
     @PutMapping("/user_profiles/{id}/set_avatar_url")
-    public ResponseEntity<UserProfile> setAvatarUrl(
+    public ResponseEntity<UserProfile> setUserProfileAvatarUrl(
             @PathVariable long id,
             @RequestBody HashMap<String, String> avatarUrl) {
 
@@ -132,7 +132,7 @@ public class UserProfileController {
 
     //  Sets Location
     @PutMapping("/user_profiles/{id}/set_location")
-    public ResponseEntity<UserProfile> setLocation(
+    public ResponseEntity<UserProfile> setUserProfileLocation(
             @PathVariable long id,
             @RequestBody HashMap<String, Location> location) {
 
@@ -147,6 +147,6 @@ public class UserProfileController {
         return ResponseEntity.ok(updatedUserProfile);
     }
 
-    
+
 
 }
