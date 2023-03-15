@@ -22,8 +22,10 @@ function CityDetails() {
 
   return (
     <View>
-      <Text>{city.name}</Text>
-      <Text>{city.country.name}</Text>
+
+      <Text>City name: {city.name}</Text>
+      <Text>Country: {city.country.name}</Text>
+
       <FlatList
         data={events}
         keyExtractor={(item, index) => index.toString()}
@@ -33,6 +35,7 @@ function CityDetails() {
           </TouchableOpacity>
         )}
       />
+
     </View>
   );
 }
