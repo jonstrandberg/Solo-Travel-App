@@ -70,13 +70,56 @@ export const addEvent = async function (event) {
 //         {return res.json()})
 // }
 
-export const getEventsByUserProfileId = async function(userProfileId) {
-    return fetch('http://localhost:8080/events?user_id=' + id.toString(userProfileId), {
-        method: 'GET',
-    })
-        .then((response) => response.json())
-        .then((res) => {
-            {return res.json()};
+export const getEventsBookedByUserProfileId = async function(userProfileId) {
+    try {
+        const response = await fetch('http://localhost:8080/events?user_profile_id=' + id.toString(userProfileId), {
+            method: 'GET',
         });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('There was a problem with the request:', error);
+        throw error;
     }
-    
+};
+
+
+// export const getEventsByUserProfileId = async function(userProfileId) {
+//     return fetch('http://localhost:8080/events?user_profile_id=' + id.toString(userProfileId), {
+//         method: 'GET',
+//     })
+//         .then((res) => {
+//             {return res.json()};
+//         });
+//     }
+
+export const getEventsByLocationId = async function(locationId) {
+    try {
+        const response = await fetch('http://localhost:8080/events?location_id=' + id.toString(locationId), {
+            method: 'GET',
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('There was a problem with the request:', error);
+        throw error;
+    }
+};
+
+
+// export const getEventsByLocationId = async function(locationId) {
+//     return fetch('http://localhost:8080/events?location_id=' + id.toString(locationId), {
+//         method: 'GET',
+//     })
+//         .then((res) => {
+//             {return res.json()};
+//         });
+//     }
+
+
