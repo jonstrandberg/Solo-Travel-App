@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer} from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons"
@@ -7,13 +7,7 @@ import Home from "./components/Home";
 import Event from "./components/Event";
 import Profile from "./components/Profile";
 
-// Screen names
-const homeDisplayName = 'Home'
-const eventDisplayName = 'Events'
-const profileDisplayName = 'Profile'
-
 const Tab = createBottomTabNavigator()
-
 
 const App = () => {
 
