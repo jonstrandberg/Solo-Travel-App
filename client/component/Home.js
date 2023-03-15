@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Cities" component={CitiesList}  />
-      <Stack.Screen name="CityDetails" component={CityDetails}  />
+      <Stack.Screen name="CityDetails" component={CityDetails} options={({ route }) => ({ title: route.params.city.name })}/>
     </Stack.Navigator>
   )
 }
