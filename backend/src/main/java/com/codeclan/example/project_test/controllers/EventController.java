@@ -26,8 +26,12 @@ public class EventController {
     @GetMapping(value = "/events")
     public ResponseEntity<List<Event>> getAllEvents(
             @RequestParam(name = "user_profile_id", required = false) Long userProfileId,
-            @RequestParam(name = "location_id", required = false) Long locationId
+            @RequestParam(name = "location_id", required = false) Long locationId,
+            @RequestParam(name = "creator_id", required = false) Long creatorId
     ){
+        if (creatorId != null){
+            return new ResponseEntity<>(eventRepository.findByCreatorId(creatorId), HttpStatus.OK);
+        }
         if (userProfileId != null){
             return new ResponseEntity<>(eventRepository.findBySignUpListUserProfileId(userProfileId), HttpStatus.OK);
         }
@@ -153,6 +157,40 @@ public class EventController {
                 .orElseThrow(() -> new RuntimeException("event not found: " + id));
 
         updatedEvent.setLocation(location.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    //  Sets Event Capacity
+    @PutMapping("/events/{id}/set_capacity")
+    public ResponseEntity<Event> setEventCapacity(
+            @PathVariable long id,
+            @RequestBody HashMap<String, Integer> capacity) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setCapacity(capacity.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    //  Sets Event Creator (don't know if we need this??)
+    @PutMapping("/events/{id}/set_creator")
+    public ResponseEntity<Event> setEventCreator(
+            @PathVariable long id,
+            @RequestBody HashMap<String, UserProfile> creator) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setCreator(creator.get("new"));
 
         eventRepository.save(updatedEvent);
 

@@ -38,17 +38,29 @@ public class Location {
     @OneToMany(mappedBy = "location")
     private List<UserProfile> userProfileList;
 
+    @Column(name = "description")
+    private String description;
+
     public Location() {}
 
-    public Location(String name, Country country) {
+    public Location(String name, Country country, String description) {
         this.name = name;
         this.country = country;
         this.eventList = new ArrayList<>();
         this.userProfileList = new ArrayList<>();
+        this.description = description;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setCountry(Country country) {
