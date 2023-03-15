@@ -9,7 +9,7 @@ function CityDetails() {
   return (
     <View>
       <Text>{city.name}</Text>
-      <Text>{city.country}</Text>
+      <Text>{city.country.name}</Text>
     </View>
   );
 }

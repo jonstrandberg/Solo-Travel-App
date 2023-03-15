@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import { View, Text, FlatList, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'
+import { createStackNavigator } from "@react-navigation/stack";
+import CityDetails from "./CityDetails";
 
-const Home = () => {
+const Stack = createStackNavigator()
+
+const CitiesList = () => {
   const [location, setLocation] = useState([])
   const navigation = useNavigation();
 
@@ -19,6 +23,7 @@ const Home = () => {
   }
 
   const handleCityPress = (city) => {
+    console.log(city)
     navigation.navigate('CityDetails', { city });
   };
 
@@ -35,6 +40,16 @@ const Home = () => {
       />
     </View>
   );
+}
+
+
+const Home = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Cities" component={CitiesList}  />
+      <Stack.Screen name="CityDetails" component={CityDetails}  />
+    </Stack.Navigator>
+  )
 }
 
 export default Home;

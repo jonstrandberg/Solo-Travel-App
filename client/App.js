@@ -1,13 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer} from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons"
 
 import Home from "./component/Home";
 import Event from "./component/Event";
 import Profile from "./component/Profile";
-import CityDetails from "./component/CityDetails";
 
 // Screen names
 const homeDisplayName = 'Home'
@@ -15,8 +13,6 @@ const eventDisplayName = 'Events'
 const profileDisplayName = 'Profile'
 
 const Tab = createBottomTabNavigator()
-
-const Stack = createStackNavigator ()
 
 
 const App = () => {
@@ -31,24 +27,20 @@ const App = () => {
             let rn = route.name
 
             if (rn === 'Home') {
-              iconName = focused ? 'home' : 'home-outline'
+              iconName = focused ? 'earth' : 'earth-outline'
             } else if (rn === 'Events') {
-              iconName = focused ? 'list' : 'list-outline'
+              iconName = focused ? 'today' : 'today-outline'
             } else if (rn === 'Profile') {
-              iconName = focused ? 'settings' : 'settings-outline'
+              iconName = focused ? 'person' : 'person-outline'
             }
 
             return <Ionicons name={iconName} size={size} color={color}/>
           }
         })}>
-        <Tab.Screen name="Home" component={Home}/>
+        <Tab.Screen name="Home" component={Home} options={{ headerShown: false }}/>
         <Tab.Screen name="Events" component={Event}/>
         <Tab.Screen name="Profile" component={Profile}/>
       </Tab.Navigator>
-
-      <Stack.Navigator>
-        <Stack.Screen name="CityDetails" component={CityDetails} options={{ headerShown: false }} />
-      </Stack.Navigator>
     </NavigationContainer>
   );
 }
