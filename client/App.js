@@ -32,8 +32,8 @@ const App = () => {
           }
         })}>
         <Tab.Screen name='Explore' component={Home} options={{ headerShown: false }}/>
-        <Tab.Screen name='My Events' component={Event}/>
-        <Tab.Screen name='Profile' component={Profile}/>
+        <Tab.Screen name='My Events' component={Event} options={{ headerShown: false }}/>
+        <Tab.Screen name='Profile' component={Profile} options={{ headerShown: false }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
