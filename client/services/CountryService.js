@@ -39,3 +39,29 @@ export const getCountry = async function (countryId) {
 //     return fetch ('http://localhost:8080/countries/{countryId}')
 //     .then(res => {return res.json()})
 // }
+
+export const getLocationsByCountryId = async function(countryId) {
+    try {
+        const response = await fetch('http://localhost:8080/countries?country_id=' + id.toString(countryId), {
+            method: 'GET',
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('There was a problem with the request:', error);
+        throw error;
+    }
+};
+
+
+// export const getLocationsByCountryId = async function(countryId) {
+//     return fetch('http://localhost:8080/countries?country_id=' + id.toString(countryId), {
+//         method: 'GET',
+//     })
+//         .then((res) => {
+//             {return res.json()};
+//         });
+//     }

@@ -70,3 +70,54 @@ export const addUserProfile = async function (userProfile) {
 //         .then(res => 
 //             {return res.json()})
 //     }
+
+export const getUserProfilesByLocationId = async function(locationId) {
+    try {
+        const response = await fetch('http://localhost:8080/userProfiles?location_id=' + id.toString(locationId), {
+            method: 'GET',
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('There was a problem with the request:', error);
+        throw error;
+    }
+};
+
+
+// export const getUserProfilesByLocationId = async function(locationId) {
+//     return fetch('http://localhost:8080/userProfiles?location_id=' + id.toString(locationId), {
+//         method: 'GET',
+//     })
+//         .then((res) => {
+//             {return res.json()};
+//         });
+//     }
+
+export const getUserProfilesByEventId = async function(eventId) {
+    try {
+        const response = await fetch('http://localhost:8080/userProfiles?event_id=' + id.toString(eventId), {
+            method: 'GET',
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('There was a problem with the request:', error);
+        throw error;
+    }
+};
+
+// export const getUserProfilesByEventId = async function(eventId) {
+//     return fetch('http://localhost:8080/userProfiles?event_id=' + id.toString(eventId), {
+//         method: 'GET',
+//     })
+//         .then((res) => {
+//             {return res.json()};
+//         });
+//     }

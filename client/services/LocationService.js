@@ -36,3 +36,5 @@ export const getLocation = async function (locationId) {
 //     return fetch ('http://localhost:8080/locations/{locationId}')
 //     .then(res => {return res.json()})
 // }
+
+
