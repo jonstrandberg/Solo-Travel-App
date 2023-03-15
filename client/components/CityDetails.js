@@ -8,8 +8,8 @@ function CityDetails() {
 
   return (
     <View>
-      <Text>{city.name}</Text>
-      <Text>{city.country.name}</Text>
+      <Text>City name: {city.name}</Text>
+      <Text>Country: {city.country.name}</Text>
     </View>
   );
 }
