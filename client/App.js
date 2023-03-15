@@ -20,7 +20,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName='Home'
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName
@@ -37,34 +37,12 @@ const App = () => {
             return <Ionicons name={iconName} size={size} color={color}/>
           }
         })}>
-        <Tab.Screen name="Home" component={Home} options={{ headerShown: false }}/>
-        <Tab.Screen name="Events" component={Event}/>
-        <Tab.Screen name="Profile" component={Profile}/>
+        <Tab.Screen name='Home' component={Home} options={{ headerShown: false }}/>
+        <Tab.Screen name='Events' component={Event}/>
+        <Tab.Screen name='Profile' component={Profile}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#979879'
-  },
-  heading: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 10,
-    textAlign: 'center'
-  },
-  locationsContainer: {
-    paddingHorizontal: 10
-  },
-  locationItem: {
-    backgroundColor: '#fff',
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 5
-  }
-});
 
 export default App;
