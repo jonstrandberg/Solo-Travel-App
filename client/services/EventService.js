@@ -70,20 +70,13 @@ export const addEvent = async function (event) {
 //         {return res.json()})
 // }
 
-// Replace YOUR_LOCATION_ID with the actual location ID you want to search for
-const locationId = "YOUR_LOCATION_ID";
-const apiUrl = `https://www.eventbriteapi.com/v3/events/search/?location.id=${locationId}&token=YOUR_EVENTBRITE_API_TOKEN`;
-
-// Make a GET request to the Eventbrite API
-fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-        // The list of events is available in the "events" array
-        const events = data.events;
-        
-        // Do something with the events (e.g. display them on a webpage)
-        console.log(events);
+export const getEventsByUserProfileId = async function(userProfileId) {
+    return fetch('http://localhost:8080/events?user_id=' + id.toString(userProfileId), {
+        method: 'GET',
     })
-    .catch(error => {
-        console.error("Error fetching events", error);
-    });
+        .then((response) => response.json())
+        .then((res) => {
+            {return res.json()};
+        });
+    }
+    
