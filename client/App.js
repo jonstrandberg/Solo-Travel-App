@@ -22,7 +22,7 @@ const App = () => {
 
             if (rn === 'Explore') {
               iconName = focused ? 'earth' : 'earth-outline'
-            } else if (rn === 'Events') {
+            } else if (rn === 'My Events') {
               iconName = focused ? 'today' : 'today-outline'
             } else if (rn === 'Profile') {
               iconName = focused ? 'person' : 'person-outline'
@@ -32,8 +32,8 @@ const App = () => {
           }
         })}>
         <Tab.Screen name='Explore' component={Home} options={{ headerShown: false }}/>
-        <Tab.Screen name='Events' component={Event}/>
-        <Tab.Screen name='Profile' component={Profile}/>
+        <Tab.Screen name='My Events' component={Event} options={{ headerShown: false }}/>
+        <Tab.Screen name='Profile' component={Profile} options={{ headerShown: false }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
