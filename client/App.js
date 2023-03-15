@@ -20,7 +20,7 @@ const App = () => {
             let iconName
             let rn = route.name
 
-            if (rn === 'Home') {
+            if (rn === 'Explore') {
               iconName = focused ? 'earth' : 'earth-outline'
             } else if (rn === 'Events') {
               iconName = focused ? 'today' : 'today-outline'
@@ -31,7 +31,7 @@ const App = () => {
             return <Ionicons name={iconName} size={size} color={color}/>
           }
         })}>
-        <Tab.Screen name='Home' component={Home} options={{ headerShown: false }}/>
+        <Tab.Screen name='Explore' component={Home} options={{ headerShown: false }}/>
         <Tab.Screen name='Events' component={Event}/>
         <Tab.Screen name='Profile' component={Profile}/>
       </Tab.Navigator>
