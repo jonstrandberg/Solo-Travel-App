@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { useEffect, useState } from "react"
+import { StyleSheet, SafeAreaView,Text, FlatList, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { createStackNavigator } from "@react-navigation/stack";
-import { getLocations } from "../services/LocationService";
-import CityDetails from "./CityDetails";
-import EventDetails from "./EventDetails";
+import { createStackNavigator } from "@react-navigation/stack"
+import { getLocations } from "../services/LocationService"
+import CityDetails from "./CityDetails"
+import EventDetails from "./EventDetails"
 
 const Stack = createStackNavigator()
 
@@ -20,32 +20,48 @@ const CitiesList = () => {
   }, [])
 
   const handleCityPress = (city) => {
-    navigation.navigate('City Details', { city });
+    navigation.navigate('City Details', { city })
   };
 
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={location}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => handleCityPress(item)}>
-            <Text>{item.name}, {item.country.name}</Text>
+            <Text style={styles.cityItem}>{item.name}</Text>
           </TouchableOpacity>
         )}
       />
-    </View>
-  );
+    </SafeAreaView>
+  )
 }
 
 const Home = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name='Event Details' component={EventDetails} />
-      <Stack.Screen name='Explore Cities' component={CitiesList} />
+      <Stack.Screen name='Explore Cities' component={CitiesList} options={{ headerShown: false }}/>
       <Stack.Screen name='City Details' component={CityDetails} options={({ route }) => ({ title: route.params.city.name })} />
     </Stack.Navigator>
   )
 }
+
+const styles = StyleSheet.create({
+  conatiner:{
+    flex:1,
+    flexDirection:'row',
+    flexWrap: 'wrap',
+  },
+  cityItem:{
+    backgroundColor:"#254C94",
+    color:"#fff",
+    padding: 15,
+    margin: 10,
+    width:140,
+    height:140
+  }
+})
 
 export default Home;
