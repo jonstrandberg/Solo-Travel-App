@@ -3,9 +3,9 @@ import { NavigationContainer} from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons"
 
-import Home from "./component/Home";
-import Event from "./component/Event";
-import Profile from "./component/Profile";
+import Home from "./components/Home";
+import Event from "./components/Event";
+import Profile from "./components/Profile";
 
 // Screen names
 const homeDisplayName = 'Home'
