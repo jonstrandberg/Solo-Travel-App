@@ -5,6 +5,7 @@ import com.codeclan.example.project_test.models.Country;
 import com.codeclan.example.project_test.models.Location;
 import com.codeclan.example.project_test.models.SignUp;
 import com.codeclan.example.project_test.models.UserProfile;
+import com.codeclan.example.project_test.models.*;
 import com.codeclan.example.project_test.repositories.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +22,7 @@ import java.nio.charset.Charset;
 
 
 @Profile("!test") //Run every time EXCEPT Tests
-@Component
+//@Component
 public class DataLoader implements ApplicationRunner {
 
     @Autowired
