@@ -1,8 +1,13 @@
 import {useEffect, useState} from 'react';
 import { View, Text, FlatList, TouchableOpacity} from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import EventDetails from './EventDetails';
 
-function CityDetails() {
+const Stack = createStackNavigator()
+
+const CityDetails = () => {
   const route = useRoute();
   const { city } = route.params;
 
@@ -20,17 +25,23 @@ function CityDetails() {
       })
   }
 
+  const handleEventPress = (event) => {
+    console.log (event)
+    // navigation.navigate('Event Details', { event });
+  };
+
   return (
     <View>
 
       <Text>City name: {city.name}</Text>
       <Text>Country: {city.country.name}</Text>
+      <Text>Events:</Text>
 
       <FlatList
         data={events}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleEventPress(item)}>
             <Text>{item.title}</Text>
           </TouchableOpacity>
         )}
@@ -39,5 +50,14 @@ function CityDetails() {
     </View>
   );
 }
+
+// const CityDetails = () => {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen name='City Details' component={CityDetails} />
+//       <Stack.Screen name='City Details' component={EventDetails} />
+//     </Stack.Navigator>
+//   )
+// }
 
 export default CityDetails;

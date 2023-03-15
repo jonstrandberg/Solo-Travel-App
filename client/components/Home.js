@@ -19,7 +19,7 @@ const CitiesList = () => {
   }, [])
 
   const handleCityPress = (city) => {
-    navigation.navigate('CityDetails', { city });
+    navigation.navigate('City Details', { city });
   };
 
   return (
@@ -40,8 +40,8 @@ const CitiesList = () => {
 const Home = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Explore Cities" component={CitiesList} />
-      <Stack.Screen name="CityDetails" component={CityDetails} options={({ route }) => ({ title: route.params.city.name })} />
+      <Stack.Screen name='Explore Cities' component={CitiesList} />
+      <Stack.Screen name='City Details' component={CityDetails} options={({ route }) => ({ title: route.params.city.name })} />
     </Stack.Navigator>
   )
 }
