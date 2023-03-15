@@ -13,14 +13,12 @@ const CitiesList = () => {
 
   useEffect(() => {
     getLocations()
-    .then(json => {
-      console.log(json)
-            setLocation(json)
-        })
+      .then(json => {
+        setLocation(json)
+      })
   }, [])
 
   const handleCityPress = (city) => {
-    console.log(city)
     navigation.navigate('CityDetails', { city });
   };
 
@@ -42,8 +40,8 @@ const CitiesList = () => {
 const Home = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Explore Cities" component={CitiesList}  />
-      <Stack.Screen name="CityDetails" component={CityDetails} options={({ route }) => ({ title: route.params.city.name })}/>
+      <Stack.Screen name="Explore Cities" component={CitiesList} />
+      <Stack.Screen name="CityDetails" component={CityDetails} options={({ route }) => ({ title: route.params.city.name })} />
     </Stack.Navigator>
   )
 }
