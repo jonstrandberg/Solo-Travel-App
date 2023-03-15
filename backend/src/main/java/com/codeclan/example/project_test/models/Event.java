@@ -44,9 +44,12 @@ public class Event {
     @JoinColumn(name = "creator")
     private UserProfile creator;
 
+    @Column(name = "capacity")
+    private int capacity;
+
     public Event() {}
 
-    public Event(String title, String time, String duration, String description, Location location, String date, UserProfile creator) {
+    public Event(String title, String time, String duration, String description, Location location, String date, UserProfile creator, int capacity) {
         this.title = title;
         this.time = time;
         this.duration = duration;
@@ -55,10 +58,19 @@ public class Event {
         this.date = date;
         this.signUpList = new ArrayList<>();
         this.creator = creator;
+        this.capacity = capacity;
     }
 
     public UserProfile getCreator() {
         return creator;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public void setCreator(UserProfile creator) {

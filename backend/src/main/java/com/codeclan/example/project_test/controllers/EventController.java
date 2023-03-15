@@ -159,6 +159,40 @@ public class EventController {
         return ResponseEntity.ok(updatedEvent);
     }
 
+    //  Sets Event Capacity
+    @PutMapping("/events/{id}/set_capacity")
+    public ResponseEntity<Event> setEventCapacity(
+            @PathVariable long id,
+            @RequestBody HashMap<String, Integer> capacity) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setCapacity(capacity.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    //  Sets Event Creator (don't know if we need this??)
+    @PutMapping("/events/{id}/set_creator")
+    public ResponseEntity<Event> setEventCreator(
+            @PathVariable long id,
+            @RequestBody HashMap<String, UserProfile> creator) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setCreator(creator.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
     //  Delete Event by ID
     @DeleteMapping(value = "/events/{id}")
     public ResponseEntity deleteEvent(@PathVariable Long id) {
