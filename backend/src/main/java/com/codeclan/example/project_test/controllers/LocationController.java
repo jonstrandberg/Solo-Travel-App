@@ -18,11 +18,13 @@ public class LocationController {
     @Autowired
     LocationRepository locationRepository;
 
+    // Get all Locations
     @GetMapping(value = "/locations")
     public ResponseEntity<List<Location>> getAllLocations(){
         return new ResponseEntity<>(locationRepository.findAll(), HttpStatus.OK);
     }
 
+    // Get Location by ID
     @GetMapping(value = "/locations/{id}")
     public ResponseEntity getLocation(@PathVariable Long id){
         return new ResponseEntity<>(locationRepository.findById(id), HttpStatus.OK);
