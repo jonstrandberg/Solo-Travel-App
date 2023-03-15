@@ -51,13 +51,5 @@ const CityDetails = () => {
   );
 }
 
-// const CityDetails = () => {
-//   return (
-//     <Stack.Navigator>
-//       <Stack.Screen name='City Details' component={CityDetails} />
-//       <Stack.Screen name='City Details' component={EventDetails} />
-//     </Stack.Navigator>
-//   )
-// }
 
 export default CityDetails;
