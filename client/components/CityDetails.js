@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import { View, Text, FlatList, TouchableOpacity} from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { getEventsByLocationId } from "../services/EventService";
 
 function CityDetails() {
   const route = useRoute();
@@ -9,16 +10,12 @@ function CityDetails() {
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-    getEvents()
+    console.log(city)
+    getEventsByLocationId(city["id"])
+    .then(json => {
+      setEvents(json)
+    })
   }, [])
-
-  const getEvents = function () {
-    fetch(`http://127.0.0.1:8080/events?location_id=${city.id}`)
-      .then(res => res.json())
-      .then(json => {
-        setEvents(json)
-      })
-  }
 
   return (
     <View>

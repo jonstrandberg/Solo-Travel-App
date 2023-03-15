@@ -10,13 +10,6 @@ export const getUserProfiles = async function () {
         throw error;
         }
     }
-    
-// export const getUserProfiles = async function () {
-//     return fetch('http://localhost:8080/user_profiles')
-//         .then(res => 
-//             {return res.json()})
-        
-//     }
 
 export const getUserProfile = async function (userProfileId) {
     try {
@@ -30,12 +23,6 @@ export const getUserProfile = async function (userProfileId) {
         throw error;
         }
     }
-
-// export const getUserProfile = async function (userProfileId) {
-//     return fetch ('http://localhost:8080/countries/{userProfileId}')
-//     .then(res => {return res.json()})
-// }
-
 
 export const addUserProfile = async function (userProfile) {
     try {
@@ -57,23 +44,9 @@ export const addUserProfile = async function (userProfile) {
         }
     }
 
-
-// export const addUserProfile = async function (userProfile) {
-//         return fetch('http://localhost:8080/userProfiles', {
-//             method: 'POST',
-//             body: JSON.stringify(userProfile),
-//             headers: {
-//                 "Accept":"application/json",
-//                 "Content-Type":"application/json",
-//             }
-//         })
-//         .then(res => 
-//             {return res.json()})
-//     }
-
 export const getUserProfilesByLocationId = async function(locationId) {
     try {
-        const response = await fetch('http://localhost:8080/userProfiles?location_id=' + id.toString(locationId), {
+        const response = await fetch('http://localhost:8080/userProfiles?location_id=' + locationId.toString(), {
             method: 'GET',
         });
         if (!response.ok) {
@@ -86,20 +59,10 @@ export const getUserProfilesByLocationId = async function(locationId) {
         throw error;
     }
 };
-
-
-// export const getUserProfilesByLocationId = async function(locationId) {
-//     return fetch('http://localhost:8080/userProfiles?location_id=' + id.toString(locationId), {
-//         method: 'GET',
-//     })
-//         .then((res) => {
-//             {return res.json()};
-//         });
-//     }
 
 export const getUserProfilesByEventId = async function(eventId) {
     try {
-        const response = await fetch('http://localhost:8080/userProfiles?event_id=' + id.toString(eventId), {
+        const response = await fetch('http://localhost:8080/userProfiles?event_id=' + eventId.toString(), {
             method: 'GET',
         });
         if (!response.ok) {
@@ -113,11 +76,110 @@ export const getUserProfilesByEventId = async function(eventId) {
     }
 };
 
-// export const getUserProfilesByEventId = async function(eventId) {
-//     return fetch('http://localhost:8080/userProfiles?event_id=' + id.toString(eventId), {
-//         method: 'GET',
-//     })
-//         .then((res) => {
-//             {return res.json()};
-//         });
-//     }
+export const updateUserProfileName = async function (userProfileId, newName) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/userProfiles/" + userProfileId.toString() + "/update_display_name", {
+            method: "PUT",
+            body: JSON.stringify(newName),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating user profile name:", error);
+        return null;
+    }
+}
+
+export const updateUserProfileHomeTown = async function (userProfileId, newHomeTown) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/userProfiles/" + userProfileId.toString() + "/update_hometown", {
+            method: "PUT",
+            body: JSON.stringify(newHomeTown),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating user profile :", error);
+        return null;
+    }
+}
+
+export const updateUserProfileNationality = async function (userProfileId, newNationality) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/userProfiles/" + userProfileId.toString() + "/update_nationality", {
+            method: "PUT",
+            body: JSON.stringify(newNationality),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating user nationality :", error);
+        return null;
+    }
+}
+
+export const updateUserProfileAge = async function (userProfileId, newAge) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/userProfiles/" + userProfileId.toString() + "/update_age", {
+            method: "PUT",
+            body: JSON.stringify(newAge),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating user age :", error);
+        return null;
+    }
+}
+
+export const updateUserProfileAvatarUrl = async function (userProfileId, newAvatarUrl) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/userProfiles/" + userProfileId.toString() + "/update_avatar_url", {
+            method: "PUT",
+            body: JSON.stringify(newAvatarUrl),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating user profile photo :", error);
+        return null;
+    }
+}
+
+export const updateUserProfileLocation = async function (userProfileId, newLocation) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/userProfiles/" + userProfileId.toString() + "/update_location", {
+            method: "PUT",
+            body: JSON.stringify(newLocation),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating user location :", error);
+        return null;
+    }
+}

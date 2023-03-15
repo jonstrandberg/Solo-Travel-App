@@ -10,14 +10,6 @@ export const getEvents = async function () {
         throw error;
         }
     }
-    
-
-// export const getEvents = async function () {
-//     return fetch('http://localhost:8080/events')
-//         .then(res => 
-//             {return res.json()})
-        
-//     }
 
 export const getEvent = async function (eventId) {
     try {
@@ -31,11 +23,6 @@ export const getEvent = async function (eventId) {
         throw error;
         }
     }
-
-// export const getEvent = async function (eventId) {
-//     return fetch ('http://localhost:8080/events/{eventId}')
-//     .then(res => {return res.json()})
-// }
 
 export const addEvent = async function (event) {
     try {
@@ -56,19 +43,6 @@ export const addEvent = async function (event) {
         throw error;
         }
     }
-    
-// export const addEvent = async function (event) {
-//     return fetch('http://localhost:8080/events', {
-//         method: 'POST',
-//         body: JSON.stringify(event),
-//         headers: {
-//             "Accept":"application/json",
-//             "Content-Type":"application/json",
-//         }
-//     })
-//     .then(res => 
-//         {return res.json()})
-// }
 
 export const getEventsBookedByUserProfileId = async function(userProfileId) {
     try {
@@ -86,19 +60,9 @@ export const getEventsBookedByUserProfileId = async function(userProfileId) {
     }
 };
 
-
-// export const getEventsByUserProfileId = async function(userProfileId) {
-//     return fetch('http://localhost:8080/events?user_profile_id=' + id.toString(userProfileId), {
-//         method: 'GET',
-//     })
-//         .then((res) => {
-//             {return res.json()};
-//         });
-//     }
-
 export const getEventsByLocationId = async function(locationId) {
     try {
-        const response = await fetch('http://localhost:8080/events?location_id=' + id.toString(locationId), {
+        const response = await fetch('http://localhost:8080/events?location_id=' + locationId.toString(), {
             method: 'GET',
         });
         if (!response.ok) {
@@ -111,15 +75,6 @@ export const getEventsByLocationId = async function(locationId) {
         throw error;
     }
 };
-
-// export const getEventsByLocationId = async function(locationId) {
-//     return fetch('http://localhost:8080/events?location_id=' + id.toString(locationId), {
-//         method: 'GET',
-//     })
-//         .then((res) => {
-//             {return res.json()};
-//         });
-//     }
 
 export const updateEventTitle = async function (eventId, newTitle){
     try {
@@ -139,19 +94,6 @@ export const updateEventTitle = async function (eventId, newTitle){
     }
 }
 
-// export const updateEventTitle = async function (eventId, newTitle){
-//     return fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-title",
-//         {
-//             method: "PUT",
-//             body: JSON.stringify(newTitle),
-//             headers: { "Content-Type": "application/json" },
-//         }
-//         ).then((response) => response.json())
-//         .then((res) => {
-//             {return res.json()};
-//         });
-//     }
-
 export const updateEventTime = async function (eventId, newTime) {
     try {
         const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-time", {
@@ -170,20 +112,6 @@ export const updateEventTime = async function (eventId, newTime) {
     }
 }
 
-
-// export const updateEventTime = async function (eventId, newTime){
-//         return fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-time",
-//             {
-//                 method: "PUT",
-//                 body: JSON.stringify(newTime),
-//                 headers: { "Content-Type": "application/json" },
-//             }
-//             ).then((response) => response.json())
-//             .then((res) => {
-//                 {return res.json()};
-//             });
-//         }
-
 export const updateEventDate = async function (eventId, newDate) {
     try {
         const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-date", {
@@ -201,19 +129,6 @@ export const updateEventDate = async function (eventId, newDate) {
         return null;
     }
 }
-
-// export const updateEventDate = async function (eventId, newDate){
-//             return fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-date",
-//                 {
-//                     method: "PUT",
-//                     body: JSON.stringify(newDate),
-//                     headers: { "Content-Type": "application/json" },
-//                 }
-//                 ).then((response) => response.json())
-//                 .then((res) => {
-//                     {return res.json()};
-//                 });
-//             }
 
 export const updateEventDuration = async function (eventId, newDuration) {
     try {
@@ -268,12 +183,6 @@ export const updateEventLocation = async function (eventId, newLocation) {
         return null;
     }
 }
-
-// export const deleteEvent = function (eventId) {
-//     return fetch('http://127.0.0.1:8080/events/' + eventId.toString() + "/delete", {
-//         method: 'DELETE'
-//     });
-// }
 
 export const deleteEvent = async function (eventId) {
     try {

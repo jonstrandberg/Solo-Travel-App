@@ -10,15 +10,11 @@ export const getCountries = async function () {
         throw error;
         }
     }
-    
-
-
 
 // export const getCountries = async function () {
 //     return fetch('http://localhost:8080/countries')
 //         .then(res => 
 //             {return res.json()})
-        
 //     }
 
 export const getCountry = async function (countryId) {
@@ -33,7 +29,6 @@ export const getCountry = async function (countryId) {
         throw error;
         }
     }
-    
 
 // export const getCountry = async function (countryId) {
 //     return fetch ('http://localhost:8080/countries/{countryId}')
@@ -55,7 +50,6 @@ export const getLocationsByCountryId = async function(countryId) {
         throw error;
     }
 };
-
 
 // export const getLocationsByCountryId = async function(countryId) {
 //     return fetch('http://localhost:8080/countries?country_id=' + id.toString(countryId), {

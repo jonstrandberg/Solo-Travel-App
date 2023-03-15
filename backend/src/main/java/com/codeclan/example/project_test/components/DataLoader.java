@@ -139,7 +139,7 @@ public class DataLoader implements ApplicationRunner {
         UserProfile user2 = new UserProfile("Ben Barlow", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "Paisley", "Scotland", 40, munich);
         userProfileRepository.save(user2);
 
-        UserProfile user3 = new UserProfile("Maggie Amin", "https://xsgames.co/randomusers/assets/avatars/male/3.jpg", "Pyramid City", "Egypt", 28, edinburgh);
+        UserProfile user3 = new UserProfile("Maggie Amin", "https://xsgames.co/randomusers/assets/avatars/female/53.jpg", "Pyramid City", "Egypt", 28, edinburgh);
         userProfileRepository.save(user3);
 
         UserProfile user4 = new UserProfile("Gareth Evans", "https://xsgames.co/randomusers/assets/avatars/male/4.jpg", "Aberdeen", "Scotland", 30, berlin);
