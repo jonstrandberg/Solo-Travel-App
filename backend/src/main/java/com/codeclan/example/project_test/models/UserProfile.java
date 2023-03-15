@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user_profiles")
-@JsonIgnoreProperties({"signUpList"})
+@JsonIgnoreProperties({"signUpList", "createdEventsList"})
 public class UserProfile {
 
     @Id
@@ -39,6 +39,9 @@ public class UserProfile {
     @JoinColumn(name = "location")
     private Location location;
 
+    @OneToMany(mappedBy = "creator")
+    private List<Event> createdEventsList;
+
     public UserProfile() {}
 
     public UserProfile(String displayName, String avatarUrl, String homeTown, String nationality, int age, Location location) {
@@ -49,10 +52,19 @@ public class UserProfile {
         this.age = age;
         this.signUpList = new ArrayList<>();
         this.location = location;
+        this.createdEventsList = new ArrayList<>();
     }
 
     public Long getId() {
         return id;
+    }
+
+    public List<Event> getCreatedEventsList() {
+        return createdEventsList;
+    }
+
+    public void setCreatedEventsList(List<Event> createdEventsList) {
+        this.createdEventsList = createdEventsList;
     }
 
     public void setId(Long id) {

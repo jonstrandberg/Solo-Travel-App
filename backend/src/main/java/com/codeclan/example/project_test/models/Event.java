@@ -40,9 +40,13 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private List<SignUp> signUpList;
 
+    @ManyToOne
+    @JoinColumn(name = "creator")
+    private UserProfile creator;
+
     public Event() {}
 
-    public Event(String title, String time, String duration, String description, Location location, String date) {
+    public Event(String title, String time, String duration, String description, Location location, String date, UserProfile creator) {
         this.title = title;
         this.time = time;
         this.duration = duration;
@@ -50,6 +54,15 @@ public class Event {
         this.location = location;
         this.date = date;
         this.signUpList = new ArrayList<>();
+        this.creator = creator;
+    }
+
+    public UserProfile getCreator() {
+        return creator;
+    }
+
+    public void setCreator(UserProfile creator) {
+        this.creator = creator;
     }
 
     public Long getId() {
