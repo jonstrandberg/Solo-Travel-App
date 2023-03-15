@@ -3,13 +3,13 @@ import { View, Text, FlatList, TouchableOpacity} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import EventDetails from './EventDetails';
 
 const Stack = createStackNavigator()
 
 const CityDetails = () => {
   const route = useRoute();
   const { city } = route.params;
+  const navigation = useNavigation();
 
   const [events, setEvents] = useState([])
 
@@ -27,7 +27,7 @@ const CityDetails = () => {
 
   const handleEventPress = (event) => {
     console.log (event)
-    // navigation.navigate('Event Details', { event });
+    navigation.navigate('Event Details', { event });
   };
 
   return (

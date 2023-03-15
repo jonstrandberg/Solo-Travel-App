@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from "@react-navigation/stack";
 import { getLocations } from "../services/LocationService";
 import CityDetails from "./CityDetails";
+import EventDetails from "./EventDetails";
 
 const Stack = createStackNavigator()
 
@@ -40,6 +41,7 @@ const CitiesList = () => {
 const Home = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen name='Event Details' component={EventDetails} />
       <Stack.Screen name='Explore Cities' component={CitiesList} />
       <Stack.Screen name='City Details' component={CityDetails} options={({ route }) => ({ title: route.params.city.name })} />
     </Stack.Navigator>
