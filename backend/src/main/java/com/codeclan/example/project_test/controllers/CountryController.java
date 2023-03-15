@@ -18,11 +18,13 @@ public class CountryController {
     @Autowired
     CountryRepository countryRepository;
 
+    //  Get all Countries
     @GetMapping(value = "/countries")
     public ResponseEntity<List<Country>> getAllCountries(){
         return new ResponseEntity<>(countryRepository.findAll(), HttpStatus.OK);
     }
 
+    // Get Country by ID
     @GetMapping(value = "/countries/{id}")
     public ResponseEntity getCountry(@PathVariable Long id){
         return new ResponseEntity<>(countryRepository.findById(id), HttpStatus.OK);

@@ -2,6 +2,7 @@ package com.codeclan.example.project_test.controllers;
 
 import com.codeclan.example.project_test.models.Event;
 import com.codeclan.example.project_test.models.Location;
+import com.codeclan.example.project_test.models.UserProfile;
 import com.codeclan.example.project_test.repositories.EventRepository;
 import com.codeclan.example.project_test.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,18 @@ public class EventController {
     @Autowired
     EventRepository eventRepository;
 
-//  Get All Events
+//  Get all Events, Get all Events a user is attending, Get all Events for a location
     @GetMapping(value = "/events")
-    public ResponseEntity<List<Event>> getAllEvents(){
+    public ResponseEntity<List<Event>> getAllEvents(
+            @RequestParam(name = "user_profile_id", required = false) Long userProfileId,
+            @RequestParam(name = "location_id", required = false) Long locationId
+    ){
+        if (userProfileId != null){
+            return new ResponseEntity<>(eventRepository.findBySignUpListUserProfileId(userProfileId), HttpStatus.OK);
+        }
+        if (locationId != null){
+            return new ResponseEntity<>(eventRepository.findByLocationId(locationId), HttpStatus.OK);
+        }
         return new ResponseEntity<>(eventRepository.findAll(), HttpStatus.OK);
     }
 
@@ -47,23 +57,116 @@ public class EventController {
         }
     }
 
-//    @PutMapping("/events/{id}/set_title")
-//    public ResponseEntity<Event> setEventTitle(
-//            @PathVariable long id,
-//            @RequestBody HashMap<String, LocalDateTime> date) {
-//
-//        Event updateEvent = eventRepository
-//                .findById(id)
-//                .orElseThrow(() -> new RuntimeException("Event Not Found: " + id));
-//
-//        updateEvent.setDate(date.get("new"));
-//
-//        eventRepository.save(updateEvent);
-//
-//        return ResponseEntity.ok(updateEvent);
-//    }
+    //  Sets Event Title
+    @PutMapping("/events/{id}/set_title")
+    public ResponseEntity<Event> setEventTitle(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> title) {
 
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
 
+        updatedEvent.setTitle(title.get("new"));
 
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    //  Sets Event Time
+    @PutMapping("/events/{id}/set_time")
+    public ResponseEntity<Event> setEventTime(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> time) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setTime(time.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    //  Sets Event Date
+    @PutMapping("/events/{id}/set_date")
+    public ResponseEntity<Event> setEventDate(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> date) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setDate(date.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    //  Sets Event Duration
+    @PutMapping("/events/{id}/set_duration")
+    public ResponseEntity<Event> setEventDuration(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> duration) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setDuration(duration.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    //  Sets Event Description
+    @PutMapping("/events/{id}/set_description")
+    public ResponseEntity<Event> setEventDescription(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> description) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setDescription(description.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    //  Sets Event Location
+    @PutMapping("/events/{id}/set_location")
+    public ResponseEntity<Event> setEventLocation(
+            @PathVariable long id,
+            @RequestBody HashMap<String, Location> location) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setLocation(location.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    //  Delete Event by ID
+    @DeleteMapping(value = "/events/{id}")
+    public ResponseEntity deleteEvent(@PathVariable Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        eventRepository.delete(event);
+        return ResponseEntity.noContent().build();
+    }
 
 }
