@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import  {getLocations}  from "../services/LocationService";
 
 const Home = ({ navigation }) => {
   const [location, setLocation] = useState([])
 
   useEffect(() => {
     getLocations()
+    .then(json => {
+      console.log(json)
+            setLocation(json)
+        })
   }, [])
 
-  const getLocations = function () {
-    fetch('http://127.0.0.1:8080/locations')
-      .then(res => res.json())
-      .then(json => {
-        setLocation(json)
-      })
-  }
 
   return (
     <View>
