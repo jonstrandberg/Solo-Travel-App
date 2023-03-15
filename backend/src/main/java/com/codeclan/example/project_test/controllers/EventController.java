@@ -26,8 +26,12 @@ public class EventController {
     @GetMapping(value = "/events")
     public ResponseEntity<List<Event>> getAllEvents(
             @RequestParam(name = "user_profile_id", required = false) Long userProfileId,
-            @RequestParam(name = "location_id", required = false) Long locationId
+            @RequestParam(name = "location_id", required = false) Long locationId,
+            @RequestParam(name = "creator_id", required = false) Long creatorId
     ){
+        if (creatorId != null){
+            return new ResponseEntity<>(eventRepository.findByCreatorId(creatorId), HttpStatus.OK);
+        }
         if (userProfileId != null){
             return new ResponseEntity<>(eventRepository.findBySignUpListUserProfileId(userProfileId), HttpStatus.OK);
         }
