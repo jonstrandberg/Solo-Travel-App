@@ -14,6 +14,14 @@ const CitiesList = () => {
     getLocations()
   }, [])
 
+  // useEffect(() => {
+  //   getLocations()
+  //   .then(json => {
+  //     console.log(json)
+  //           setLocation(json)
+  //       })
+  // }, [])
+
   const getLocations = function () {
     fetch('http://127.0.0.1:8080/locations')
       .then(res => res.json())
