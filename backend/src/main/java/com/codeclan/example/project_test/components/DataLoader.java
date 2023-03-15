@@ -103,31 +103,31 @@ public class DataLoader implements ApplicationRunner {
         countryRepository.save(sweden);
 
 //      Locations
-        Location edinburgh = new Location("Edinburgh", scotland);
+        Location edinburgh = new Location("Edinburgh", scotland, "Edinburgh is the capital city of Scotland and home to many historical landmarks, including Edinburgh Castle and the Royal Mile. It is also known for its festivals, including the Edinburgh Fringe Festival and the Hogmanay celebrations.");
         locationRepository.save(edinburgh);
 
-        Location berlin = new Location("Berlin", germany);
+        Location berlin = new Location("Berlin", germany, "Berlin is the capital city of Germany and is known for its rich history, culture, and nightlife. It is home to many world-famous landmarks, such as the Berlin Wall and the Brandenburg Gate.");
         locationRepository.save(berlin);
 
-        Location munich = new Location("Munich", germany);
+        Location munich = new Location("Munich", germany, "Munich is the capital city of Bavaria in Germany and is known for its beautiful architecture, beer gardens, and museums. It is also the home of the world-famous Oktoberfest.");
         locationRepository.save(munich);
 
-        Location porto = new Location("Porto", portugal);
+        Location porto = new Location("Porto", portugal, "Porto is a coastal city in Portugal and is known for its historic center, which is a UNESCO World Heritage Site. It is also famous for its port wine, which is produced in the Douro Valley.");
         locationRepository.save(porto);
 
-        Location lisbon = new Location("Lisbon", portugal);
+        Location lisbon = new Location("Lisbon", portugal, "Lisbon is the capital city of Portugal and is known for its stunning architecture, beaches, and vibrant culture. It is home to many historical landmarks, including the Belem Tower and the Jeronimos Monastery.");
         locationRepository.save(lisbon);
 
-        Location vienna = new Location("Vienna", austria);
+        Location vienna = new Location("Vienna", austria, "...");
         locationRepository.save(vienna);
 
-        Location cairo = new Location("Cairo", egypt);
+        Location cairo = new Location("Cairo", egypt, "...");
         locationRepository.save(cairo);
 
-        Location stockholm = new Location("Stockholm", sweden);
+        Location stockholm = new Location("Stockholm", sweden, "...");
         locationRepository.save(stockholm);
 
-        Location rome = new Location("Rome", italy);
+        Location rome = new Location("Rome", italy, "...");
         locationRepository.save(rome);
 
 
