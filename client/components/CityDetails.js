@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddEventScreen from './AddEventScreen';
@@ -18,11 +18,11 @@ function CityDetails({ navigation }) {
     <Stack.Navigator>
       <Stack.Screen name="City Details">
         {() => (
-          <View>
-            <Text>City name: {city.name}</Text>
-            <Text>Country: {city.country.name}</Text>
-            <TouchableOpacity onPress={handleAddEventPress}>
-              <Text>Add Event</Text>
+          <View style={styles.container}>
+            <Text style={styles.cityName}>City name: {city.name}</Text>
+            <Text style={styles.country}>Country: {city.country.name}</Text>
+            <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
+              <Text style={styles.buttonText}>Add Event</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -32,4 +32,41 @@ function CityDetails({ navigation }) {
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+  },
+  cityName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginVertical: 20,
+  },
+  country: {
+    fontSize: 20,
+    marginVertical: 10,
+  },
+  button: {
+    backgroundColor: '#254C94',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
 export default CityDetails;
+
+
+
+
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet, Text } from "react-native";
+import { View, TextInput, Button, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { addEvent } from '../services/EventService';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -40,6 +40,7 @@ const AddEventScreen = () => {
       addEvent(event)
         .then(() => {
           console.log('Event added successfully');
+          navigation.navigate('Event List');
         })
         .catch(error => {
           console.log(error);
@@ -48,70 +49,86 @@ const AddEventScreen = () => {
     };
   
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder="Title"
-          value={title}
-          onChangeText={setTitle}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Date"
-          value={date}
-          onChangeText={setDate}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Time"
-          value={time}
-          onChangeText={setTime}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Duration"
-          value={duration}
-          onChangeText={setDuration}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Description"
-          value={description}
-          onChangeText={setDescription}
-        />
-        <View style={{ display: 'none' }}>
+        <View style={styles.container}>
           <TextInput
-            value={location ? location.toString() : ''}
-            onChangeText={setLocation}
+            style={styles.input}
+            placeholderTextColor="#757575"
+            placeholder="Title"
+            value={title}
+            onChangeText={setTitle}
           />
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#757575"
+            placeholder="Date"
+            value={date}
+            onChangeText={setDate}
+          />
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#757575"
+            placeholder="Time"
+            value={time}
+            onChangeText={setTime}
+          />
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#757575"
+            placeholder="Duration"
+            value={duration}
+            onChangeText={setDuration}
+          />
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="#757575"
+            placeholder="Description"
+            value={description}
+            onChangeText={setDescription}
+          />
+          <View style={{ display: 'none' }}>
+            <TextInput
+              value={location ? location.toString() : ''}
+              onChangeText={setLocation}
+            />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={handleAddEvent}>
+            <Text style={styles.buttonText}>Add Event</Text>
+          </TouchableOpacity>
         </View>
-        <Button 
-          title="Add Event" 
-          onPress={handleAddEvent} 
-          color="#fff" 
-        />
-      </View>
-    );
+      );
   };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: '#002060',
-  },
-  input: {
-    height: 50,
-    width: '100%',
-    marginVertical: 10,
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
-    borderColor: '#BDBDBD',
-    backgroundColor: 'white',
-  },
-});
-
-export default AddEventScreen;
+  
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      backgroundColor: '#002060',
+    },
+    input: {
+      height: 50,
+      width: '100%',
+      marginVertical: 10,
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 10,
+      borderColor: '#BDBDBD',
+      backgroundColor: 'white',
+    },
+    button: {
+      backgroundColor: '#4d4dff',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 20,
+      marginTop: 10,
+    },
+    buttonText: {
+      color: '#FFFFFF',
+      textAlign: 'center',
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+  });
+  
+  export default AddEventScreen
