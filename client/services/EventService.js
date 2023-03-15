@@ -112,7 +112,6 @@ export const getEventsByLocationId = async function(locationId) {
     }
 };
 
-
 // export const getEventsByLocationId = async function(locationId) {
 //     return fetch('http://localhost:8080/events?location_id=' + id.toString(locationId), {
 //         method: 'GET',
@@ -121,5 +120,175 @@ export const getEventsByLocationId = async function(locationId) {
 //             {return res.json()};
 //         });
 //     }
+
+export const updateEventTitle = async function (eventId, newTitle){
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-title", {
+            method: "PUT",
+            body: JSON.stringify(newTitle),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event title:", error);
+        return null;
+    }
+}
+
+// export const updateEventTitle = async function (eventId, newTitle){
+//     return fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-title",
+//         {
+//             method: "PUT",
+//             body: JSON.stringify(newTitle),
+//             headers: { "Content-Type": "application/json" },
+//         }
+//         ).then((response) => response.json())
+//         .then((res) => {
+//             {return res.json()};
+//         });
+//     }
+
+export const updateEventTime = async function (eventId, newTime) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-time", {
+            method: "PUT",
+            body: JSON.stringify(newTime),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event time:", error);
+        return null;
+    }
+}
+
+
+// export const updateEventTime = async function (eventId, newTime){
+//         return fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-time",
+//             {
+//                 method: "PUT",
+//                 body: JSON.stringify(newTime),
+//                 headers: { "Content-Type": "application/json" },
+//             }
+//             ).then((response) => response.json())
+//             .then((res) => {
+//                 {return res.json()};
+//             });
+//         }
+
+export const updateEventDate = async function (eventId, newDate) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-date", {
+            method: "PUT",
+            body: JSON.stringify(newDate),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event date:", error);
+        return null;
+    }
+}
+
+// export const updateEventDate = async function (eventId, newDate){
+//             return fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-date",
+//                 {
+//                     method: "PUT",
+//                     body: JSON.stringify(newDate),
+//                     headers: { "Content-Type": "application/json" },
+//                 }
+//                 ).then((response) => response.json())
+//                 .then((res) => {
+//                     {return res.json()};
+//                 });
+//             }
+
+export const updateEventDuration = async function (eventId, newDuration) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-duration", {
+            method: "PUT",
+            body: JSON.stringify(newDuration),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event duration:", error);
+        return null;
+    }
+}
+
+export const updateEventDescribtion = async function (eventId, newDescribtion) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-description", {
+            method: "PUT",
+            body: JSON.stringify(newDescribtion),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event description:", error);
+        return null;
+    }
+}
+
+export const updateEventLocation = async function (eventId, newLocation) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-location", {
+            method: "PUT",
+            body: JSON.stringify(newLocation),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event location:", error);
+        return null;
+    }
+}
+
+// export const deleteEvent = function (eventId) {
+//     return fetch('http://127.0.0.1:8080/events/' + eventId.toString() + "/delete", {
+//         method: 'DELETE'
+//     });
+// }
+
+export const deleteEvent = async function (eventId) {
+    try {
+        const response = await fetch('http://127.0.0.1:8080/events/' + eventId.toString() + "/delete", {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        return true;
+    } catch (error) {
+        console.error("Error deleting event:", error);
+        return false;
+    }
+}
+
 
 
