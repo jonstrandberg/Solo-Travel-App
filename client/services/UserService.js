@@ -96,9 +96,9 @@ export const updateUserProfileName = async function (userProfileId, newName) {
 
 export const updateUserProfileHomeTown = async function (userProfileId, newHomeTown) {
     try {
-        const response = await fetch("http://127.0.0.1:8080/userProfiles/" + userProfileId.toString() + "/update_hometown", {
+        const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_home_town", {
             method: "PUT",
-            body: JSON.stringify(newHomeTown),
+            body: JSON.stringify({ new: newHomeTown }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
