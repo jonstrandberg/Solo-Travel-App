@@ -134,18 +134,21 @@ public class DataLoader implements ApplicationRunner {
         Location rome = new Location("Rome", italy, "Rome is the capital city of Italy and is known for its rich history, stunning architecture, and delicious food. It is home to many world-famous landmarks, such as the Colosseum and the Vatican City.");
         locationRepository.save(rome);
 
+        Location milan = new Location("Milan", italy, "Milan is a stylish city in northern Italy, famous for its fashion industry and landmarks such as the Gothic Cathedral and La Scala opera house. Its rich artistic heritage and delicious cuisine make it a popular destination for tourists.");
+        locationRepository.save(milan);
+
 
         // Users
-        UserProfile user1 = new UserProfile("Johnny Sweden", "https://xsgames.co/randomusers/assets/avatars/male/1.jpg", "Gothernberg", "Scotland", 37, munich);
+        UserProfile user1 = new UserProfile("Johnny Sweden", "https://xsgames.co/randomusers/assets/avatars/male/1.jpg", "Gothernberg, Sweden", "Scotland", 37, munich);
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile("Ben Barlow", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "Paisley", "Scotland", 40, munich);
+        UserProfile user2 = new UserProfile("Ben Barlow", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "Paisley, Scotland", "Scotland", 40, munich);
         userProfileRepository.save(user2);
 
-        UserProfile user3 = new UserProfile("Maggie Amin", "https://xsgames.co/randomusers/assets/avatars/female/53.jpg", "Pyramid City", "Egypt", 28, edinburgh);
+        UserProfile user3 = new UserProfile("Maggie Amin", "https://xsgames.co/randomusers/assets/avatars/female/53.jpg", "Cairo, Egypt", "Egypt", 28, edinburgh);
         userProfileRepository.save(user3);
 
-        UserProfile user4 = new UserProfile("Gareth Evans", "https://xsgames.co/randomusers/assets/avatars/male/4.jpg", "Aberdeen", "Scotland", 30, berlin);
+        UserProfile user4 = new UserProfile("Gareth Evans", "https://xsgames.co/randomusers/assets/avatars/male/4.jpg", "Lossiemouth, Scotland", "Scotland", 30, berlin);
         userProfileRepository.save(user4);
 
         UserProfile user5 = new UserProfile("The Almighty Creator", "https://xsgames.co/randomusers/assets/avatars/male/5.jpg", "Heaven", "Godly", 30, munich);
