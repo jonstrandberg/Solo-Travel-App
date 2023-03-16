@@ -58,7 +58,7 @@ public class Event {
         this.date = date;
         this.signUpList = new ArrayList<>();
         this.creator = creator;
-        this.capacity = capacity;
+        this.capacity = capacity - 1;
     }
 
     public UserProfile getCreator() {

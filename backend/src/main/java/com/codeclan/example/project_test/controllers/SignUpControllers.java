@@ -44,4 +44,14 @@ public class SignUpControllers {
             throw new ServerException("error: could not create new sign up");
         }
     }
+
+    //  Delete Sign Up by ID
+    @DeleteMapping(value = "/sign_ups/{id}")
+    public ResponseEntity deleteSignUp(@PathVariable Long id) {
+        SignUp signUp = signUpRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        signUpRepository.delete(signUp);
+        return ResponseEntity.noContent().build();
+    }
 }
