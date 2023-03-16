@@ -28,6 +28,8 @@ const Profile = () => {
             <Text style={styles.userProfileName}>User profile name: </Text>
             <Text style={styles.userProfileAge}>Age: </Text>
             <Text style={styles.userProfileHometown}>Hometown: </Text>
+            <Text style={styles.userProfileNationality}>Nationality: </Text>
+            <Text style={styles.userProfileLocation}>Location: </Text>
             
         </View>
     )
@@ -51,6 +53,14 @@ const styles = StyleSheet.create({
         
     },
     userProfileHometown: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    userProfileNationality: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    userProfileLocation: {
         fontSize: 20,
         fontWeight: 'bold',
     }
