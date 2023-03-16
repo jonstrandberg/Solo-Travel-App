@@ -81,9 +81,6 @@ const styles = StyleSheet.create({
   columnWrapper: {
     justifyContent: 'space-between',
   },
-});
-
-const styles = StyleSheet.create({
   titleContainer: {
     backgroundColor: '#0B909B',
     width: '100%',

@@ -92,5 +92,5 @@ const styles = StyleSheet.create({
 });
 
 
-export default Events;
+export default Event;
 
