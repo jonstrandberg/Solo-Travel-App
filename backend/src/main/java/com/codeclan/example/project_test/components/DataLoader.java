@@ -131,6 +131,9 @@ public class DataLoader implements ApplicationRunner {
         Location rome = new Location("Rome", italy, "Rome is the capital city of Italy and is known for its rich history, stunning architecture, and delicious food. It is home to many world-famous landmarks, such as the Colosseum and the Vatican City.");
         locationRepository.save(rome);
 
+        Location milan = new Location("Milan", italy, "Milan is a vibrant city located in northern Italy and is known as the fashion capital of the world. It is home to many iconic landmarks, such as the Gothic Cathedral, La Scala opera house, and the Galleria Vittorio Emanuele II shopping arcade. Milan is also renowned for its delicious cuisine and rich artistic heritage, making it a must-visit destination for travelers.");
+        locationRepository.save(milan);
+
 
         // Users
         UserProfile user1 = new UserProfile("Johnny Sweden", "https://xsgames.co/randomusers/assets/avatars/male/1.jpg", "Gothernberg", "Scotland", 37, munich);
