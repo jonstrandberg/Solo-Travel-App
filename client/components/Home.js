@@ -8,15 +8,14 @@ import CityDetails from "./CityDetails";
 const Stack = createStackNavigator()
 
 const CitiesList = () => {
-  const [location, setLocation] = useState([])
+  const [location, setLocation] = useState([]);
   const navigation = useNavigation();
 
   useEffect(() => {
-    getLocations()
-      .then(json => {
-        setLocation(json)
-      })
-  }, [])
+    getLocations().then((json) => {
+      setLocation(json);
+    });
+  }, []);
 
   const handleCityPress = (city) => {
     navigation.navigate('CityDetails', { city });
@@ -27,50 +26,57 @@ const CitiesList = () => {
       <FlatList
         data={location}
         keyExtractor={(item, index) => index.toString()}
+        numColumns={2}
         renderItem={({ item }) => (
           <TouchableOpacity
+            key={item.id}
             onPress={() => handleCityPress(item)}
-            style={styles.item}
+            style={styles.box}
           >
-            <Text style={styles.itemText}>{item.name}, {item.country.name}</Text>
+            <Text style={styles.title}>{item.name}, {item.country.name}</Text>
           </TouchableOpacity>
         )}
-        numColumns={2}
+        columnWrapperStyle={styles.columnWrapper}
       />
     </View>
   );
-}
+};
 
 const Home = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Explore Cities" component={CitiesList} />
-      <Stack.Screen name="CityDetails" component={CityDetails} options={({ route }) => ({ title: route.params.city.name })} />
+      <Stack.Screen
+        name="CityDetails"
+        component={CityDetails}
+        options={({ route }) => ({ title: route.params.city.name })}
+      />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 5,
-    backgroundColor: '#FFF',
-  },
-  item: {
-    flex: 1,
-    height: 120,
-    margin: 5,
     padding: 10,
-    backgroundColor: '#FFF',
-    borderRadius: 10,
+    backgroundColor: '#002060',
+  },
+  box: {
+    width: '48%',
+    height: 150,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
     elevation: 5,
   },
-  itemText: {
-    fontSize: 16,
-    color: '#254C94',
+  title: {
+    fontSize: 18,
     fontWeight: 'bold',
+    color: '#254C94',
+  },
+  columnWrapper: {
+    justifyContent: 'space-between',
   },
 });
 
