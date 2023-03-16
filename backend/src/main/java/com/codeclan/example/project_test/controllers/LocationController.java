@@ -20,7 +20,12 @@ public class LocationController {
 
     // Get all Locations
     @GetMapping(value = "/locations")
-    public ResponseEntity<List<Location>> getAllLocations(){
+    public ResponseEntity<List<Location>> getAllLocations(
+            @RequestParam(name = "country_id", required = false) Long countryId
+    ){
+        if (countryId != null){
+            return new ResponseEntity<>(locationRepository.findByCountryId(countryId), HttpStatus.OK);
+        }
         return new ResponseEntity<>(locationRepository.findAll(), HttpStatus.OK);
     }
 
