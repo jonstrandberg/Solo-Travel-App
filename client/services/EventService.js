@@ -78,7 +78,7 @@ export const getEventsByLocationId = async function(locationId) {
 
 export const updateEventTitle = async function (eventId, newTitle){
     try {
-        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-title", {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_title", {
             method: "PUT",
             body: JSON.stringify(newTitle),
             headers: { "Content-Type": "application/json" },
@@ -96,7 +96,7 @@ export const updateEventTitle = async function (eventId, newTitle){
 
 export const updateEventTime = async function (eventId, newTime) {
     try {
-        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-time", {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_time", {
             method: "PUT",
             body: JSON.stringify(newTime),
             headers: { "Content-Type": "application/json" },
@@ -114,7 +114,7 @@ export const updateEventTime = async function (eventId, newTime) {
 
 export const updateEventDate = async function (eventId, newDate) {
     try {
-        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-date", {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_date", {
             method: "PUT",
             body: JSON.stringify(newDate),
             headers: { "Content-Type": "application/json" },
@@ -132,7 +132,7 @@ export const updateEventDate = async function (eventId, newDate) {
 
 export const updateEventDuration = async function (eventId, newDuration) {
     try {
-        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-duration", {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_duration", {
             method: "PUT",
             body: JSON.stringify(newDuration),
             headers: { "Content-Type": "application/json" },
@@ -150,7 +150,7 @@ export const updateEventDuration = async function (eventId, newDuration) {
 
 export const updateEventDescribtion = async function (eventId, newDescribtion) {
     try {
-        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-description", {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_description", {
             method: "PUT",
             body: JSON.stringify(newDescribtion),
             headers: { "Content-Type": "application/json" },
@@ -168,7 +168,7 @@ export const updateEventDescribtion = async function (eventId, newDescribtion) {
 
 export const updateEventLocation = async function (eventId, newLocation) {
     try {
-        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-location", {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_location", {
             method: "PUT",
             body: JSON.stringify(newLocation),
             headers: { "Content-Type": "application/json" },
