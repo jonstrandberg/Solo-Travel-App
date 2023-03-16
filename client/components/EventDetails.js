@@ -13,7 +13,6 @@ function EventDetails () {
         <Text>Duration: {event.duration}</Text>
         <Text>Description: {event.description}</Text>
         <Text>Location: {event.location.name}, {event.location.country.name}</Text>
-        <Text>I am a single event page</Text>
         </View>
     )
 

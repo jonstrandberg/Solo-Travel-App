@@ -24,18 +24,17 @@ const CitiesList = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>Top Cities To Explore!</Text>
       </View>
         <FlatList
           data={location}
           keyExtractor={(item, index) => index.toString()}
-          numColumns={2}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => handleCityPress(item)}>
-              <View style={styles.cityItem}>
-                <Text style={styles.cityText}>{item.name}</Text>
+              <View>
+                <Text>{item.name}</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -55,24 +54,6 @@ const Home = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  cityItem: {
-    backgroundColor: "#254C94",
-    margin: 6,
-    width: 170,
-    height: 100,
-    borderRadius: 25,
-    justifyContent: 'center',
-  },
-  cityText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 17,
-    fontWeight: 'bold'
-  },
   titleContainer: {
     backgroundColor: '#0B909B',
     width: '100%',

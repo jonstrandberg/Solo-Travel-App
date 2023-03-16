@@ -20,7 +20,6 @@ const CityDetails = () => {
   }, [])
 
   const handleEventPress = (event) => {
-    console.log (event)
     navigation.navigate('Event Details', { event });
   };
 
