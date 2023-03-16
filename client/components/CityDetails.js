@@ -11,19 +11,13 @@ const CityDetails = () => {
   const { city } = route.params;
   const navigation = useNavigation();
 
-  const [events, setEvents] = useState([])
+  const [event, setEvent] = useState([])
 
   useEffect(() => {
-    getEvents()
-  }, [])
-
-  const getEvents = function () {
     fetch(`http://127.0.0.1:8080/events?location_id=${city.id}`)
       .then(res => res.json())
-      .then(json => {
-        setEvents(json)
-      })
-  }
+      .then(json => {setEvent(json)})
+  }, [])
 
   const handleEventPress = (event) => {
     console.log (event)
@@ -38,7 +32,7 @@ const CityDetails = () => {
       <Text>Events:</Text>
 
       <FlatList
-        data={events}
+        data={event}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => handleEventPress(item)}>
