@@ -22,7 +22,7 @@ import java.nio.charset.Charset;
 
 
 @Profile("!test") //Run every time EXCEPT Tests
-//@Component
+@Component
 public class DataLoader implements ApplicationRunner {
 
     @Autowired
@@ -81,6 +81,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
+        if(countryRepository.findAll().size() > 0) {
+            return;
+        }
 //      Countries
         Country scotland = new Country("Scotland");
         countryRepository.save(scotland);

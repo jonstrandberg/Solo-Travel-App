@@ -184,6 +184,42 @@ export const updateEventLocation = async function (eventId, newLocation) {
     }
 }
 
+export const updateEventCapacity = async function (eventId, newCapacity) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-location", {
+            method: "PUT",
+            body: JSON.stringify(newCapacity),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event capacity:", error);
+        return null;
+    }
+}
+
+export const updateEventCreator = async function (eventId, newCreator) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update-location", {
+            method: "PUT",
+            body: JSON.stringify(newCreator),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event creator:", error);
+        return null;
+    }
+}
+
 export const deleteEvent = async function (eventId) {
     try {
         const response = await fetch('http://127.0.0.1:8080/events/' + eventId.toString() + "/delete", {
