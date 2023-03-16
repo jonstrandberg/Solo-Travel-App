@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
 import { getEventsByLocationId } from "../services/EventService";
 import AddEventScreen from './AddEventScreen';
 
@@ -14,8 +13,6 @@ function CityDetails({ navigation }) {
 
   const route = useRoute();
   const { city } = route.params;
-  // const navigation = useNavigation();
-
 
   const [event, setEvent] = useState([])
 
@@ -40,23 +37,10 @@ function CityDetails({ navigation }) {
   const handleAddEventPress = () => {
     navigation.navigate('Add Event', { cityId: city.id });
   };
-
-  // return (
-  //  <View>
-  //    <Text>City name: {city.name}</Text>
-  //    <Text>Country: {city.country.name}</Text>
-  //    <Text>Events:</Text>
-  //    <FlatList
-  //      data={event}
-  //      keyExtractor={(item, index) => index.toString()}
-  //      renderItem={({ item }) => (
-  //        <TouchableOpacity onPress={() => handleEventPress(item)}>
-  //          <Text>{item.title}</Text>
-  //       </TouchableOpacity>
-
+  
   return (
     <Stack.Navigator>
-      <Stack.Screen name="City Details">
+      <Stack.Screen name="Single City Details">
         {() => (
           <View style={styles.container}>
             <Text style={styles.cityName}>City name: {city.name}</Text>
