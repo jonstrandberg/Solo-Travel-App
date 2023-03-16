@@ -80,7 +80,7 @@ export const updateEventTitle = async function (eventId, newTitle){
     try {
         const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_title", {
             method: "PUT",
-            body: JSON.stringify(newTitle),
+            body: JSON.stringify({ new: newTitle }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -98,7 +98,7 @@ export const updateEventTime = async function (eventId, newTime) {
     try {
         const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_time", {
             method: "PUT",
-            body: JSON.stringify(newTime),
+            body: JSON.stringify({ new: newTime }newTime),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -116,7 +116,7 @@ export const updateEventDate = async function (eventId, newDate) {
     try {
         const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_date", {
             method: "PUT",
-            body: JSON.stringify(newDate),
+            body: JSON.stringify({ new: newDate }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -134,7 +134,7 @@ export const updateEventDuration = async function (eventId, newDuration) {
     try {
         const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_duration", {
             method: "PUT",
-            body: JSON.stringify(newDuration),
+            body: JSON.stringify({ new: newDuration }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -152,7 +152,7 @@ export const updateEventDescribtion = async function (eventId, newDescribtion) {
     try {
         const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_description", {
             method: "PUT",
-            body: JSON.stringify(newDescribtion),
+            body: JSON.stringify({ new: newDescribtion }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -170,7 +170,7 @@ export const updateEventLocation = async function (eventId, newLocation) {
     try {
         const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_location", {
             method: "PUT",
-            body: JSON.stringify(newLocation),
+            body: JSON.stringify({ new: newLocation }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {

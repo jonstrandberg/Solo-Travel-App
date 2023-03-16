@@ -80,7 +80,7 @@ export const updateUserProfileName = async function (userProfileId, newName) {
     try {
         const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_display_name", {
             method: "PUT",
-            body: JSON.stringify(newName),
+            body: JSON.stringify({ new: newName }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -98,7 +98,7 @@ export const updateUserProfileHomeTown = async function (userProfileId, newHomeT
     try {
         const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_home_town", {
             method: "PUT",
-            body: JSON.stringify(newHomeTown),
+            body: JSON.stringify({ new: newHomeTown }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -116,7 +116,7 @@ export const updateUserProfileNationality = async function (userProfileId, newNa
     try {
         const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_nationality", {
             method: "PUT",
-            body: JSON.stringify(newNationality),
+            body: JSON.stringify({ new: newNationality }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -134,7 +134,7 @@ export const updateUserProfileAge = async function (userProfileId, newAge) {
     try {
         const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_age", {
             method: "PUT",
-            body: JSON.stringify(newAge),
+            body: JSON.stringify({ new: newAge }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -152,7 +152,7 @@ export const updateUserProfileAvatarUrl = async function (userProfileId, newAvat
     try {
         const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_avatar_url", {
             method: "PUT",
-            body: JSON.stringify(newAvatarUrl),
+            body: JSON.stringify({ new: newAvatarUrl }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
@@ -170,7 +170,7 @@ export const updateUserProfileLocation = async function (userProfileId, newLocat
     try {
         const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_location", {
             method: "PUT",
-            body: JSON.stringify(newLocation),
+            body: JSON.stringify({ new: newLocation }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
