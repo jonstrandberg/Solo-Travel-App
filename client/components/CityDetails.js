@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { getEventsByLocationId } from "../services/EventService";
 import { createStackNavigator } from '@react-navigation/stack';
 import AddEventScreen from './AddEventScreen';
 
@@ -10,9 +11,20 @@ function CityDetails({ navigation }) {
   const route = useRoute();
   const { city } = route.params;
 
+  const [events, setEvents] = useState([])
+
+  useEffect(() => {
+    console.log(city)
+    getEventsByLocationId(city["id"])
+    .then(json => {
+      setEvents(json)
+    })
+  }, [])
+
   const handleAddEventPress = () => {
     navigation.navigate('Add Event', { cityId: city.id });
   };
+
 
   return (
     <Stack.Navigator>
