@@ -1,19 +1,31 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useRoute, useState} from '@react-navigation/native';
-import { getEventsByLocationId } from "../services/EventService";
+
+import {useEffect, useState} from 'react';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import { getEventsByLocationId } from "../services/EventService";
 import AddEventScreen from './AddEventScreen';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
+
 
 function CityDetails({ navigation }) {
+
   const route = useRoute();
   const { city } = route.params;
+  const navigation = useNavigation();
 
-  // const [events, setEvents] = useState([])
 
-  // useEffect(() => {
+  const [event, setEvent] = useState([])
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8080/events?location_id=${city.id}`)
+      .then(res => res.json())
+      .then(json => {setEvent(json)})
+  }, [])
+  
+   // useEffect(() => {
   //   console.log(city)
   //   getEventsByLocationId(city["id"])
   //   .then(json => {
@@ -21,10 +33,26 @@ function CityDetails({ navigation }) {
   //   })
   // }, [])
 
+  const handleEventPress = (event) => {
+    navigation.navigate('Event Details', { event });
+  };
+  
   const handleAddEventPress = () => {
     navigation.navigate('Add Event', { cityId: city.id });
   };
 
+  // return (
+  //  <View>
+  //    <Text>City name: {city.name}</Text>
+  //    <Text>Country: {city.country.name}</Text>
+  //    <Text>Events:</Text>
+  //    <FlatList
+  //      data={event}
+  //      keyExtractor={(item, index) => index.toString()}
+  //      renderItem={({ item }) => (
+  //        <TouchableOpacity onPress={() => handleEventPress(item)}>
+  //          <Text>{item.title}</Text>
+  //       </TouchableOpacity>
 
   return (
     <Stack.Navigator>
@@ -33,6 +61,14 @@ function CityDetails({ navigation }) {
           <View style={styles.container}>
             <Text style={styles.cityName}>City name: {city.name}</Text>
             <Text style={styles.country}>Country: {city.country.name}</Text>
+             <Text>Events:</Text>
+      <FlatList
+        data={event}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => handleEventPress(item)}>
+            <Text>{item.title}</Text>
+          </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
               <Text style={styles.buttonText}>Add Event</Text>
             </TouchableOpacity>
@@ -77,8 +113,4 @@ const styles = StyleSheet.create({
 });
 
 export default CityDetails;
-
-
-
-
 

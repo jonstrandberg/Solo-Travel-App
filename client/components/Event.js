@@ -45,7 +45,7 @@ const EventsList = () => {
   );
 };
 
-const Events = () => {
+const Event = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Events" component={EventsList} />
@@ -91,4 +91,6 @@ const styles = StyleSheet.create({
   },
 });
 
+
 export default Events;
+
