@@ -25,18 +25,21 @@ const CitiesList = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={location}
-        keyExtractor={(item, index) => index.toString()}
-        numColumns={2}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleCityPress(item)}>
-            <View style={styles.cityItem}>
-              <Text style={styles.cityText}>{item.name}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Top Cities To Explore!</Text>
+      </View>
+        <FlatList
+          data={location}
+          keyExtractor={(item, index) => index.toString()}
+          numColumns={2}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleCityPress(item)}>
+              <View style={styles.cityItem}>
+                <Text style={styles.cityText}>{item.name}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
     </SafeAreaView>
   )
 }
@@ -44,7 +47,6 @@ const CitiesList = () => {
 const Home = () => {
   return (
     <Stack.Navigator>
-      
       <Stack.Screen name='Explore Cities' component={CitiesList} options={{ headerShown: false }} />
       <Stack.Screen name='City Details' component={CityDetails} options={({ route }) => ({ title: route.params.city.name })} />
       <Stack.Screen name='Event Details' component={EventDetails} />
@@ -59,18 +61,30 @@ const styles = StyleSheet.create({
   },
   cityItem: {
     backgroundColor: "#254C94",
-    padding: 15,
-    margin: 8,
+    margin: 6,
     width: 170,
     height: 100,
-    borderRadius: 10,
+    borderRadius: 25,
     justifyContent: 'center',
   },
   cityText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize:17,
-    fontWeight:'bold'
+    fontSize: 17,
+    fontWeight: 'bold'
+  },
+  titleContainer: {
+    backgroundColor: '#0B909B',
+    width: '100%',
+    marginTop:5,
+    marginBottom:10
+  },
+  titleText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 10,
   },
 })
 

@@ -38,7 +38,7 @@ const EventsList = () => {
   );
 };
 
-const Events = () => {
+const Event = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Event List" component={EventsList}  />
@@ -49,4 +49,4 @@ const Events = () => {
 
 
 
-export default Events
+export default Event
