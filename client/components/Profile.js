@@ -12,6 +12,7 @@ const Profile = () => {
     useEffect(() => {
         getUserProfile(3)
         .then(data => {
+            console.log(data);
             setUser(data);
         })
         .catch(error => console.log(error))
@@ -25,11 +26,11 @@ const Profile = () => {
             source={{ uri: user?.avatarUrl?user.avatarUrl: backupImage}}
             style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center'}}
             />
-            <Text style={styles.userProfileName}>User profile name: </Text>
-            <Text style={styles.userProfileAge}>Age: </Text>
-            <Text style={styles.userProfileHometown}>Hometown: </Text>
-            <Text style={styles.userProfileNationality}>Nationality: </Text>
-            <Text style={styles.userProfileLocation}>Location: </Text>
+            <Text style={styles.userProfileName}>User profile name: {user?.displayName?user.displayName: ""}</Text>
+            <Text style={styles.userProfileAge}>Age: {user?.age?user.age: ""}</Text>
+            <Text style={styles.userProfileHometown}>Hometown: {user?.homeTown?user.homeTown: ""}</Text>
+            <Text style={styles.userProfileNationality}>Nationality: {user?.nationality?user.nationality: ""}</Text>
+            <Text style={styles.userProfileLocation}>Location: {user?.location?user.location.name: ""}</Text>
             
         </View>
     )
