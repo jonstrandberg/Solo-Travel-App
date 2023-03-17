@@ -3,6 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { getEvents } from '../services/EventService';
+import{ getSignUpsByEventId } from '../services/SignupService'
 import EventDetails from './EventDetails';
 import AddEventScreen from './AddEventScreen'
 
@@ -18,6 +19,7 @@ const EventsList = () => {
       setEvent(json);
     });
   }, []);
+  
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {

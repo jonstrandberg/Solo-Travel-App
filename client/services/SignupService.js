@@ -84,3 +84,8 @@ export const deleteSignUp = async function (signUpId) {
         return false;
     }
 }
+
+export const getSignUpsByEventId = async function (eventId) {
+        return fetch (`http://localhost:8080/sign_ups/event/${eventId}`)
+        .then(res => {return res.json()})
+    }
