@@ -34,7 +34,6 @@ const Profile = () => {
     useEffect(() => {
         getUserProfile(5)
             .then(data => {
-                console.log(data);
                 setProfile(data);
             })
             .catch(error => console.log(error))
@@ -244,7 +243,7 @@ const Profile = () => {
                         <>
                             {profile.location && profile.location.name ? (
                                 <Text style={{ marginRight: 10 }}>
-                                    {profile.location.name}, {profile.location.country.name}
+                                    {profile.location.name}
                                 </Text>
                             ) : (
                                 <Text style={{ marginRight: 10 }}>N/A</Text>
