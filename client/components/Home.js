@@ -85,6 +85,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#254C94',
+    backgroundColor: 'rgba(256, 256, 256, 0.65)',
+    textAlign: 'center'
+
 
   },
   columnWrapper: {
@@ -113,7 +116,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     overlayColor: 'white',
-
     
   },
   textWrapper: {
