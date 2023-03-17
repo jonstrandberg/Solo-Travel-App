@@ -69,3 +69,18 @@ export const addSignUp = async function (signUp) {
 //     .then(res => 
 //         {return res.json()})
 // }
+
+export const deleteSignUp = async function (signUpId) {
+    try {
+        const response = await fetch('http://127.0.0.1:8080/events/' + signUpId.toString() + "/delete", {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        return true;
+    } catch (error) {
+        console.error("Error deleting signUp:", error);
+        return false;
+    }
+}

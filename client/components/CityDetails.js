@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
@@ -17,18 +16,12 @@ function CityDetails({ navigation }) {
   const [event, setEvent] = useState([])
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8080/events?location_id=${city.id}`)
-      .then(res => res.json())
-      .then(json => { setEvent(json) })
+    console.log(city)
+    getEventsByLocationId(city["id"])
+    .then(json => {
+      setEvent(json)
+    })
   }, [])
-
-  // useEffect(() => {
-  //   console.log(city)
-  //   getEventsByLocationId(city["id"])
-  //   .then(json => {
-  //     setEvents(json)
-  //   })
-  // }, [])
 
   const handleEventPress = (event) => {
     navigation.navigate('Event Details', { event });
