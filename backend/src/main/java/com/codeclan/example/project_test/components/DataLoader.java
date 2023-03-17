@@ -22,7 +22,7 @@ import java.nio.charset.Charset;
 
 
 @Profile("!test") //Run every time EXCEPT Tests
-//@Component
+@Component
 public class DataLoader implements ApplicationRunner {
 
     @Autowired
@@ -107,36 +107,35 @@ public class DataLoader implements ApplicationRunner {
         countryRepository.save(sweden);
 
 //      Locations
-        Location edinburgh = new Location("Edinburgh", scotland, "Edinburgh is the capital city of Scotland and home to many historical landmarks, including Edinburgh Castle and the Royal Mile. It is also known for its festivals, including the Edinburgh Fringe Festival and the Hogmanay celebrations.");
+        Location edinburgh = new Location("Edinburgh", scotland, "Edinburgh is the capital city of Scotland and home to many historical landmarks, including Edinburgh Castle and the Royal Mile. It is also known for its festivals, including the Edinburgh Fringe Festival and the Hogmanay celebrations.", "https://www.planetware.com/photos-large/SCO/scotland-edinburgh-castle-day.jpg");
         locationRepository.save(edinburgh);
 
-        Location berlin = new Location("Berlin", germany, "Berlin is the capital city of Germany and is known for its rich history, culture, and nightlife. It is home to many world-famous landmarks, such as the Berlin Wall and the Brandenburg Gate.");
+        Location berlin = new Location("Berlin", germany, "Berlin is the capital city of Germany and is known for its rich history, culture, and nightlife. It is home to many world-famous landmarks, such as the Berlin Wall and the Brandenburg Gate.", "https://media.timeout.com/images/105303515/image.jpg");
         locationRepository.save(berlin);
 
-        Location munich = new Location("Munich", germany, "Munich is the capital city of Bavaria in Germany and is known for its beautiful architecture, beer gardens, and museums. It is also the home of the world-famous Oktoberfest.");
+        Location munich = new Location("Munich", germany, "Munich is the capital city of Bavaria in Germany and is known for its beautiful architecture, beer gardens, and museums. It is also the home of the world-famous Oktoberfest.", "https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/10/01/17/munich-hero.jpg?width=1200");
         locationRepository.save(munich);
 
-        Location porto = new Location("Porto", portugal, "Porto is a coastal city in Portugal and is known for its historic center, which is a UNESCO World Heritage Site. It is also famous for its port wine, which is produced in the Douro Valley.");
+        Location porto = new Location("Porto", portugal, "Porto is a coastal city in Portugal and is known for its historic center, which is a UNESCO World Heritage Site. It is also famous for its port wine, which is produced in the Douro Valley.", "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/06/26/18/porto-main.jpg?quality=75&width=1200&auto=webp");
         locationRepository.save(porto);
 
-        Location lisbon = new Location("Lisbon", portugal, "Lisbon is the capital city of Portugal and is known for its stunning architecture, beaches, and vibrant culture. It is home to many historical landmarks, including the Belem Tower and the Jeronimos Monastery.");
+        Location lisbon = new Location("Lisbon", portugal, "Lisbon is the capital city of Portugal and is known for its stunning architecture, beaches, and vibrant culture. It is home to many historical landmarks, including the Belem Tower and the Jeronimos Monastery.", "https://www.winetraveler.com/wp-content/uploads/2018/11/10-best-unique-things-to-do-in-lisbon-portugal-experiences.jpg");
         locationRepository.save(lisbon);
 
-        Location vienna = new Location("Vienna", austria, "Vienna is the capital city of Austria and is known for its stunning architecture, music, and art. It is home to many world-famous landmarks, such as the Hofburg Palace and St. Stephen's Cathedral.");
+        Location vienna = new Location("Vienna", austria, "Vienna is the capital city of Austria and is known for its stunning architecture, music, and art. It is home to many world-famous landmarks, such as the Hofburg Palace and St. Stephen's Cathedral.", "https://www.telegraph.co.uk/content/dam/travel/2022/12/12/TELEMMGLPICT000319480847_trans_NvBQzQNjv4BqfzOMAl0Xij9hZ3C3ekNETVUo7BdMuH_4WL_JvvDwfJI.jpeg");
         locationRepository.save(vienna);
 
-        Location cairo = new Location("Cairo", egypt, "Cairo is the capital city of Egypt and is known for its ancient history, including the Pyramids of Giza and the Sphinx. It is also a vibrant city, with a bustling market, delicious food, and a rich culture.");
+        Location cairo = new Location("Cairo", egypt, "Cairo is the capital city of Egypt and is known for its ancient history, including the Pyramids of Giza and the Sphinx. It is also a vibrant city, with a bustling market, delicious food, and a rich culture.", "https://mediacloud.theweek.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1658846189/theweek/2022/July/Giza-Necropolis-Great-Sphinx-pyramids-Cairo-Egypt-Alamy-2HAJ78M.jpg");
         locationRepository.save(cairo);
 
-        Location stockholm = new Location("Stockholm", sweden, "Stockholm is the capital city of Sweden and is known for its beautiful architecture, parks, and museums. It is situated on a group of islands, which makes it a unique and picturesque city to explore.");
+        Location stockholm = new Location("Stockholm", sweden, "Stockholm is the capital city of Sweden and is known for its beautiful architecture, parks, and museums. It is situated on a group of islands, which makes it a unique and picturesque city to explore.", "https://www.lifeinnorway.net/wp-content/uploads/2022/06/waterside-view-of-stockholm-in-sweden.jpg");
         locationRepository.save(stockholm);
 
-        Location rome = new Location("Rome", italy, "Rome is the capital city of Italy and is known for its rich history, stunning architecture, and delicious food. It is home to many world-famous landmarks, such as the Colosseum and the Vatican City.");
+        Location rome = new Location("Rome", italy, "Rome is the capital city of Italy and is known for its rich history, stunning architecture, and delicious food. It is home to many world-famous landmarks, such as the Colosseum and the Vatican City.", "https://www.roadaffair.com/wp-content/uploads/2017/09/colosseum-rome-italy-shutterstock_433413835.jpg");
         locationRepository.save(rome);
 
-        Location milan = new Location("Milan", italy, "Milan is a stylish city in northern Italy, famous for its fashion industry and landmarks such as the Gothic Cathedral and La Scala opera house. Its rich artistic heritage and delicious cuisine make it a popular destination for tourists.");
+        Location milan = new Location("Milan", italy, "Milan is a stylish city in northern Italy, famous for its fashion industry and landmarks such as the Gothic Cathedral and La Scala opera house. Its rich artistic heritage and delicious cuisine make it a popular destination for tourists.", "https://a.cdn-hotels.com/gdcs/production68/d1314/b12f79e7-bcce-4cac-96f8-33f98b9bfb88.jpg?impolicy=fcrop&w=800&h=533&q=medium");
         locationRepository.save(milan);
-
 
         // Users
         UserProfile user1 = new UserProfile("Johnny Sweden", "https://xsgames.co/randomusers/assets/avatars/male/1.jpg", "Gothernberg, Sweden", "Scotland", 37, munich);
