@@ -40,7 +40,7 @@ const AddEventScreen = () => {
       addEvent(event)
         .then(() => {
           console.log('Event added successfully');
-          navigation.navigate('Event List');
+          navigation.navigate('My Events');
         })
         .catch(error => {
           console.log(error);

@@ -16,7 +16,6 @@ function CityDetails({ navigation }) {
   const [event, setEvent] = useState([])
 
   useEffect(() => {
-    console.log(city)
     getEventsByLocationId(city["id"])
     .then(json => {
       setEvent(json)
