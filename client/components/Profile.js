@@ -66,6 +66,7 @@ const Profile = () => {
         if (res) {
             setProfile({ ...profile, nationality: newNationality });
             setNewNationality("");
+            setEditingNationality(false)
         }
     };
 
@@ -74,6 +75,7 @@ const Profile = () => {
         if (res) {
             setProfile({ ...profile, age: newAge })
             setNewAge("")
+            setEditingAge(false)
         }
     }
 
@@ -90,6 +92,7 @@ const Profile = () => {
         if (res) {
             setProfile({ ...profile, location: { name: newLocation, country: profile.location.country } })
             setNewLocation("")
+            setEditingLocation(false)
         }
     }
 
