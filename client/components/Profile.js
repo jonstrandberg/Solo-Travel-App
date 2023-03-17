@@ -88,13 +88,19 @@ const Profile = () => {
     }
 
     const handleUpdateLocation = async () => {
-        const res = await updateUserProfileLocation(profile.id, { name: newLocation, country: profile.location.country })
-        if (res) {
-            setProfile({ ...profile, location: { name: newLocation, country: profile.location.country } })
-            setNewLocation("")
-            setEditingLocation(false)
+        try {
+            const updatedLocation = { ...profile.location, name: newLocation };
+            const res = await updateUserProfileLocation(profile.id, updatedLocation);
+            if (res) {
+                setProfile({ ...profile, location: updatedLocation });
+                setNewLocation("");
+                setEditingLocation(false);
+            }
+        } catch (error) {
+            console.log("Error updating user location: ", error);
         }
-    }
+    };
+
 
     return (
 
