@@ -1,13 +1,16 @@
 
 import { useEffect, useState } from "react"
-import { StyleSheet, SafeAreaView, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, SafeAreaView, Text, View, FlatList, TouchableOpacity, ImageBackground } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from "@react-navigation/stack"
 import { getLocations } from "../services/LocationService"
 import CityDetails from "./CityDetails"
 import EventDetails from "./EventDetails"
 
+const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
+
 const Stack = createStackNavigator()
+
 
 const CitiesList = () => {
   const [location, setLocation] = useState([]);
@@ -20,6 +23,7 @@ const CitiesList = () => {
   }, []);
 
   const handleCityPress = (city) => {
+    console.log(city)
     navigation.navigate('City Details', { city })
   };
 
@@ -39,7 +43,11 @@ const CitiesList = () => {
             onPress={() => handleCityPress(item)}
             style={styles.box}
           >
+            <ImageBackground source={{uri: item?.imageUrl ? item.imageUrl : placeholderCitiyImage}} resizeMode="cover" style={styles.imageUrl}>
+              <View style={styles.textWrapper}>
             <Text style={styles.title}>{item.name}, {item.country.name}</Text>
+              </View>
+            </ImageBackground>
           </TouchableOpacity>
         )}
         columnWrapperStyle={styles.columnWrapper}
@@ -77,6 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#254C94',
+
   },
   columnWrapper: {
     justifyContent: 'space-between',
@@ -93,7 +102,26 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     margin: 10,
+    zIndex: 1,
+    alignContent: 'center',
+    
   },
+  imageUrl: {
+    flex:1,
+    justifyContent: 'center',
+    resizeMode: 'cover', // or 'stretch'
+    width: '100%',
+    height: '100%',
+    overlayColor: 'white'
+
+    
+  },
+  textWrapper: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    zIndex: 1,
+    overflow: 'hidden'
+  }
 })
 
 export default Home;

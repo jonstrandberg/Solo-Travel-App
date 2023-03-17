@@ -41,14 +41,18 @@ public class Location {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     public Location() {}
 
-    public Location(String name, Country country, String description) {
+    public Location(String name, Country country, String description, String imageUrl) {
         this.name = name;
         this.country = country;
         this.eventList = new ArrayList<>();
         this.userProfileList = new ArrayList<>();
         this.description = description;
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -97,5 +101,13 @@ public class Location {
 
     public Country getCountry() {
         return country;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
