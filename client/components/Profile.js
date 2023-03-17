@@ -47,7 +47,7 @@ const Profile = () => {
         if (res) {
             setProfile({ ...profile, homeTown: newHomeTown });
             setNewHomeTown("");
-            setIsSavingHomeTown(false);
+            setIsEditingHomeTown(false)
         }
     };
 
@@ -88,65 +88,63 @@ const Profile = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{profile.displayName}</Text>
             <View style={styles.profileInfo}>
                 <View style={styles.row}>
-                <View style={styles.container}>
-                        {isEditingHomeTown ? (
-                            <>
-                                <TextInput
-                                    style={styles.input}
-                                    value={newHomeTown}
-                                    onChangeText={(text) => setNewHomeTown(text)}
-                                />
-                                <Button
-                                    title="Save"
-                                    onPress={handleUpdateHomeTown}
-                                    style={styles.button}
-                                />
-                            </>
-                        ) : (
-                            <>
-                                <Text style={styles.text}>{profile.homeTown}</Text>
-                                <Button
-                                    title="Edit"
-                                    onPress={() => setIsEditingHomeTown(true)}
-                                    disabled={isSavingHomeTown}
-                                    style={styles.button}
-                                />
-                            </>
-                        )}
-                    </View>
+            </View>
+            </View>
+            <View style={styles.profileInfo}>
+                <View style={styles.row}>
+                    {editingName ? (
+                        <>
+                            <TextInput
+                                style={styles.input}
+                                value={newName}
+                                onChangeText={(text) => setNewName(text)}
+                            />
+                            <Button
+                                title="Save"
+                                onPress={handleUpdateName}
+                                style={styles.button}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <Text style={styles.title}>{profile.displayName}</Text>
+                            <Button
+                                title="Edit"
+                                onPress={() => setIsEditingName(true)}
+                                style={styles.button}
+                            />
+                        </>
+                    )}
                 </View>
             </View>
             <View style={styles.profileInfo}>
-                <Text style={styles.label}>Home Town:</Text>
+                <Text style={styles.label}>Home town:</Text>
                 <View style={styles.row}>
-                    <View style={styles.container}>
-                        {isEditingHomeTown ? (
-                            <>
-                                <TextInput
-                                    style={styles.input}
-                                    value={newHomeTown}
-                                    onChangeText={(text) => setNewHomeTown(text)}
-                                />
-                                <Button
-                                    title="Save"
-                                    onPress={handleUpdateHomeTown}
-                                    style={styles.button}
-                                />
-                            </>
-                        ) : (
-                            <>
-                                <Text style={styles.text}>{profile.homeTown}</Text>
-                                <Button
-                                    title="Edit"
-                                    onPress={() => setIsEditingHomeTown(true)}
-                                    style={styles.button}
-                                />
-                            </>
-                        )}
-                    </View>
+                    {isEditingHomeTown ? (
+                        <>
+                            <TextInput
+                                style={styles.input}
+                                value={newHomeTown}
+                                onChangeText={(text) => setNewHomeTown(text)}
+                            />
+                            <Button
+                                title="Save"
+                                onPress={handleUpdateHomeTown}
+                                style={styles.button}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <Text style={styles.text}>{profile.homeTown}</Text>
+                            <Button
+                                title="Edit"
+                                onPress={() => setIsEditingHomeTown(true)}
+                                style={styles.button}
+                            />
+                        </>
+                    )}
                 </View>
             </View>
             <View style={styles.profileInfo}>
@@ -241,7 +239,6 @@ const Profile = () => {
             </View>
         </View>
     );
-
 }
 
 const styles = StyleSheet.create({
