@@ -13,7 +13,6 @@ const Stack = createStackNavigator()
 function CityDetails({ navigation }) {
 
   const route = useRoute();
-  console.log(city)
   const { city } = route.params;
 
   const [event, setEvent] = useState([])
@@ -56,7 +55,7 @@ function CityDetails({ navigation }) {
           </View>
         )}
       </Stack.Screen>
-      <Stack.Screen name="Add Event" component={AddEventScreen} options={{ title: 'Add Event' }} />
+      <Stack.Screen name="Add Event" component={AddEventScreen} options={{ title: 'Add Event', headerShown: false }} />
     </Stack.Navigator>
   );
 }
