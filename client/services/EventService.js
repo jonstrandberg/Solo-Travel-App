@@ -44,21 +44,18 @@ export const addEvent = async function (event) {
         }
     }
 
-export const getEventsBookedByUserProfileId = async function(userProfileId) {
-    try {
-        const response = await fetch('http://localhost:8080/events?user_profile_id=' + id.toString(userProfileId), {
-            method: 'GET',
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+    export const getEventsBookedByUserProfileId = async function(userProfileId) {
+        try {
+            const res = await fetch('http://localhost:8080/events?user_profile_id=' + userProfileId.toString());
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            return res.json();
+        } catch (error) {
+            console.error('Error fetching events:', error);
+            throw error;
         }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('There was a problem with the request:', error);
-        throw error;
     }
-};
 
 export const getEventsByLocationId = async function(locationId) {
     try {

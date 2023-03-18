@@ -2,9 +2,8 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer} from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons"
-
 import Home from "./components/Home";
-import Events from "./components/Event";
+import MyEvents from "./components/MyEvents";
 import Profile from "./components/Profile";
 
 const Tab = createBottomTabNavigator()
@@ -32,7 +31,7 @@ const App = () => {
           }
         })}>
         <Tab.Screen name='Explore' component={Home} options={{ headerShown: false }}/>
-        <Tab.Screen name='My Events' component={Events} options={{ headerShown: false }}/>
+        <Tab.Screen name='My Events' component={MyEvents} options={{ headerShown: false }}/>
         <Tab.Screen name='Profile' component={Profile} options={{ headerShown: false }}/>
       </Tab.Navigator>
     </NavigationContainer>
