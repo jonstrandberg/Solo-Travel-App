@@ -86,6 +86,16 @@ export const deleteSignUp = async function (signUpId) {
 }
 
 export const getSignUpsByEventId = async function (eventId) {
-        return fetch (`http://localhost:8080/sign_ups/event/${eventId}`)
-        .then(res => {return res.json()})
-    }
+    try {
+        const response = await fetch(`http://localhost:8080/sign_ups/event/${eventId}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+        } catch (error) {
+        console.error('There was an error fetching sign-ups:', error);
+        throw error;
+        }
+    };
+    
