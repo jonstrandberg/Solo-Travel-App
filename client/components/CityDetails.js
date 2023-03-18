@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { getEventsByLocationId } from "../services/EventService";
 import AddEventScreen from './AddEventScreen';
+
+const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
 
 const Stack = createStackNavigator()
 
@@ -11,6 +13,7 @@ const Stack = createStackNavigator()
 function CityDetails({ navigation }) {
 
   const route = useRoute();
+  console.log(city)
   const { city } = route.params;
 
   const [event, setEvent] = useState([])
@@ -37,6 +40,7 @@ function CityDetails({ navigation }) {
           <View style={styles.container}>
             <Text style={styles.cityName}>City name: {city.name}</Text>
             <Text style={styles.country}>Country: {city.country.name}</Text>
+            <Image source={{uri: city?.imageUrl ? city.imageUrl : placeholderCitiyImage}} resizeMode="contain" style={styles.imageUrl}></Image>
             <Text>Events:</Text>
             <FlatList
               data={event}
@@ -86,6 +90,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  imageUrl: {
+    flex: 1,
+    justifyContent: 'center',
+    width:'100%',
+  }
 });
 
 export default CityDetails;

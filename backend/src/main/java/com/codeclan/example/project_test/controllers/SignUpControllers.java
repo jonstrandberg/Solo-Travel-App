@@ -31,6 +31,12 @@ public class SignUpControllers {
         return new ResponseEntity<>(signUpRepository.findById(id), HttpStatus.OK);
     }
 
+    //Get SignUps by event id
+    @GetMapping(value = "/sign_ups/event/{id}")
+    public ResponseEntity<List<SignUp>> signUpByEventId(@PathVariable Long id){
+        return  new ResponseEntity<>(signUpRepository.findByEventId(id), HttpStatus.OK);
+    }
+
     //  Post New SignUp
     @PostMapping(path = "/sign_ups",
             consumes = MediaType.APPLICATION_JSON_VALUE,    // expects data in JSON format
