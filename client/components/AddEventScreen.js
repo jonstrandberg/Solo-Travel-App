@@ -48,6 +48,9 @@ const AddEventScreen = () => {
           name: countryName,
         },
       },
+      creator: {
+        id: 4   //HARD CODED
+      },
       capacity,
     };
     addEvent(event)
