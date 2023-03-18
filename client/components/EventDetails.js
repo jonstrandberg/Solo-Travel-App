@@ -58,12 +58,14 @@ function EventDetails() {
     <SafeAreaView>
       <View>
         <Text>Event: {event.title}</Text>
+        <Text>Date: {event.date}</Text>
         <Text>Time: {event.time}</Text>
         <Text>Duration: {event.duration}</Text>
         <Text>Description: {event.description}</Text>
         <Text>
           Location: {event.location.name}, {event.location.country.name}
         </Text>
+        <Text>Available Spaces: {event.capacity}</Text>
         {/* New code: render the Cancel Attendance button if the current user is signed up, otherwise render the Sign Up button */}
         {currentUser ? (
           <Button title="Cancel Attendance" onPress={handleCancelAttendance} />
