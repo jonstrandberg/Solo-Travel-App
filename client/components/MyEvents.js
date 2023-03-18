@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { getEventsBookedByUserProfileId } from "../services/EventService";
+import EventDetails from "./EventDetails";
 
-const MyEvents = () => {
+const Stack = createStackNavigator();
+
+const MyEventsList = () => {
     const navigation = useNavigation();
     const [events, setEvents] = useState([]);
-
-    const Stack = createStackNavigator();
 
     useEffect(() => {
         getEventsBookedByUserProfileId(1)
@@ -45,6 +46,15 @@ const MyEvents = () => {
                 keyExtractor={(item) => item.id.toString()}
             />
         </View>
+    );
+};
+
+const MyEvents = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="My Events" component={MyEventsList} />
+            <Stack.Screen name="EventDetails" component={EventDetails} />
+        </Stack.Navigator>
     );
 };
 
@@ -92,3 +102,4 @@ const styles = StyleSheet.create({
 });
 
 export default MyEvents;
+
