@@ -35,7 +35,8 @@ function CityDetails({ navigation }) {
   
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Single City Details">
+      <Stack.Screen name="Single City Details"
+      options={{ headerShown: false }}>
         {() => (
           <View style={styles.container}>
             <Text style={styles.cityName}>City name: {city.name}</Text>
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 20,
     marginTop: 20,
+    marginBottom: 10,
   },
   buttonText: {
     color: '#FFFFFF',
