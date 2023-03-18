@@ -105,7 +105,7 @@ const AddEventScreen = () => {
           placeholderTextColor="#757575"
           placeholder="Select Date"
           value={date}
-          // onChangeText={setDate}
+          onChangeText={setDate} //NOT SURE IF THIS IS NEEDED, IS SET BY THE COMPONENT
           editable={false}
         />
         <View style={styles.buttonContainer}>
@@ -125,7 +125,7 @@ const AddEventScreen = () => {
           placeholderTextColor="#757575"
           placeholder="Time"
           value={time}
-          // onChangeText={setTime}
+          onChangeText={setTime} //NOT SURE IF THIS IS NEEDED, IS SET BY THE COMPONENT
           editable={false}
         />
         <View style={styles.buttonContainer}>
@@ -145,7 +145,7 @@ const AddEventScreen = () => {
           placeholderTextColor="#757575"
           placeholder="Duration"
           value={duration}
-          // onChangeText={setDuration}
+          onChangeText={setDuration} //NOT SURE IF THIS IS NEEDED, IS SET BY THE COMPONENT
           editable={false}
         />
         <View style={styles.buttonContainer}>
