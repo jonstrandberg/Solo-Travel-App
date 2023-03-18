@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
 import { addEvent } from '../services/EventService';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import BottomDrawer from './BottomDrawer';
@@ -29,6 +29,10 @@ const AddEventScreen = () => {
   }, [route.params.cityId]);
 
   const handleAddEvent = () => {
+    if (!title || !date || !time|| !duration || !description || !location){
+      Alert.alert('Error', 'All fields are required!')
+    return 
+    }
     const event = {
       title,
       date,
