@@ -72,7 +72,7 @@ export const addSignUp = async function (signUp) {
 
 export const deleteSignUp = async function (signUpId) {
     try {
-        const response = await fetch('http://127.0.0.1:8080/events/' + signUpId.toString() + "/delete", {
+        const response = await fetch('http://127.0.0.1:8080/sign_ups/' + signUpId.toString(), {
             method: 'DELETE'
         });
         if (!response.ok) {
