@@ -1,29 +1,27 @@
-import { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Calendar } from "react-native-calendars";
+import { useState } from "react"
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Calendar } from "react-native-calendars"
 
 const EventCalendar = (props) => {
     const currentDate = new Date();
     const today = currentDate.toLocaleDateString("fr-CA", {
-        year: "numeric",
-        month: "2-digit",
         day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
     })
 
-    const [marked, setMarked] = useState({[today]: { selected: true }})
+    const [marked, setMarked] = useState({ [today]: { selected: true } })
     const [selectedDate, setSelectedDate] = useState(null)
-
 
     const handleAddDate = () => {
         const selectedDateString = Object.keys(marked)[0];
-        const selectedDateFormatted = new Date(selectedDateString).toLocaleDateString("fr-CA", {
-            year: "numeric",
-            month: "2-digit",
+        const selectedDateFormatted = new Date(selectedDateString).toLocaleDateString("en-GB", {
             day: "2-digit",
-        });
+            month: "long",
+            year: "numeric",
+        })
         setSelectedDate(selectedDateFormatted)
         props.onAddDate && props.onAddDate(selectedDateFormatted)
-        console.log(selectedDateFormatted);
     }
 
     return (
@@ -37,19 +35,17 @@ const EventCalendar = (props) => {
                     setMarked({
                         [dateString]: { selected: true }
                     });
-                    props.onDaySelect && props.onDaySelect(day);
-
+                    props.onDaySelect && props.onDaySelect(day)
                 }}
                 monthFormat={'MMMM yyyy'}
                 onMonthChange={month => {
-                    console.log('month changed', month);
+                    console.log('month changed', month)
                 }}
                 hideArrows={false}
                 hideExtraDays={false}
                 disableMonthChange={false}
                 firstDay={1}
                 markedDates={marked}
-
                 theme={{
                     backgroundColor: 'transparent',
                     calendarBackground: 'transparent',
@@ -78,7 +74,7 @@ const EventCalendar = (props) => {
                 }}
             />
             <TouchableOpacity>
-                <Text onPress={handleAddDate}>Add Date</Text>
+                <Text onPress={handleAddDate}>Change Date</Text>
             </TouchableOpacity>
         </View>
     );
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         width: 350
     },
-});
+})
 
 
 export default EventCalendar

@@ -4,6 +4,8 @@ import { addEvent } from '../services/EventService';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import BottomDrawer from './BottomDrawer';
 import EventCalendar from './EventCalender';
+import TimeSelector from './TimeSelector';
+import DurationSelector from './DurationSelector';
 
 
 const AddEventScreen = () => {
@@ -16,6 +18,8 @@ const AddEventScreen = () => {
   const [countryName, setCountryName] = useState('');
   const [cityName, setCityName] = useState('');
   const [isCalendarSheetOpen, setIsCalendarSheetOpen] = useState(false)
+  const [isStartTimeSheetOpen, setIsStartTimeSheetOpen] = useState(false)
+  const [isDurationSheetOpen, setIsDurationSheetOpen] = useState(false)
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -54,14 +58,34 @@ const AddEventScreen = () => {
   const handleOpenCalendarSheet = () => {
     setIsCalendarSheetOpen(true)
   }
-
   const handleCloseCalendarSheet = () => {
     setIsCalendarSheetOpen(false)
   }
-
   const handleAddDate = (selectedDate) => {
     setDate(selectedDate)
     setIsCalendarSheetOpen(false)
+  }
+
+  const handleOpenStartTimeSheet = () => {
+    setIsStartTimeSheetOpen(true)
+  }
+  const handleCloseStartTimeSheet = () => {
+    setIsStartTimeSheetOpen(false)
+  }
+  const handleAddStartTime = (selectedTime) => {
+    setTime(selectedTime)
+    setIsStartTimeSheetOpen(false)
+  }
+
+  const handleOpenDurationSheet = () => {
+    setIsDurationSheetOpen(true)
+  }
+  const handleCloseDurationSheet = () => {
+    setIsDurationSheetOpen(false)
+  }
+  const handleAddDuration = (selectedDuration) => {
+    setDuration(selectedDuration)
+    setIsDurationSheetOpen(false)
   }
 
   return (
@@ -74,40 +98,68 @@ const AddEventScreen = () => {
         onChangeText={setTitle}
       />
 
-      
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#757575"
-        placeholder="Select Date"
-        value={date}
-        onChangeText={setDate}
-        // editable={false} 
-      />
-      <TouchableOpacity onPress={handleOpenCalendarSheet} style={styles.button}>
-        <Text>Select Date</Text>
-      </TouchableOpacity>
-
+      {/* ADDED CALENDAR PICKER */}
+      <View style={styles.timeDateInputContainer}>
+        <TextInput
+          style={styles.timeDateInput}
+          placeholderTextColor="#757575"
+          placeholder="Select Date"
+          value={date}
+          // onChangeText={setDate}
+          editable={false}
+        />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={handleOpenCalendarSheet} style={styles.inputButton}>
+            <Text>Select Date</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
       <BottomDrawer visible={isCalendarSheetOpen} onClose={handleCloseCalendarSheet}>
         <EventCalendar onAddDate={handleAddDate} />
       </BottomDrawer>
 
+      {/* ADDED TIME PICKER */}
+      <View style={styles.timeDateInputContainer}>
+        <TextInput
+          style={styles.timeDateInput}
+          placeholderTextColor="#757575"
+          placeholder="Time"
+          value={time}
+          // onChangeText={setTime}
+          editable={false}
+        />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={handleOpenStartTimeSheet} style={styles.inputButton}>
+            <Text>Set Start Time</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <BottomDrawer visible={isStartTimeSheetOpen} onClose={handleCloseStartTimeSheet}>
+        <TimeSelector onAddStartTime={handleAddStartTime} />
+      </BottomDrawer>
+
+      {/* ADDED DURATION PICKER */}
+      <View style={styles.timeDateInputContainer}>
+        <TextInput
+          style={styles.timeDateInput}
+          placeholderTextColor="#757575"
+          placeholder="Duration"
+          value={duration}
+          // onChangeText={setDuration}
+          editable={false}
+        />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={handleOpenDurationSheet} style={styles.inputButton}>
+            <Text>Set Duration</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <BottomDrawer visible={isDurationSheetOpen} onClose={handleCloseDurationSheet}>
+        <DurationSelector onAddDuration={handleAddDuration} />
+      </BottomDrawer>
 
 
 
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#757575"
-        placeholder="Time"
-        value={time}
-        onChangeText={setTime}
-      />
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#757575"
-        placeholder="Duration"
-        value={duration}
-        onChangeText={setDuration}
-      />
       <TextInput
         style={styles.input}
         placeholderTextColor="#757575"
@@ -146,12 +198,43 @@ const styles = StyleSheet.create({
     borderColor: '#BDBDBD',
     backgroundColor: 'white',
   },
+  timeDateInputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+  },
+  timeDateInput: {
+    height: 50,
+    width: '55%',
+    marginVertical: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    borderColor: '#BDBDBD',
+    backgroundColor: 'white',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '44%'
+  },
+  inputButton: {
+    height: 40,
+    width: '100%',
+    marginLeft: 10,
+    backgroundColor: '#BDBDBD',
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   button: {
     backgroundColor: '#4d4dff',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    marginTop: 10,
   },
   buttonText: {
     color: '#FFFFFF',
