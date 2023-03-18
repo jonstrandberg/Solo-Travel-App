@@ -8,7 +8,6 @@ import {Attendee} from "./Attendee";
 function EventDetails() {
     const route = useRoute()
     const { event } = route.params
-
     const [sign_ups, setSignups] = useState([]);
 
 useEffect(() => {
@@ -18,25 +17,21 @@ useEffect(() => {
         })
     }, []);
 
-    // useEffect(() => {
-    //     setUserProfile().then((json) => {
-    //         setUser(json)
-    //     })
-    // }, [])
+    const updateSignUps = async () => {
+        const json = await getSignUpsByEventId(event.id);
+        setSignups(json);
+    }
+
     const handleSignUp = async () => {
-        // const userProfile = getUserProfile(1)
         const signUp = {
-            userProfile: {
-                id: 4
-            },
-            event: {
-                id: event.id
-            }
+            userProfile: {id: 4},
+            event: {id: event.id}
         }
         try {
             const response = await addSignUp(signUp);
             console.log(response); // Log the response from your API for debugging
             // Handle any success logic, e.g. show a success message
+            await updateSignUps()
         } catch (error) {
             console.error(error); // Log any error for debugging
             // Handle any error logic, e.g. show an error message
