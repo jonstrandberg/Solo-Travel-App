@@ -10,14 +10,18 @@ function EventDetails() {
   const route = useRoute();
   const { event } = route.params;
   const [sign_ups, setSignups] = useState([]);
+  const [availableSpaces, setAvailableSpaces] = useState(event.capacity);
   const currentUser = sign_ups.find((signUp) => signUp.userProfile.id === 5); //HARD CODED
   const isEventCreator = event.creator.id === 5; //HARD CODED
   const navigation = useNavigation()
+
+
 
   useEffect(() => {
     const fetchSignUps = async () => {
       const json = await getSignUpsByEventId(event.id);
       setSignups(json);
+      setAvailableSpaces(event.capacity - json.length)
     };
 
     fetchSignUps();
@@ -29,10 +33,14 @@ function EventDetails() {
       event: { id: event.id },
     };
     try {
-      const response = await addSignUp(signUp);
-      console.log(response);
-      await updateSignUps();
-    } catch (error) {
+        if (availableSpaces > 0) {
+          const response = await addSignUp(signUp);
+          setAvailableSpaces(Spaces => Spaces - 1);
+          await updateSignUps();
+        } else {
+          Alert.alert('No available spaces', 'Sorry, there are no spaces available for this event.');
+        }
+      } catch (error) {
       console.error(error);
     }
   };
@@ -44,6 +52,7 @@ function EventDetails() {
       const signUp = signUps.find((signUp) => signUp.userProfile.id === userProfile.id);
       const response = await deleteSignUp(signUp.id);
       console.log(response);
+      setAvailableSpaces(Spaces => Spaces + 1)
       await updateSignUps();
     } catch (error) {
       console.error(error);
@@ -77,6 +86,7 @@ function EventDetails() {
   const updateSignUps = async () => {
     const json = await getSignUpsByEventId(event.id);
     setSignups(json);
+    setAvailableSpaces(event.capacity - json.length)
   };
 
   return (
@@ -93,7 +103,7 @@ function EventDetails() {
         <Text>
           Location: {event.location.name}, {event.location.country.name}
         </Text>
-        <Text>Available Spaces: {event.capacity}</Text>
+        <Text>Available Spaces: {availableSpaces}</Text>
         {isEventCreator && (
           <Button title="Delete Event" onPress={handleDeleteEvent} />
         )}

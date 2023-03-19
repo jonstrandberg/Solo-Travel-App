@@ -184,6 +184,9 @@ public class DataLoader implements ApplicationRunner {
         Event event10 = new Event("Porto Wine Festival", "12:00", "8 hours", "Sample the famous port wine of Porto while enjoying live music and entertainment", porto, "26-03-2023", user5, 10);
         eventRepository.save(event10);
 
+        Event event11 = new Event("Test Capacity", "12:00", "8 hours", "Test Capacity", porto, "26-03-2023", user4, 2);
+        eventRepository.save(event11);
+
         // Sign Ups
         SignUp signUp1 = new SignUp(user1, event1);
         signUpRepository.save(signUp1);
@@ -202,6 +205,12 @@ public class DataLoader implements ApplicationRunner {
 
         SignUp signUp6 = new SignUp(user4, event4);
         signUpRepository.save(signUp6);
+
+        SignUp signUp7 = new SignUp(user1, event11);
+        signUpRepository.save(signUp7);
+
+        SignUp signUp8 = new SignUp(user2, event11);
+        signUpRepository.save(signUp8);
     }
 
 }

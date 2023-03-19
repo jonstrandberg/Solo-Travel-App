@@ -47,6 +47,9 @@ public class Event {
     @Column(name = "capacity")
     private int capacity;
 
+//    @Column(name = "available_spaces")
+//    private int availableSpaces;
+
     public Event() {}
 
     public Event(String title, String time, String duration, String description, Location location, String date, UserProfile creator, int capacity) {
@@ -58,7 +61,8 @@ public class Event {
         this.date = date;
         this.signUpList = new ArrayList<>();
         this.creator = creator;
-        this.capacity = capacity - 1;
+        this.capacity = capacity;
+//        this.availableSpaces = capacity;
     }
 
     public UserProfile getCreator() {
@@ -140,4 +144,12 @@ public class Event {
     public void setSignUpList(List<SignUp> signUpList) {
         this.signUpList = signUpList;
     }
+
+//    public int getAvailableSpaces() {
+//        return availableSpaces;
+//    }
+//
+//    public void setAvailableSpaces(int availableSpaces) {
+//        this.availableSpaces = availableSpaces;
+//    }
 }
