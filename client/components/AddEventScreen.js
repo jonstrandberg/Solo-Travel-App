@@ -30,7 +30,7 @@ const AddEventScreen = () => {
   }, [route.params.cityId]);
 
   const handleAddEvent = () => {
-    if (!title || !date || !time|| !duration || !description || !location){
+    if (!title || !date || !time|| !duration || !description || !location || !capacity){
       Alert.alert('Error', 'All fields are required!')
     return 
     }

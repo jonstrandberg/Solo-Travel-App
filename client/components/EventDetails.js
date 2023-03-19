@@ -73,7 +73,7 @@ function EventDetails() {
     await Promise.all(promises);
     const response = await deleteEvent(event.id);
     console.log(response);
-      navigation.navigate('Explore');
+    navigation.navigate('Explore');
     } catch (error) {
       console.error('Error deleting event:', error);
     }
