@@ -4,9 +4,9 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/SignupService";
 import { deleteEvent } from "../services/EventService";
 import { getUserProfile } from "../services/UserService";
-import { Attendee } from "./Attendee";
+import { Attendee } from "../components/Attendee";
 
-function EventDetails() {
+function EventDetailsScreen() {
   const route = useRoute();
   const { event } = route.params;
   const [sign_ups, setSignups] = useState([]);
@@ -131,4 +131,4 @@ const styles = StyleSheet.create({
     }
   });
 
-export default EventDetails;
+export default EventDetailsScreen;
