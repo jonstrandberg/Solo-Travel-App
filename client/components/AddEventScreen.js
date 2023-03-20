@@ -249,7 +249,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#4d4dff',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 20,
+    borderRadius: 15,
+    alignSelf: 'stretch'
   },
   buttonText: {
     color: '#FFFFFF',
