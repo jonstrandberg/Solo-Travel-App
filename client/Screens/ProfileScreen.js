@@ -18,7 +18,7 @@ import { getLocations } from "../services/LocationService";
 
 const placeholderImage = 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'
 
-const Profile = () => {
+const ProfileScreen = () => {
     const [user, setUser] = useState();
     const [profile, setProfile] = useState([]);
     const [newName, setNewName] = useState("")
@@ -337,4 +337,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Profile
+export default ProfileScreen

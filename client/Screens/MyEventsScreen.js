@@ -3,7 +3,7 @@ import { FlatList, Text, View, TouchableOpacity, StyleSheet } from "react-native
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { getEventsBookedByUserProfileId } from "../services/EventService";
-import EventDetails from "./EventDetails";
+import EventDetails from "../components/EventDetails";
 
 const Stack = createStackNavigator();
 
@@ -49,7 +49,7 @@ const MyEventsList = () => {
     );
 };
 
-const MyEvents = () => {
+const MyEventsScreen = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="My Events" component={MyEventsList} />
@@ -101,5 +101,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MyEvents;
+export default MyEventsScreen;
 
