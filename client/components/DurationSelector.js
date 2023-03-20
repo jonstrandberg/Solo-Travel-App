@@ -40,7 +40,7 @@ const DurationSelector = (props) => {
                 locale='en_GB'
             />
             <TouchableOpacity>
-                <Text onPress={handleSelectDuration}>Change Duration</Text>
+                <Text onPress={handleSelectDuration}>Set Duration</Text>
             </TouchableOpacity>
 
         </View>
