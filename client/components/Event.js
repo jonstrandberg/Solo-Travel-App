@@ -23,7 +23,6 @@ const EventsList = () => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      // Fetch the updated events data when the screen comes into focus
       getEvents().then(json => {
         setEvent(json);
       });
