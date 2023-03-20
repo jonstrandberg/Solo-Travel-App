@@ -14,6 +14,7 @@ const AddEventScreen = () => {
   const [time, setTime] = useState('');
   const [duration, setDuration] = useState('');
   const [capacity, setCapacity] = useState('');
+  const [meetingPoint, setMeetingPoint] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState(null);
   const [countryName, setCountryName] = useState('');
@@ -30,7 +31,7 @@ const AddEventScreen = () => {
   }, [route.params.cityId]);
 
   const handleAddEvent = () => {
-    if (!title || !date || !time|| !duration || !description || !location || !capacity){
+    if (!title || !date || !time|| !duration || !description || !location || !capacity || !meetingPoint){
       Alert.alert('Error', 'All fields are required!')
     return 
     }
@@ -40,6 +41,7 @@ const AddEventScreen = () => {
       time,
       duration,
       description,
+      meetingPoint,
       location: {
         id: location,
         name: cityName,
@@ -173,6 +175,14 @@ const AddEventScreen = () => {
         placeholder="Maximum Capacity"
         value={capacity}
         onChangeText={setCapacity}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholderTextColor="#757575"
+        placeholder="Meet-up Point"
+        value={meetingPoint}
+        onChangeText={setMeetingPoint}
       />
 
       <TextInput

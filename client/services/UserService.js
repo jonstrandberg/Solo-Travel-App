@@ -183,3 +183,21 @@ export const updateUserProfileLocation = async function (userProfileId, newLocat
         return null;
     }
 }
+
+export const updateUserProfileInterests = async function (userProfileId, newInterests) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_interests", {
+            method: "PUT",
+            body: JSON.stringify({ new: newInterests }),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating user interests :", error);
+        return null;
+    }
+}

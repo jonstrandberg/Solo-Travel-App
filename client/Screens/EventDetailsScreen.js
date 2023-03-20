@@ -104,6 +104,7 @@ function EventDetailsScreen() {
         <Text>
           Location: {event.location.name}, {event.location.country.name}
         </Text>
+        <Text>Meet-up Point: {event.meetingPoint}</Text>
         <Text>Available Spaces: {availableSpaces}</Text>
         {isEventCreator && (
           <Button title="Delete Event" onPress={handleDeleteEvent} />

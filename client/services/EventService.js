@@ -217,6 +217,24 @@ export const updateEventCreator = async function (eventId, newCreator) {
     }
 }
 
+export const updateEventMeetingPoint = async function (eventId, newMeetingPoint) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_meeting_point", {
+            method: "PUT",
+            body: JSON.stringify({ new: newMeetingPoint }),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event meeting point:", error);
+        return null;
+    }
+}
+
 export const deleteEvent = async function (eventId) {
     try {
         const response = await fetch('http://localhost:8080/events/' + eventId.toString(), {

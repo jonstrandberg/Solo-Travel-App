@@ -156,6 +156,21 @@ public class UserProfileController {
         return ResponseEntity.ok(updatedUserProfile);
     }
 
+    //  Sets Interests
+    @PutMapping("/user_profiles/{id}/set_interests")
+    public ResponseEntity<UserProfile> setUserProfileInterests(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> interests) {
 
+        UserProfile updatedUserProfile = userProfileRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
+
+        updatedUserProfile.setInterests(interests.get("new"));
+
+        userProfileRepository.save(updatedUserProfile);
+
+        return ResponseEntity.ok(updatedUserProfile);
+    }
 
 }
