@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     detailsButtonContainer: {
-        backgroundColor: "#007AFF",
+        backgroundColor: "#0B909B",
         borderRadius: 5,
         paddingHorizontal: 10,
         paddingVertical: 5,
