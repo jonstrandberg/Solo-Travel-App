@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer} from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons"
-import Home from "./components/Home";
-import MyEvents from "./components/MyEvents";
-import Profile from "./components/Profile";
+import HomeScreen from "./Screens/HomeScreen";
+import MyEventsScreen from "./Screens/MyEventsScreen";
+import ProfileScreen from "./Screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator()
 
@@ -30,9 +30,9 @@ const App = () => {
             return <Ionicons name={iconName} size={size} color={color}/>
           }
         })}>
-        <Tab.Screen name='Explore' component={Home} options={{ headerShown: false }}/>
-        <Tab.Screen name='My Events' component={MyEvents} options={{ headerShown: false }}/>
-        <Tab.Screen name='Profile' component={Profile} options={{ headerShown: false }}/>
+        <Tab.Screen name='Explore' component={HomeScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name='My Events' component={MyEventsScreen} options={{ headerShown: false }}/>
+        <Tab.Screen name='Profile' component={ProfileScreen} options={{ headerShown: false }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );

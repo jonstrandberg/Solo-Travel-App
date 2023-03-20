@@ -10,7 +10,7 @@ const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wild
 const Stack = createStackNavigator()
 
 
-function CityDetails({ navigation }) {
+function CityDetailsScreen({ navigation }) {
 
   const route = useRoute();
   const { city } = route.params;
@@ -98,5 +98,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CityDetails;
+export default CityDetailsScreen;
 
