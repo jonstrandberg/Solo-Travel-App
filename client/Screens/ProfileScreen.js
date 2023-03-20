@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react"
-import { Image, View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { Image, View, Text, StyleSheet, TextInput, Button, ScrollView, SafeAreaView } from "react-native";
 import {
     updateUserProfileName,
     updateUserProfileHomeTown,
@@ -11,7 +11,8 @@ import {
     getUserProfile,
     updateUserProfileInterests
 } from "../services/UserService";
-import DropDownPicker from 'react-native-dropdown-picker';
+import SelectDropdownWithSearch from 'react-native-select-dropdown-with-search';
+
 import { getCountries } from "../services/CountryService";
 import { getLocations } from "../services/LocationService";
 
@@ -38,8 +39,6 @@ const ProfileScreen = () => {
     const [editingInterests, setEditingInterests] = useState(false)
     const [isSavingHomeTown, setIsSavingHomeTown] = useState(false);
 
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
     const [items, setItems] = useState([
         {label: 'Egypt', value: 'egypt'},
         {label: 'Scotland', value: 'scotland'}
@@ -47,9 +46,8 @@ const ProfileScreen = () => {
 
     useEffect(() => {
         getCountries()
-        
         .then(data => { 
-            setItems( data.map(x => ({label: x.name, value: x.name})));
+            setItems( data.map(x =>  x.name));
         })
     }, [])
 
@@ -110,7 +108,7 @@ const ProfileScreen = () => {
         }
     }
 
-     const handleUpdateUserInterests = async () => {
+    const handleUpdateUserInterests = async () => {
         const res = await updateUserProfileInterests(profile.id, newInterests)
         if (res) {
             setProfile({ ...profile, interests: newInterests })
@@ -205,22 +203,28 @@ const ProfileScreen = () => {
                 <View style={styles.row}>
                     {editingNationality ? (
                         <>
-                            <DropDownPicker
-                                open={open}
-                                value={value}
-                                items={items}
-                                setOpen={setOpen}
-                                setValue={setValue}
-                                setItems={setItems}
-                                zIndexInverse={1000}
-                                
-                            />
-                            <Button
+                        <SelectDropdownWithSearch
+                        data={items}
+                        onSelect={(selectedItem, index) => {
+                            console.log(selectedItem, index)
+                        }}
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            // text represented after item is selected
+                            // if data array is an array of objects then return selectedItem.property to render after item is selected
+                            return selectedItem
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            // text represented for each item in dropdown
+                            // if data array is an array of objects then return item.property to represent item in dropdown
+                            return item
+                        }}
+                    />
+                    <Button
                                 title="Save"
                                 onPress={handleUpdateNationality}
                                 style={styles.button}
                             />
-                        </>
+                            </>
                     ) : (
                         <>
                             <Text style={styles.text}>{profile.nationality}</Text>
@@ -334,7 +338,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: '#F2F2F2',
-        marginTop: 50
+        marginTop: 50,
     },
     title: {
         fontSize: 24,
@@ -375,7 +379,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingHorizontal: 20,
     },
-
 });
 
 export default ProfileScreen
