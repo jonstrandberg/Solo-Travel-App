@@ -252,7 +252,7 @@ export const deleteEvent = async function (eventId) {
 
 export const getEventsCreatedByUserProfileId = async function (user_profile_id) {
     try {
-        const response = await fetch(`http://localhost:8080/sign_ups/events/${user_profile_id}`);
+        const response = await fetch(`http://localhost:8080/events?creator_id=${user_profile_id}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
