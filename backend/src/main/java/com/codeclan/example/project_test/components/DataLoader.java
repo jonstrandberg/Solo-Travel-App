@@ -138,19 +138,19 @@ public class DataLoader implements ApplicationRunner {
         locationRepository.save(milan);
 
         // Users
-        UserProfile user1 = new UserProfile("Johnny Sweden", "https://xsgames.co/randomusers/assets/avatars/male/1.jpg", "Gothernberg, Sweden", "Scotland", 37, munich, "Ice Hockey, Meatballs, Going to IKEA with the missus", "wedf");
+        UserProfile user1 = new UserProfile("Johnny Sweden", "https://xsgames.co/randomusers/assets/avatars/male/1.jpg", "Gothernberg, Sweden", "Scotland", 37, munich, "Ice Hockey, Meatballs, Going to IKEA with the missus", "Vxj1gKvrTFOQBkqv2nQnduRp8Xl1");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile("Ben Barlow", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "Paisley, Scotland", "Scotland", 40, munich, "Pizza, Football, Darwin Nunez", "ershtrtjw");
+        UserProfile user2 = new UserProfile("Ben Barlow", "https://xsgames.co/randomusers/assets/avatars/male/2.jpg", "Paisley, Scotland", "Scotland", 40, munich, "Pizza, Football, Darwin Nunez", "xSojzcd1TjSsUvNvsEQADlyY18B2");
         userProfileRepository.save(user2);
 
-        UserProfile user3 = new UserProfile("Maggie Amin", "https://xsgames.co/randomusers/assets/avatars/female/53.jpg", "Cairo, Egypt", "Egypt", 28, edinburgh, "Puppies, Long walks on the beach, Architecture", "erhwt");
+        UserProfile user3 = new UserProfile("Maggie Amin", "https://xsgames.co/randomusers/assets/avatars/female/53.jpg", "Cairo, Egypt", "Egypt", 28, edinburgh, "Puppies, Long walks on the beach, Architecture", "sTVxexzZ6hhytl8tPWHF5H2k46n2");
         userProfileRepository.save(user3);
 
         UserProfile user4 = new UserProfile("Gareth Evans", "https://xsgames.co/randomusers/assets/avatars/male/4.jpg", "Lossiemouth, Scotland", "Scotland", 30, berlin, "Football, Sobriety, Puns", "rthjt");
         userProfileRepository.save(user4);
 
-        UserProfile user5 = new UserProfile("The Almighty Creator", "https://xsgames.co/randomusers/assets/avatars/male/5.jpg", "Heaven", "Godly", 30, null, "Church, Resurrection, Smiting", "holyid");
+        UserProfile user5 = new UserProfile("The Almighty Creator", "https://xsgames.co/randomusers/assets/avatars/male/5.jpg", "Heaven", "Godly", 30, null, "Church, Resurrection, Smiting", "Wkdd3oJeZlWMA8xktKyszQgnB4g1");
         userProfileRepository.save(user5);
 
         UserProfile user6 = new UserProfile("Sally Cinnamon", "https://xsgames.co/randomusers/assets/avatars/female/4.jpg", "Manchester, England", "England", 30, stockholm, "Music, Gigs, Pub", "rfsdfajt");
