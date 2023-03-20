@@ -11,10 +11,7 @@ import {
     getUserProfile,
     updateUserProfileInterests
 } from "../services/UserService";
-import DropDownPicker from 'react-native-dropdown-picker';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import SelectDropdownWithSearch from 'react-native-select-dropdown-with-search';
 
 import { getCountries } from "../services/CountryService";
 import { getLocations } from "../services/LocationService";
@@ -42,19 +39,15 @@ const ProfileScreen = () => {
     const [editingInterests, setEditingInterests] = useState(false)
     const [isSavingHomeTown, setIsSavingHomeTown] = useState(false);
 
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
     const [items, setItems] = useState([
         {label: 'Egypt', value: 'egypt'},
         {label: 'Scotland', value: 'scotland'}
     ]);
 
-    const [loading, setLoading] = useState(false);
-
     useEffect(() => {
         getCountries()
         .then(data => { 
-            setItems( data.map(x => ({label: x.name, value: x.name})));
+            setItems( data.map(x =>  x.name));
         })
     }, [])
 
@@ -115,7 +108,7 @@ const ProfileScreen = () => {
         }
     }
 
-     const handleUpdateUserInterests = async () => {
+    const handleUpdateUserInterests = async () => {
         const res = await updateUserProfileInterests(profile.id, newInterests)
         if (res) {
             setProfile({ ...profile, interests: newInterests })
@@ -209,54 +202,29 @@ const ProfileScreen = () => {
                 <Text style={styles.label}>Nationality:</Text>
                 <View style={styles.row}>
                     {editingNationality ? (
-                        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                            <DropDownPicker 
-                                style={{
-                                    backgroundColor: '#fafafa',
-                                    borderWidth: 1,
-                                    borderColor: '#ccc',
-                                    borderRadius: 5,
-                                    height: 40,
-                                    marginVertical: 10,
-                                    zIndex: 9999
-                                    }}
-                                showTickIcon={true}
-                                placeholder='Where are you from:'
-                                open={open}
-                                value={value}
-                                items={items}
-                                setOpen={setOpen}
-                                setValue={setValue}
-                                setItems={setItems}
-                                zIndexInverse={1000}
-                                showTickIconSelected={true}
-                                selectedItemContainerStyle={{
-                                    backgroundColor: 'gray'
-                                    }}
-                                showArrowIcon={true}
-                                loading={loading}
-                                itemsStyle={{
-                                    justifyContent: 'flex-start'
-                                    }}
-                                labelStyle={{
-                                    fontWeight: 'bold',
-                                    fontSize: 16,
-                                    color: '#333'
-                                    }}
-                                arrowStyle={{
-                                    borderWidth: 1,
-                                    
-                                }}
-                                activeItemContainerStyle={{
-                                    backgroundColor: 'blue'
-                                }}
-                            />
-                            <Button
+                        <>
+                        <SelectDropdownWithSearch
+                        data={items}
+                        onSelect={(selectedItem, index) => {
+                            console.log(selectedItem, index)
+                        }}
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            // text represented after item is selected
+                            // if data array is an array of objects then return selectedItem.property to render after item is selected
+                            return selectedItem
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            // text represented for each item in dropdown
+                            // if data array is an array of objects then return item.property to represent item in dropdown
+                            return item
+                        }}
+                    />
+                    <Button
                                 title="Save"
                                 onPress={handleUpdateNationality}
-                                
+                                style={styles.button}
                             />
-                        </ScrollView>
+                            </>
                     ) : (
                         <>
                             <Text style={styles.text}>{profile.nationality}</Text>
@@ -411,32 +379,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingHorizontal: 20,
     },
-    dropdown2BtnStyle: {
-        width: '80%',
-        height: 50,
-        backgroundColor: '#444',
-        borderRadius: 8,
-    },
-    dropdown2BtnTxtStyle: {
-        color: '#FFF',
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-    dropdown2DropdownStyle: {
-        backgroundColor: '#444',
-        borderBottomLeftRadius: 12,
-        borderBottomRightRadius: 12,
-    },
-    dropdown2RowStyle: {backgroundColor: '#444', borderBottomColor: '#C5C5C5'},
-    dropdown2RowTxtStyle: {
-        color: '#FFF',
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-    button: {
-        zIndex: 1,
-    }
-
 });
 
 export default ProfileScreen
