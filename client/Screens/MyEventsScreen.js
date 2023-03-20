@@ -9,15 +9,15 @@ const Stack = createStackNavigator();
 
 const MyEventsList = () => {
     const navigation = useNavigation();
-    const [events, setEvents] = useState([]);
+    const [eventsAttending, setEventsAttending] = useState([]);
 
     useEffect(() => {
         getEventsBookedByUserProfileId(1)
             .then((json) => {
-                setEvents(json);
+                setEventsAttending(json);
             })
             .catch((error) => {
-                console.error("Error getting events:", error);
+                console.error("Error getting events attended:", error);
             });
     }, []);
 
@@ -41,7 +41,7 @@ const MyEventsList = () => {
     return (
         <View style={styles.container}>
             <FlatList
-                data={events}
+                data={eventsAttending}
                 renderItem={eventItem}
                 keyExtractor={(item) => item.id.toString()}
             />
