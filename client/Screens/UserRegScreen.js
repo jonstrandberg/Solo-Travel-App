@@ -24,7 +24,7 @@ const UserRegScreen = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log("registered with: ", user.email)
+                console.log("registered with: ", user.uid)
             })
             .catch((error) => {
                 if(error.code === 'auth/invalid-email'){

@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react"
 import { StyleSheet, SafeAreaView, View, Text, TextInput, TouchableOpacity } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { auth } from "../firebase";
 
 const UserDetailsScreen = () => {
     const [name, setName] = useState('')
     const [nationality, setNationality] = useState('')
 
-    
+    const navigation = useNavigation()
+
+    const handleUserDetailCompletion = () => {
+        navigation.navigate("Navigator")
+    }
 
     return (
         <SafeAreaView
