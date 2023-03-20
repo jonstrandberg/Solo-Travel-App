@@ -8,7 +8,8 @@ import {
     updateUserProfileAge,
     updateUserProfileAvatarUrl,
     updateUserProfileLocation,
-    getUserProfile
+    getUserProfile,
+    updateUserProfileInterests
 } from "../services/UserService";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { getCountries } from "../services/CountryService";
@@ -27,12 +28,14 @@ const ProfileScreen = () => {
     const [newAge, setNewAge] = useState("")
     const [newPhoto, setNewPhoto] = useState("")
     const [newLocation, setNewLocation] = useState("");
+    const [newInterests, setNewInterests] = useState("")
     const [editingName, setEditingName] = useState("")
     const [isEditingName, setIsEditingName] = useState(false);
     const [isEditingHomeTown, setIsEditingHomeTown] = useState(false);
     const [editingNationality, setEditingNationality] = useState(false);
     const [editingAge, setEditingAge] = useState(false);
     const [editingLocation, setEditingLocation] = useState(false);
+    const [editingInterests, setEditingInterests] = useState(false)
     const [isSavingHomeTown, setIsSavingHomeTown] = useState(false);
 
     const [open, setOpen] = useState(false);
@@ -103,6 +106,15 @@ const ProfileScreen = () => {
         if (res) {
             setProfile({ ...profile, avatarUrl: newPhoto })
             setNewPhoto("")
+        }
+    }
+
+     const handleUpdateUserInterests = async () => {
+        const res = await updateUserProfileInterests(profile.id, newInterests)
+        if (res) {
+            setProfile({ ...profile, interests: newInterests })
+            setNewInterests("")
+            setEditingInterests(false)
         }
     }
 
@@ -242,6 +254,34 @@ const ProfileScreen = () => {
                             <Button
                                 title="Edit"
                                 onPress={() => setEditingAge(true)}
+                                style={styles.button}
+                            />
+                        </>
+                    )}
+                </View>
+            </View>
+            <View style={styles.profileInfo}>
+                <Text style={styles.label}>Interests:</Text>
+                <View style={styles.row}>
+                    {editingInterests ? (
+                        <>
+                            <TextInput
+                                style={styles.input}
+                                value={newInterests}
+                                onChangeText={(text) => setNewInterests(text)}
+                            />
+                            <Button
+                                title="Save"
+                                onPress={handleUpdateUserInterests}
+                                style={styles.button}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <Text style={styles.text}>{profile.interests}</Text>
+                            <Button
+                                title="Edit"
+                                onPress={() => setEditingInterests(true)}
                                 style={styles.button}
                             />
                         </>

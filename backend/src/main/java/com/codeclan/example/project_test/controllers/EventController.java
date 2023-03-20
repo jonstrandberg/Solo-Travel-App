@@ -180,6 +180,23 @@ public class EventController {
         return ResponseEntity.ok(updatedEvent);
     }
 
+    //  Sets Event Meeting Point
+    @PutMapping("/events/{id}/set_meeting_point")
+    public ResponseEntity<Event> setEventMeetingPoint(
+            @PathVariable long id,
+            @RequestBody HashMap<String, String> meeting_point) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setMeetingPoint(meeting_point.get("new"));
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
     //  Sets Event Creator (don't know if we need this??)
     @PutMapping("/events/{id}/set_creator")
     public ResponseEntity<Event> setEventCreator(

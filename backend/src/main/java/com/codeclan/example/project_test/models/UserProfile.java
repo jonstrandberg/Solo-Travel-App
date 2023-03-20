@@ -42,9 +42,12 @@ public class UserProfile {
     @OneToMany(mappedBy = "creator")
     private List<Event> createdEventsList;
 
+    @Column(name = "interests")
+    private String interests;
+
     public UserProfile() {}
 
-    public UserProfile(String displayName, String avatarUrl, String homeTown, String nationality, int age, Location location) {
+    public UserProfile(String displayName, String avatarUrl, String homeTown, String nationality, int age, Location location, String interests) {
         this.displayName = displayName;
         this.avatarUrl = avatarUrl;
         this.homeTown = homeTown;
@@ -53,6 +56,7 @@ public class UserProfile {
         this.signUpList = new ArrayList<>();
         this.location = location;
         this.createdEventsList = new ArrayList<>();
+        this.interests = interests;
     }
 
     public Long getId() {
@@ -125,5 +129,13 @@ public class UserProfile {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public String getInterests() {
+        return interests;
+    }
+
+    public void setInterests(String interests) {
+        this.interests = interests;
     }
 }
