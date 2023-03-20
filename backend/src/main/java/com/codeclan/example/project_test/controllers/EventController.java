@@ -61,6 +61,31 @@ public class EventController {
         }
     }
 
+    //  Update Event Details
+    @PutMapping("/events/{id}/update")
+    public ResponseEntity<Event> updateEvent(
+            @PathVariable long id,
+            @RequestBody Event putEvent) {
+
+        Event updatedEvent = eventRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("event not found: " + id));
+
+        updatedEvent.setTitle(putEvent.getTitle());
+        updatedEvent.setDate(putEvent.getDate());
+        updatedEvent.setTime(putEvent.getTime());
+        updatedEvent.setDuration(putEvent.getDuration());
+        updatedEvent.setDescription(putEvent.getDescription());
+        updatedEvent.setMeetingPoint(putEvent.getMeetingPoint());
+        updatedEvent.setLocation(putEvent.getLocation());
+        updatedEvent.setCreator(putEvent.getCreator());
+        updatedEvent.setCapacity(putEvent.getCapacity());
+
+        eventRepository.save(updatedEvent);
+
+        return ResponseEntity.ok(updatedEvent);
+    }
+
     //  Sets Event Title
     @PutMapping("/events/{id}/set_title")
     public ResponseEntity<Event> setEventTitle(
