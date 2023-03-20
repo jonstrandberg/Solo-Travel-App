@@ -54,6 +54,30 @@ public class UserProfileController {
         }
     }
 
+    //  Update UserProfile
+    @PutMapping("/user_profiles/{id}/update")
+    public ResponseEntity<UserProfile> updateUserProfile(
+            @PathVariable long id,
+            @RequestBody UserProfile putUserProfile) {
+
+        UserProfile updatedUserProfile = userProfileRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
+
+        updatedUserProfile.setDisplayName(putUserProfile.getDisplayName());
+        updatedUserProfile.setAvatarUrl(putUserProfile.getAvatarUrl());
+        updatedUserProfile.setHomeTown(putUserProfile.getHomeTown());
+        updatedUserProfile.setNationality(putUserProfile.getNationality());
+        updatedUserProfile.setAge(putUserProfile.getAge());
+        updatedUserProfile.setLocation(putUserProfile.getLocation());
+        updatedUserProfile.setInterests(putUserProfile.getInterests());
+        updatedUserProfile.setFirebaseId(putUserProfile.getFirebaseId());
+
+        userProfileRepository.save(updatedUserProfile);
+
+        return ResponseEntity.ok(updatedUserProfile);
+    }
+
     //  Sets Display Name
     @PutMapping("/user_profiles/{id}/set_display_name")
     public ResponseEntity<UserProfile> setUserProfileDisplayName(
