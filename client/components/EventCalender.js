@@ -74,7 +74,7 @@ const EventCalendar = (props) => {
                 }}
             />
             <TouchableOpacity>
-                <Text onPress={handleAddDate}>Change Date</Text>
+                <Text onPress={handleAddDate}>Set Date</Text>
             </TouchableOpacity>
         </View>
     );

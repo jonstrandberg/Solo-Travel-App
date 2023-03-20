@@ -32,7 +32,7 @@ const TimeSelector = (props) => {
                 style={styleSheet.datePicker}
             />
             <TouchableOpacity>
-                <Text onPress={handleSelectTime}>Change Time</Text>
+                <Text onPress={handleSelectTime}>Set Time</Text>
             </TouchableOpacity>
 
         </View>
