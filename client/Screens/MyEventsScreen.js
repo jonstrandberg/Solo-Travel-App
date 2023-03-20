@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList, Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-import { getEventsBookedByUserProfileId } from "../services/EventService";
+import { getEventsBookedByUserProfileId, getEventsCreatedByUserProfileId } from "../services/EventService";
 import EventDetailsScreen from "./EventDetailsScreen";
 
 const Stack = createStackNavigator();
@@ -10,16 +10,23 @@ const Stack = createStackNavigator();
 const MyEventsList = () => {
     const navigation = useNavigation();
     const [eventsAttending, setEventsAttending] = useState([]);
+    const [eventsCreated, setEventsCreated] = useState([]);
+    const currentUserId = 4     //HARD CODED
+
 
     useEffect(() => {
-        getEventsBookedByUserProfileId(1)
-            .then((json) => {
-                setEventsAttending(json);
-            })
-            .catch((error) => {
-                console.error("Error getting events attended:", error);
-            });
-    }, []);
+    Promise.all([
+        getEventsBookedByUserProfileId(currentUserId),
+        getEventsCreatedByUserProfileId(currentUserId)
+    ])
+    .then(([bookedEvents, createdEvents]) => {
+        setEventsAttending(bookedEvents);
+        setEventsCreated(createdEvents);
+    })
+    .catch((error) => {
+        console.error("Error getting events:", error);
+    });
+}, []);
 
     const handlePress = (event) => {
         navigation.navigate("EventDetails", { event });
@@ -40,11 +47,28 @@ const MyEventsList = () => {
 
     return (
         <View style={styles.container}>
-            <FlatList
-                data={eventsAttending}
-                renderItem={eventItem}
-                keyExtractor={(item) => item.id.toString()}
-            />
+            {/* Display the events the user has created */}
+            {eventsCreated.length > 0 && (
+                <>
+                    <Text style={styles.heading}>Events Created</Text>
+                    <FlatList
+                        data={eventsCreated}
+                        renderItem={eventItem}
+                        keyExtractor={(item) => item.id.toString()}
+                    />
+                </>
+            )}
+            {/* Display the events the user is attending */}
+            {eventsAttending.length > 0 && (
+                <>
+                    <Text style={styles.heading}>Events Attending</Text>
+                    <FlatList
+                        data={eventsAttending}
+                        renderItem={eventItem}
+                        keyExtractor={(item) => item.id.toString()}
+                    />
+                </>
+            )}
         </View>
     );
 };
