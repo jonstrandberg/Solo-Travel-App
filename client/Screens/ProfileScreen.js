@@ -51,7 +51,8 @@ const ProfileScreen = () => {
         .then(data => { 
             setItems( data.map(x => ({label: x.name, value: x.name})));
         })
-    },[])
+    }, [])
+
 
     useEffect(() => {
         getUserProfile(5)
