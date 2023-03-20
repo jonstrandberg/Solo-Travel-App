@@ -153,6 +153,36 @@ public class DataLoader implements ApplicationRunner {
         UserProfile user5 = new UserProfile("The Almighty Creator", "https://xsgames.co/randomusers/assets/avatars/male/5.jpg", "Heaven", "Godly", 30, null, "Church, Resurrection, Smiting", "holyid");
         userProfileRepository.save(user5);
 
+        UserProfile user6 = new UserProfile("Sally Cinnamon", "https://xsgames.co/randomusers/assets/avatars/female/4.jpg", "Manchester, England", "England", 30, stockholm, "Music, Gigs, Pub", "rfsdfajt");
+        userProfileRepository.save(user6);
+
+        UserProfile user7 = new UserProfile("Fraser Jubb", "https://media.licdn.com/dms/image/C4D03AQGH9R6IEZOpSA/profile-displayphoto-shrink_800_800/0/1618099535038?e=1684972800&v=beta&t=2gp2t3e-LFq3nMda_kwWD8oULARkJ_wsDC9mSZmstQI", "Edinburgh, Scotland", "Scotland", 30, edinburgh, "Gaming, Comedy, Coding", "sghetahjt");
+        userProfileRepository.save(user7);
+
+        UserProfile user8 = new UserProfile("Samantha Elliott", "https://media.licdn.com/dms/image/D4E03AQHbiKkQZU812Q/profile-displayphoto-shrink_800_800/0/1678205452590?e=1684972800&v=beta&t=XpS0XJxVsYu14Vg-WppjsUBD2s96_CF2s0QVvUKU0sc", "London, England", "England", 30, edinburgh, "Travel, Hinge, Architecture", "ewytkjt");
+        userProfileRepository.save(user8);
+
+        UserProfile user9 = new UserProfile("Daniel Salvatori", "https://media.licdn.com/dms/image/C4E03AQGewW9qYtNwIA/profile-displayphoto-shrink_800_800/0/1627986476192?e=1684972800&v=beta&t=R4BfsTq0Kdcx2sUw5l1ckMSvQ8JVOxZwpeoaWhKFVT0", "Kent, England", "England", 30, edinburgh, "Photography, Space, Baking", "koethsa");
+        userProfileRepository.save(user9);
+
+        UserProfile user10 = new UserProfile("Lucy Kimmich", "https://xsgames.co/randomusers/assets/avatars/female/9.jpg", "Munich, Germany", "Germany", 30, cairo, "Fashion, Cooking, Learning Languages", "gfjskskr");
+        userProfileRepository.save(user10);
+
+        UserProfile user11 = new UserProfile("Maximilian Schmidt", "https://xsgames.co/randomusers/assets/avatars/male/12.jpg", "Berlin, Germany", "Germany", 28, berlin, "Technology, Music, Football", "mxhyfrt");
+        userProfileRepository.save(user11);
+
+        UserProfile user12 = new UserProfile("Sophia Gomez", "https://xsgames.co/randomusers/assets/avatars/female/9.jpg", "Madrid, Spain", "Spain", 25, lisbon, "Dancing, Literature, History", "gzmphs");
+        userProfileRepository.save(user12);
+
+        UserProfile user13 = new UserProfile("Luca Rossi", "https://xsgames.co/randomusers/assets/avatars/male/32.jpg", "Rome, Italy", "Italy", 31, rome, "Art, Nature, Cooking", "lcmvr74");
+        userProfileRepository.save(user13);
+
+        UserProfile user14 = new UserProfile("Hanna Olsson", "https://xsgames.co/randomusers/assets/avatars/female/2.jpg", "Stockholm, Sweden", "Sweden", 27, stockholm, "Yoga, Hiking, Photography", "hnasl39");
+        userProfileRepository.save(user14);
+
+        UserProfile user15 = new UserProfile("Karim Abdel Nour", "https://xsgames.co/randomusers/assets/avatars/male/23.jpg", "Cairo, Egypt", "Egypt", 29, cairo, "Reading, Astronomy, Tennis", "krnbd98");
+        userProfileRepository.save(user15);
+
         // Events
         Event event1 = new Event("Oktoberfest", "17:00 PM", "05hr(s) 0mins", "World famous beer festival", munich, "17 March 2023", user5, 10, "In front of the Bavaria statue");
         eventRepository.save(event1);
