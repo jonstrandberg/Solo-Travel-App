@@ -56,15 +56,15 @@ const AddEventScreen = () => {
       capacity,
     };
     addEvent(event)
-      .then(() => {
-        console.log('Event added successfully');
-        navigation.navigate('My Events');
-      })
-      .catch(error => {
-        console.log(error);
-        Alert.alert('Error', 'Failed to add event');
-      });
-  };
+    .then((newEvent) => {
+      console.log('Event added successfully');
+      navigation.navigate('Event Details', { event: newEvent });
+    })
+    .catch(error => {
+      console.log(error);
+      Alert.alert('Error', 'Failed to add event');
+    });
+  }
 
   const handleOpenCalendarSheet = () => {
     setIsCalendarSheetOpen(true)
