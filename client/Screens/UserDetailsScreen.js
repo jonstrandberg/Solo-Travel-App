@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react"
-import { StyleSheet, SafeAreaView, View, Text, TextInput, TouchableOpacity } from "react-native"
+import { StyleSheet, SafeAreaView, View, Text, TextInput, TouchableOpacity, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import firebase from 'firebase/app'
+import { addUserProfile } from "../services/UserService"
 import { auth } from "../firebase"
 
 const UserDetailsScreen = () => {
-    const [uid, setUid] = useState('')
-    const [name, setName] = useState('')
-    const [avatar, setAvatar] = useState('')
+    const [firebaseId, setFirebaseId] = useState('')
+    const [displayName, setDisplayName] = useState('')
+    const [avatarUrl, setAvatarUrl] = useState('')
     const [homeTown, setHomeTown] = useState('')
     const [nationality, setNationality] = useState('')
     const [age, setAge] = useState('')
-    const [location, setLocation] = useState('')
+    const [location, setLocation] = useState(null)
     const [interests, setInterests] = useState('')
 
     const navigation = useNavigation()
@@ -20,21 +20,45 @@ const UserDetailsScreen = () => {
     useEffect(() => {
         const user = auth.currentUser
         if (user) {
-            setUid(user.uid)
+            setFirebaseId(user.uid)
         }
     }, [])
 
     const handleUserDetailCompletion = () => {
-        console.log('UID:', uid)
-        console.log('Name:', name)
-        console.log('Avatar:', avatar)
-        console.log('Home town:', homeTown)
-        console.log('Nationality:', nationality)
-        console.log('Age:', age)
-        console.log('Location:', location)
-        console.log('Interests:', interests)
-        navigation.navigate("Navigator")
+        if (!firebaseId || !displayName || !avatarUrl || !homeTown || !nationality || !age || !interests) {
+            Alert.alert('Error', 'All fields are required!')
+            return
+        }
+        const userProfile = {
+            firebaseId,
+            displayName,
+            avatarUrl,
+            homeTown,
+            nationality,
+            age,
+            location,
+            interests
+        }
+        addUserProfile(userProfile)
+        .then(() => {
+            console.log('User Added Succesfully');
+            navigation.navigate("Navigator")
+        })
+        .catch(error => {
+            console.log(error);
+            Alert.alert('Error', 'Failed to add user');
+            console.log(userProfile)
+            // console.log('firebaseId:', firebaseId)
+            // console.log('Name:', displayName)
+            // console.log('Avatar:', avatarUrl)
+            // console.log('Home town:', homeTown)
+            // console.log('Nationality:', nationality)
+            // console.log('Age:', age)
+            // console.log('Location:', location)
+            // console.log('Interests:', interests)
+        });
     }
+
 
     return (
         <SafeAreaView
@@ -44,14 +68,14 @@ const UserDetailsScreen = () => {
             <View style={styles.inputContainer}>
                 <TextInput
                     placeholder="Name"
-                    value={name}
-                    onChangeText={text => setName(text)}
+                    value={displayName}
+                    onChangeText={text => setDisplayName(text)}
                     style={styles.input}
                 />
                 <TextInput
                     placeholder="Profile photo url"
-                    value={avatar}
-                    onChangeText={text => setAvatar(text)}
+                    value={avatarUrl}
+                    onChangeText={text => setAvatarUrl(text)}
                     style={styles.input}
                 />
                 <TextInput
@@ -72,12 +96,12 @@ const UserDetailsScreen = () => {
                     onChangeText={text => setAge(text)}
                     style={styles.input}
                 />
-                <TextInput
+                {/* <TextInput
                     placeholder="Current Location"
                     value={location}
                     onChangeText={text => setLocation(text)}
                     style={styles.input}
-                />
+                /> */}
                 <TextInput
                     placeholder="Interests"
                     value={interests}
