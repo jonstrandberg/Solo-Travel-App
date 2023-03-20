@@ -76,6 +76,24 @@ export const getUserProfilesByEventId = async function(eventId) {
     }
 };
 
+export const updateUserProfile = async function (userProfileId, updatedUserProfile) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/update", {
+            method: "PUT",
+            body: JSON.stringify(updatedUserProfile),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating user profile", error);
+        return null;
+    }
+}
+
 export const updateUserProfileName = async function (userProfileId, newName) {
     try {
         const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_display_name", {
