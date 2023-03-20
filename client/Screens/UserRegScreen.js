@@ -14,13 +14,13 @@ const UserRegScreen = () => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                navigation.replace("Navigator")
+                navigation.replace("User Details")
             }
         })
         return unsubscribe
     }, [])
 
-    const handleSignUp = () => {
+    const handleRegistration = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -66,7 +66,7 @@ const UserRegScreen = () => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    onPress={handleSignUp}
+                    onPress={handleRegistration}
                     style={[styles.button, styles.button]}
                 >
                     <Text style={styles.buttonText}>Register</Text>
