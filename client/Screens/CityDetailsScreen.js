@@ -18,14 +18,16 @@ function CityDetailsScreen({ navigation }) {
   const [event, setEvent] = useState([])
 
   useEffect(() => {
-    getEventsByLocationId(city["id"])
-    .then(json => {
-      setEvent(json)
-    })
-  }, [])
+    getEventsByLocationId(city.id)
+      .then(json => {
+        setEvent(json)
+      })
+  }, [event])
+
+
 
   const handleEventPress = (event) => {
-    navigation.navigate('Event Details', { event });
+    navigation.navigate('Event Details', { event: event, city: city });
   };
 
   const handleAddEventPress = () => {

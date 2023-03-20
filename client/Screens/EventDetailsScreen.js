@@ -8,7 +8,7 @@ import { Attendee } from "../components/Attendee";
 
 function EventDetailsScreen() {
   const route = useRoute();
-  const { event } = route.params;
+  const { event, city } = route.params;
   const [sign_ups, setSignups] = useState([]);
   const [availableSpaces, setAvailableSpaces] = useState(event.capacity);
   const currentUser = sign_ups.find((signUp) => signUp.userProfile.id === 5); //HARD CODED
@@ -66,22 +66,23 @@ function EventDetailsScreen() {
         [
           { text: 'Cancel', style: 'cancel' },
           { text: 'Delete', style: 'destructive', onPress: async () => {
-    try {
-      // delete all sign-ups for the event
-    const signUps = await getSignUpsByEventId(event.id);
-    const promises = signUps.map(signUp => deleteSignUp(signUp.id));
-    await Promise.all(promises);
-    const response = await deleteEvent(event.id);
-    console.log(response);
-    navigation.navigate('Explore');
-    } catch (error) {
-      console.error('Error deleting event:', error);
-    }
-    } },
-    ],
-    { cancelable: false }
+            try {
+              // delete all sign-ups for the event
+              const signUps = await getSignUpsByEventId(event.id);
+              const promises = signUps.map(signUp => deleteSignUp(signUp.id));
+              await Promise.all(promises);
+              const response = await deleteEvent(event.id);
+              console.log(response);
+              navigation.goBack();
+            } catch (error) {
+              console.error('Error deleting event:', error);
+            }
+          } },
+        ],
+        { cancelable: false }
     );
   }
+  
 
   const updateSignUps = async () => {
     const json = await getSignUpsByEventId(event.id);
