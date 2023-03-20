@@ -73,6 +73,24 @@ export const getEventsByLocationId = async function(locationId) {
     }
 };
 
+export const updateEvent = async function (eventId, newEvent){
+    try {
+        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update", {
+            method: "PUT",
+            body: JSON.stringify(newEvent),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        console.error("Error updating event", error);
+        return null;
+    }
+}
+
 export const updateEventTitle = async function (eventId, newTitle){
     try {
         const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/set_title", {

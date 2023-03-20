@@ -193,37 +193,37 @@ public class DataLoader implements ApplicationRunner {
         userProfileRepository.save(user18);
 
         // Events
-        Event event1 = new Event("Oktoberfest", "17:00 PM", "05hr(s) 0mins", "World famous beer festival", munich, "17 March 2023", user5, 10, "In front of the Bavaria statue");
+        Event event1 = new Event("Oktoberfest", "17:00 PM", "05hr(s) 0mins", "World famous beer festival", munich, "03 April 2023", user5, 10, "In front of the Bavaria statue");
         eventRepository.save(event1);
 
-        Event event2 = new Event("Bayern Munich v Union Berlin", "15:00 PM", "2.5 hours", "FOOTBALL", munich, "18-03-2023", user5, 6, "Meeting at Marienplatz, then walking to the stadium");
+        Event event2 = new Event("Bayern Munich v Union Berlin", "15:00 PM", "02hr(s) 30mins", "FOOTBALL", munich, "30 March 2023", user5, 6, "Meeting at Marienplatz, then walking to the stadium");
         eventRepository.save(event2);
 
-        Event event3 = new Event("KitKat Club", "23:00 PM", "12 hours", "Don't forget your latex ;)", berlin, "20-03-2023", user5, 3, "In front of the club, next to the pink neon sign");
+        Event event3 = new Event("KitKat Club", "23:00 PM", "12hr(s) 00mins", "Don't forget your latex ;)", berlin, "29 March 2023", user5, 3, "In front of the club, next to the pink neon sign");
         eventRepository.save(event3);
 
-        Event event4 = new Event("Pub Crawl", "20:00 PM", "3 hours", "A famous tour across the Grassmarket and Cowgate", edinburgh, "19-03-2023", user5, 15, "Meeting outside The Last Drop pub, 74-78 Grassmarket");
+        Event event4 = new Event("Pub Crawl", "20:00 PM", "03hr(s) 00mins", "A famous tour across the Grassmarket and Cowgate", edinburgh, "25 March 2023", user5, 15, "Meeting outside The Last Drop pub, 74-78 Grassmarket");
         eventRepository.save(event4);
 
-        Event event5 = new Event("Carnaval de Lisboa", "14:00 PM", "6 hours", "A colorful celebration of Portuguese culture", lisbon, "21-03-2023", user5, 14, "Meeting at Praça da Figueira, in front of the statue of King John I");
+        Event event5 = new Event("Carnaval de Lisboa", "14:00 PM", "06hr(s) 00mins", "A colorful celebration of Portuguese culture", lisbon, "03 April 2023", user5, 14, "Meeting at Praça da Figueira, in front of the statue of King John I");
         eventRepository.save(event5);
 
-        Event event6 = new Event("Vienna Ball Season", "19:00 PM", "8 hours", "A formal event featuring ballroom dancing and live music", vienna, "22-03-2023", user5, 8, "Meeting at the entrance of the Hofburg Palace, next to the guard");
+        Event event6 = new Event("Vienna Ball Season", "19:00 PM", "08hr(s) 00mins", "A formal event featuring ballroom dancing and live music", vienna, "04 April 2023", user5, 8, "Meeting at the entrance of the Hofburg Palace, next to the guard");
         eventRepository.save(event6);
 
-        Event event7 = new Event("Pyramids of Giza Sound and Light Show", "19:00 PM", "2 hours", "Experience the history of the pyramids through a unique light and sound show", cairo, "23-03-2023", user5, 5, "Meeting at the entrance of the Pyramid of Khafre");
+        Event event7 = new Event("Pyramids of Giza Sound and Light Show", "19:00 PM", "02hr(s) 00mins", "Experience the history of the pyramids through a unique light and sound show", cairo, "01 April 2023", user5, 5, "Meeting at the entrance of the Pyramid of Khafre");
         eventRepository.save(event7);
 
-        Event event8 = new Event("Stockholm Marathon", "09:00 AM", "6 hours", "A scenic run through the streets of Stockholm", stockholm, "24-03-2023", user5, 4, "Meeting at the start line, located at Lidingövägen 30");
+        Event event8 = new Event("Stockholm Marathon", "09:00 AM", "06hr(s) 00mins", "A scenic run through the streets of Stockholm", stockholm, "27 March 2023", user5, 4, "Meeting at the start line, located at Lidingövägen 30");
         eventRepository.save(event8);
 
-        Event event9 = new Event("Rome International Film Festival", "18:00 PM", "4 hours", "A showcase of international films in the heart of Rome", rome, "25-03-2023", user5,20, "Meeting at the entrance of Auditorium Parco della Musica, near the giant harp sculpture");
+        Event event9 = new Event("Rome International Film Festival", "18:00 PM", "04hr(s) 00mins", "A showcase of international films in the heart of Rome", rome, "28 March 2023", user5,20, "Meeting at the entrance of Auditorium Parco della Musica, near the giant harp sculpture");
         eventRepository.save(event9);
 
-        Event event10 = new Event("Porto Wine Festival", "12:00 PM", "8 hours", "Sample the famous port wine of Porto while enjoying live music and entertainment", porto, "26-03-2023", user5, 10, "Meeting at the entrance of Palácio da Bolsa, next to the statue of King Pedro IV");
+        Event event10 = new Event("Porto Wine Festival", "12:00 PM", "08hr(s) 00mins", "Sample the famous port wine of Porto while enjoying live music and entertainment", porto, "02 April 2023", user5, 10, "Meeting at the entrance of Palácio da Bolsa, next to the statue of King Pedro IV");
         eventRepository.save(event10);
 
-        Event event11 = new Event("Test Capacity", "12:00 PM", "8 hours", "Test Capacity", porto, "26-03-2023", user4, 2, "Test Meeting Point");
+        Event event11 = new Event("Test Capacity", "12:00 PM", "08hr(s) 00mins", "Test Capacity", porto, "28 March 2023", user4, 2, "Test Meeting Point");
         eventRepository.save(event11);
 
         // Sign Ups
