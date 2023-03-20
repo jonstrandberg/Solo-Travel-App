@@ -53,9 +53,9 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-        <Stack.Screen name="UserReg" component={UserRegScreen} />
-        <Stack.Screen name="Navigator" component={Navigator} />
+        <Stack.Screen  name="Login" component={LoginScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="User Registration" component={UserRegScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="Navigator" component={Navigator} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

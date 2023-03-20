@@ -22,7 +22,7 @@ const LoginScreen = () => {
 
 
     const handleMoveToUserReg = () => {
-        navigation.navigate("UserReg")
+        navigation.navigate("User Registration")
     }
 
     const handleLogin = () => {
