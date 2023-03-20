@@ -3,7 +3,7 @@ import { FlatList, Text, View, TouchableOpacity, StyleSheet } from "react-native
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { getEventsBookedByUserProfileId } from "../services/EventService";
-import EventDetails from "../components/EventDetails";
+import EventDetails from "./EventDetailsScreen";
 
 const Stack = createStackNavigator();
 

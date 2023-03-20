@@ -3,14 +3,14 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react
 import { useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { getEventsByLocationId } from "../services/EventService";
-import AddEventScreen from './AddEventScreen';
+import AddEventScreen from '../components/AddEventScreen';
 
 const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
 
 const Stack = createStackNavigator()
 
 
-function CityDetails({ navigation }) {
+function CityDetailsScreen({ navigation }) {
 
   const route = useRoute();
   const { city } = route.params;
@@ -98,5 +98,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CityDetails;
+export default CityDetailsScreen;
 
