@@ -31,6 +31,9 @@ public class Event {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "meeting_point")
+    private String meetingPoint;
+
     @ManyToOne
 //    @JsonIgnoreProperties({"event"})
     @JoinColumn(name = "location")
@@ -52,7 +55,7 @@ public class Event {
 
     public Event() {}
 
-    public Event(String title, String time, String duration, String description, Location location, String date, UserProfile creator, int capacity) {
+    public Event(String title, String time, String duration, String description, Location location, String date, UserProfile creator, int capacity, String meetingPoint) {
         this.title = title;
         this.time = time;
         this.duration = duration;
@@ -63,6 +66,7 @@ public class Event {
         this.creator = creator;
         this.capacity = capacity;
 //        this.availableSpaces = capacity;
+        this.meetingPoint = meetingPoint;
     }
 
     public UserProfile getCreator() {
@@ -145,6 +149,13 @@ public class Event {
         this.signUpList = signUpList;
     }
 
+    public String getMeetingPoint() {
+        return meetingPoint;
+    }
+
+    public void setMeetingPoint(String meetingPoint) {
+        this.meetingPoint = meetingPoint;
+    }
 //    public int getAvailableSpaces() {
 //        return availableSpaces;
 //    }
