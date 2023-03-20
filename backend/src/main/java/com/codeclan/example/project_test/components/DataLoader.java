@@ -183,6 +183,15 @@ public class DataLoader implements ApplicationRunner {
         UserProfile user15 = new UserProfile("Karim Abdel Nour", "https://xsgames.co/randomusers/assets/avatars/male/23.jpg", "Cairo, Egypt", "Egypt", 29, cairo, "Reading, Astronomy, Tennis", "krnbd98");
         userProfileRepository.save(user15);
 
+        UserProfile user16 = new UserProfile("Maria Rodriguez", "https://xsgames.co/randomusers/assets/avatars/female/6.jpg", "Barcelona, Spain", "Spain", 26, edinburgh, "Hiking, Travel, Music", "mrdrgh7");
+        userProfileRepository.save(user16);
+
+        UserProfile user17 = new UserProfile("Lena Fischer", "https://xsgames.co/randomusers/assets/avatars/female/3.jpg", "Munich, Germany", "Germany", 28, munich, "Art, Cycling, Literature", "lfschr2");
+        userProfileRepository.save(user17);
+
+        UserProfile user18 = new UserProfile("Alessandra Conti", "https://xsgames.co/randomusers/assets/avatars/female/1.jpg", "Milan, Italy", "Italy", 30, milan, "Fashion, Food, Architecture", "alscn79");
+        userProfileRepository.save(user18);
+
         // Events
         Event event1 = new Event("Oktoberfest", "17:00 PM", "05hr(s) 0mins", "World famous beer festival", munich, "17 March 2023", user5, 10, "In front of the Bavaria statue");
         eventRepository.save(event1);
@@ -241,6 +250,18 @@ public class DataLoader implements ApplicationRunner {
 
         SignUp signUp8 = new SignUp(user2, event11);
         signUpRepository.save(signUp8);
+
+        SignUp signUp9 = new SignUp(user7, event4);
+        signUpRepository.save(signUp9);
+
+        SignUp signUp10 = new SignUp(user8, event4);
+        signUpRepository.save(signUp10);
+
+        SignUp signUp11 = new SignUp(user9, event4);
+        signUpRepository.save(signUp11);
+
+        SignUp signUp12 = new SignUp(user16, event4);
+        signUpRepository.save(signUp12);
     }
 
 }
