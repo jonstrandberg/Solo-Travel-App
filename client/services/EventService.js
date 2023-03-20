@@ -219,7 +219,7 @@ export const updateEventCreator = async function (eventId, newCreator) {
 
 export const deleteEvent = async function (eventId) {
     try {
-        const response = await fetch('http://127.0.0.1:8080/events/' + eventId.toString() + "/delete", {
+        const response = await fetch('http://localhost:8080/events/' + eventId.toString(), {
             method: 'DELETE'
         });
         if (!response.ok) {

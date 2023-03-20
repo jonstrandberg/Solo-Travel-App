@@ -152,37 +152,41 @@ public class DataLoader implements ApplicationRunner {
 
         UserProfile user5 = new UserProfile("The Almighty Creator", "https://xsgames.co/randomusers/assets/avatars/male/5.jpg", "Heaven", "Godly", 30, munich);
         userProfileRepository.save(user5);
-
+        
         // Events
-        Event event1 = new Event("Oktoberfest", "17:00", "5 hours", "World famous beer festival", munich, "17-03-2023", user5, 10);
+        Event event1 = new Event("Oktoberfest", "17:00 PM", "05hr(s) 0mins", "World famous beer festival", munich, "17 March 2023", user5, 10);
         eventRepository.save(event1);
 
-        Event event2 = new Event("Bayern Munich v Union Berlin", "15:00", "2.5 hours", "FOOTBALL", munich, "18-03-2023", user5, 6);
+        Event event2 = new Event("Bayern Munich v Union Berlin", "15:00 PM", "2.5 hours", "FOOTBALL", munich, "18-03-2023", user5, 6);
         eventRepository.save(event2);
 
-        Event event3 = new Event("KitKat Club", "23:00", "12 hours", "Don't forget your latex ;)", berlin, "20-03-2023", user5, 3);
+        Event event3 = new Event("KitKat Club", "23:00 PM", "12 hours", "Don't forget your latex ;)", berlin, "20-03-2023", user5, 3);
         eventRepository.save(event3);
 
-        Event event4 = new Event("Pub Crawl", "20:00", "3 hours", "A famous tour across the Grassmarket and Cowgate", edinburgh, "19-03-2023", user5, 15);
+        Event event4 = new Event("Pub Crawl", "20:00 PM", "3 hours", "A famous tour across the Grassmarket and Cowgate", edinburgh, "19-03-2023", user5, 15);
         eventRepository.save(event4);
 
-        Event event5 = new Event("Carnaval de Lisboa", "14:00", "6 hours", "A colorful celebration of Portuguese culture", lisbon, "21-03-2023", user5, 14);
+        Event event5 = new Event("Carnaval de Lisboa", "14:00 PM", "6 hours", "A colorful celebration of Portuguese culture", lisbon, "21-03-2023", user5, 14);
         eventRepository.save(event5);
 
-        Event event6 = new Event("Vienna Ball Season", "19:00", "8 hours", "A formal event featuring ballroom dancing and live music", vienna, "22-03-2023", user5, 8);
+        Event event6 = new Event("Vienna Ball Season", "19:00 PM", "8 hours", "A formal event featuring ballroom dancing and live music", vienna, "22-03-2023", user5, 8);
         eventRepository.save(event6);
 
-        Event event7 = new Event("Pyramids of Giza Sound and Light Show", "19:00", "2 hours", "Experience the history of the pyramids through a unique light and sound show", cairo, "23-03-2023", user5, 5);
+        Event event7 = new Event("Pyramids of Giza Sound and Light Show", "19:00 PM", "2 hours", "Experience the history of the pyramids through a unique light and sound show", cairo, "23-03-2023", user5, 5);
         eventRepository.save(event7);
 
-        Event event8 = new Event("Stockholm Marathon", "09:00", "6 hours", "A scenic run through the streets of Stockholm", stockholm, "24-03-2023", user5, 4);
+        Event event8 = new Event("Stockholm Marathon", "09:00 AM", "6 hours", "A scenic run through the streets of Stockholm", stockholm, "24-03-2023", user5, 4);
         eventRepository.save(event8);
 
-        Event event9 = new Event("Rome International Film Festival", "18:00", "4 hours", "A showcase of international films in the heart of Rome", rome, "25-03-2023", user5,20);
+        Event event9 = new Event("Rome International Film Festival", "18:00 PM", "4 hours", "A showcase of international films in the heart of Rome", rome, "25-03-2023", user5,20);
         eventRepository.save(event9);
 
-        Event event10 = new Event("Porto Wine Festival", "12:00", "8 hours", "Sample the famous port wine of Porto while enjoying live music and entertainment", porto, "26-03-2023", user5, 10);
+        Event event10 = new Event("Porto Wine Festival", "12:00 PM", "8 hours", "Sample the famous port wine of Porto while enjoying live music and entertainment", porto, "26-03-2023", user5, 10);
         eventRepository.save(event10);
+
+        Event event11 = new Event("Test Capacity", "12:00 PM", "8 hours", "Test Capacity", porto, "26-03-2023", user4, 2);
+        eventRepository.save(event11);
+
 
         // Sign Ups
         SignUp signUp1 = new SignUp(user1, event1);
@@ -202,6 +206,12 @@ public class DataLoader implements ApplicationRunner {
 
         SignUp signUp6 = new SignUp(user4, event4);
         signUpRepository.save(signUp6);
+
+        SignUp signUp7 = new SignUp(user1, event11);
+        signUpRepository.save(signUp7);
+
+        SignUp signUp8 = new SignUp(user2, event11);
+        signUpRepository.save(signUp8);
     }
 
 }

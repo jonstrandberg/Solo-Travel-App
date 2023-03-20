@@ -13,6 +13,7 @@ const AddEventScreen = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [duration, setDuration] = useState('');
+  const [capacity, setCapacity] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState(null);
   const [countryName, setCountryName] = useState('');
@@ -29,7 +30,7 @@ const AddEventScreen = () => {
   }, [route.params.cityId]);
 
   const handleAddEvent = () => {
-    if (!title || !date || !time|| !duration || !description || !location){
+    if (!title || !date || !time|| !duration || !description || !location || !capacity){
       Alert.alert('Error', 'All fields are required!')
     return 
     }
@@ -47,6 +48,10 @@ const AddEventScreen = () => {
           name: countryName,
         },
       },
+      creator: {
+        id: 4   //HARD CODED
+      },
+      capacity,
     };
     addEvent(event)
       .then(() => {
@@ -162,7 +167,13 @@ const AddEventScreen = () => {
         <DurationSelector onAddDuration={handleAddDuration} />
       </BottomDrawer>
 
-
+      <TextInput
+        style={styles.input}
+        placeholderTextColor="#757575"
+        placeholder="Maximum Capacity"
+        value={capacity}
+        onChangeText={setCapacity}
+      />
 
       <TextInput
         style={styles.input}
