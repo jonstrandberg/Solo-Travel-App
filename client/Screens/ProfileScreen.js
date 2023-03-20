@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react"
-import { Image, View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { Image, View, Text, StyleSheet, TextInput, Button, ScrollView, SafeAreaView } from "react-native";
 import {
     updateUserProfileName,
     updateUserProfileHomeTown,
@@ -12,6 +12,10 @@ import {
     updateUserProfileInterests
 } from "../services/UserService";
 import DropDownPicker from 'react-native-dropdown-picker';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+
 import { getCountries } from "../services/CountryService";
 import { getLocations } from "../services/LocationService";
 
@@ -45,9 +49,10 @@ const ProfileScreen = () => {
         {label: 'Scotland', value: 'scotland'}
     ]);
 
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         getCountries()
-        
         .then(data => { 
             setItems( data.map(x => ({label: x.name, value: x.name})));
         })
@@ -203,8 +208,19 @@ const ProfileScreen = () => {
                 <Text style={styles.label}>Nationality:</Text>
                 <View style={styles.row}>
                     {editingNationality ? (
-                        <>
-                            <DropDownPicker
+                        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                            <DropDownPicker 
+                                style={{
+                                    backgroundColor: '#fafafa',
+                                    borderWidth: 1,
+                                    borderColor: '#ccc',
+                                    borderRadius: 5,
+                                    height: 40,
+                                    marginVertical: 10,
+                                    zIndex: 9999
+                                    }}
+                                showTickIcon={true}
+                                placeholder='Where are you from:'
                                 open={open}
                                 value={value}
                                 items={items}
@@ -212,14 +228,34 @@ const ProfileScreen = () => {
                                 setValue={setValue}
                                 setItems={setItems}
                                 zIndexInverse={1000}
-                                
+                                showTickIconSelected={true}
+                                selectedItemContainerStyle={{
+                                    backgroundColor: 'gray'
+                                    }}
+                                showArrowIcon={true}
+                                loading={loading}
+                                itemsStyle={{
+                                    justifyContent: 'flex-start'
+                                    }}
+                                labelStyle={{
+                                    fontWeight: 'bold',
+                                    fontSize: 16,
+                                    color: '#333'
+                                    }}
+                                arrowStyle={{
+                                    borderWidth: 1,
+                                    
+                                }}
+                                activeItemContainerStyle={{
+                                    backgroundColor: 'blue'
+                                }}
                             />
                             <Button
                                 title="Save"
                                 onPress={handleUpdateNationality}
-                                style={styles.button}
+                                
                             />
-                        </>
+                        </ScrollView>
                     ) : (
                         <>
                             <Text style={styles.text}>{profile.nationality}</Text>
@@ -333,7 +369,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: '#F2F2F2',
-        marginTop: 50
+        marginTop: 50,
     },
     title: {
         fontSize: 24,
@@ -374,6 +410,31 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingHorizontal: 20,
     },
+    dropdown2BtnStyle: {
+        width: '80%',
+        height: 50,
+        backgroundColor: '#444',
+        borderRadius: 8,
+    },
+    dropdown2BtnTxtStyle: {
+        color: '#FFF',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    dropdown2DropdownStyle: {
+        backgroundColor: '#444',
+        borderBottomLeftRadius: 12,
+        borderBottomRightRadius: 12,
+    },
+    dropdown2RowStyle: {backgroundColor: '#444', borderBottomColor: '#C5C5C5'},
+    dropdown2RowTxtStyle: {
+        color: '#FFF',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    button: {
+        zIndex: 1,
+    }
 
 });
 
