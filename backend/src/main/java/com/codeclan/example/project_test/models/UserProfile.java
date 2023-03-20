@@ -45,9 +45,12 @@ public class UserProfile {
     @Column(name = "interests")
     private String interests;
 
+    @Column(name = "firebase_id")
+    private String firebaseId;
+
     public UserProfile() {}
 
-    public UserProfile(String displayName, String avatarUrl, String homeTown, String nationality, int age, Location location, String interests) {
+    public UserProfile(String displayName, String avatarUrl, String homeTown, String nationality, int age, Location location, String interests, String firebaseId) {
         this.displayName = displayName;
         this.avatarUrl = avatarUrl;
         this.homeTown = homeTown;
@@ -57,6 +60,7 @@ public class UserProfile {
         this.location = location;
         this.createdEventsList = new ArrayList<>();
         this.interests = interests;
+        this.firebaseId = firebaseId;
     }
 
     public Long getId() {
@@ -137,5 +141,13 @@ public class UserProfile {
 
     public void setInterests(String interests) {
         this.interests = interests;
+    }
+
+    public String getFirebaseId() {
+        return firebaseId;
+    }
+
+    public void setFirebaseId(String firebaseId) {
+        this.firebaseId = firebaseId;
     }
 }
