@@ -10,6 +10,10 @@ import {
     updateUserProfileLocation,
     getUserProfile
 } from "../services/UserService";
+import DropDownPicker from 'react-native-dropdown-picker';
+import { getCountries } from "../services/CountryService";
+import { getLocations } from "../services/LocationService";
+
 
 
 const placeholderImage = 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'
@@ -31,9 +35,25 @@ const Profile = () => {
     const [editingLocation, setEditingLocation] = useState(false);
     const [isSavingHomeTown, setIsSavingHomeTown] = useState(false);
 
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        {label: 'Egypt', value: 'egypt'},
+        {label: 'Scotland', value: 'scotland'}
+    ]);
+
+    useEffect(() => {
+        getCountries()
+        
+        .then(data => { 
+            setItems( data.map(x => ({label: x.name, value: x.name})));
+        })
+    })
+
     useEffect(() => {
         getUserProfile(5)
             .then(data => {
+                console.log(data)
                 setProfile(data);
             })
             .catch(error => console.log(error))
@@ -60,10 +80,10 @@ const Profile = () => {
     const handleUpdateNationality = async () => {
         const res = await updateUserProfileNationality(
             profile.id,
-            newNationality
+            value
         );
         if (res) {
-            setProfile({ ...profile, nationality: newNationality });
+            setProfile({ ...profile, nationality: value });
             setNewNationality("");
             setEditingNationality(false)
         }
@@ -172,10 +192,15 @@ const Profile = () => {
                 <View style={styles.row}>
                     {editingNationality ? (
                         <>
-                            <TextInput
-                                style={styles.input}
-                                value={newNationality}
-                                onChangeText={(text) => setNewNationality(text)}
+                            <DropDownPicker
+                                open={open}
+                                value={value}
+                                items={items}
+                                setOpen={setOpen}
+                                setValue={setValue}
+                                setItems={setItems}
+                                zIndexInverse={1000}
+                                
                             />
                             <Button
                                 title="Save"
