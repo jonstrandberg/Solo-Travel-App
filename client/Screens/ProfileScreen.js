@@ -58,6 +58,7 @@ const ProfileScreen = () => {
         })
     }, [])
 
+
     useEffect(() => {
         getUserProfile(5)
             .then(data => {
