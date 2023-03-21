@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, FlatList, SafeAreaView, StyleSheet, Image, Alert } from "react-native";
+import { View, Text, Button, FlatList, SafeAreaView, StyleSheet, Image, Alert, ScrollView } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/SignupService";
 import { deleteEvent } from "../services/EventService";
@@ -92,45 +92,97 @@ function EventDetailsScreen() {
 
   return (
     <SafeAreaView>
-      <View>
-        <Text>Created By: {event.creator.displayName}</Text>
-        <Image source={{uri: event.creator.avatarUrl}}
-        style={{ width: 75, height: 75, borderRadius: 50, alignSelf: 'center' }} />
-        <Text>Event: {event.title}</Text>
-        <Text>Date: {event.date}</Text>
-        <Text>Time: {event.time}</Text>
-        <Text>Duration: {event.duration}</Text>
-        <Text>Description: {event.description}</Text>
-        <Text>
-          Location: {event.location.name}, {event.location.country.name}
-        </Text>
-        <Text>Meet-up Point: {event.meetingPoint}</Text>
-        <Text>Available Spaces: {availableSpaces}</Text>
-        {isEventCreator && (
-          <Button title="Delete Event" onPress={handleDeleteEvent} />
-        )}
-        {!isEventCreator && currentUser ? (
-          <Button title="Cancel Attendance" onPress={handleCancelAttendance} />
-        ) : (
-          !isEventCreator && <Button title="Sign Up" onPress={handleSignUp} />
-        )}
-      </View>
-      <Text>Attendees: </Text>
-      <FlatList
-        data={sign_ups}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Attendee user={item.userProfile} />}
-      />
+      <ScrollView>
+        <View>
+          <Image source={{ uri: event.creator.avatarUrl }} style={{ width: 75, height: 75, borderRadius: 50, alignSelf: 'center', marginTop: 8 }} />
+          <Text style={styles.createdBy}>Created By: {event.creator.displayName}</Text>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.eventDetailsContainer}>
+            <Text style={styles.eventName}>Event: {event.title}</Text>
+            <Text style={styles.eventDetails}>Date: {event.date}</Text>
+            <Text style={styles.eventDetails}>Time: {event.time}</Text>
+            <Text style={styles.eventDetails}>Duration: {event.duration}</Text>
+            <Text style={styles.eventDetails}>Description: {event.description}</Text>
+            <Text style={styles.eventDetails}>Location: {event.location.name}, {event.location.country.name}</Text>
+            <Text style={styles.eventDetails}>Meet-up Point: {event.meetingPoint}</Text>
+            <Text style={styles.eventDetails}>Available Spaces: {availableSpaces}</Text>
+            {isEventCreator && <Button title="Delete Event" onPress={handleDeleteEvent} />}
+            {!isEventCreator && currentUser ? (
+              <Button title="Cancel Attendance" onPress={handleCancelAttendance} />
+            ) : (
+              !isEventCreator && <Button title="Sign Up" onPress={handleSignUp} />
+            )}
+          </View>
+        </View>
+        <Text style={styles.attendeesHeaderText}>Attendees:</Text>
+        <View style={styles.attendeesContainer}>
+          {sign_ups.map((sign_up) => (
+            <View key={sign_up.id} style={styles.attendeeContainer}>
+              <Image
+              source={{ uri: sign_up.userProfile.avatarUrl }}
+              style={{ width: 50, height: 50, borderRadius: 25, marginLeft: 10 }}
+              />
+              <Text style={styles.attendeeName}>{sign_up.userProfile.displayName}</Text>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
-
 }
 
 const styles = StyleSheet.create({
-    avatar: {
-      width: 50,
-      height: 50
-    }
-  });
+  container: {
+    margin: 10,
+    marginTop: 20,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#888',
+  },
+  createdBy: {   
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  eventDetailsContainer: {
+    marginLeft: 10,
+  },
+  eventName: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  eventDetails: {
+    marginVertical: 5,
+  },
+  attendeesHeaderText: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginTop: 10,
+    marginBottom: 5,
+    marginLeft: 10,
+  },
+  attendeesContainer: {
+    marginTop: 10,
+    marginHorizontal: 10,
+    borderWidth: 1,
+    borderColor: '#888',
+    borderRadius: 10,
+    padding: 10,
+  },
+  attendeeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  attendeeName: {
+    marginLeft: 12,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
 
 export default EventDetailsScreen;

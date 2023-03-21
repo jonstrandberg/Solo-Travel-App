@@ -25,8 +25,6 @@ const AddEventScreen = ({ activeUser }) => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  console.log('Add event user:', activeUser)
-
   useEffect(() => {
     setLocation(route.params.cityId)
   }, [route.params.cityId]);
@@ -58,7 +56,6 @@ const AddEventScreen = ({ activeUser }) => {
     };
     addEvent(event)
       .then((newEvent) => {
-        console.log('Event added successfully');
         navigation.navigate('Event Details', { event: newEvent });
       })
       .catch(error => {

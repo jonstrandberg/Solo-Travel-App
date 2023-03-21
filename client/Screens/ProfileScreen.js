@@ -55,13 +55,10 @@ const ProfileScreen = (props) => {
     useEffect(() => {
         getUserProfile(activeUser.id)
             .then(data => {
-                console.log(data)
                 setProfile(data);
             })
             .catch(error => console.log(error))
     }, [activeUser.id]);
-
-    console.log('active user on profile', props)
 
     const handleUpdateName = async () => {
         const res = await updateUserProfileName(profile.id, newName);
