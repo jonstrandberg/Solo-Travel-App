@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     },
     attendeesHeaderText: {
       fontWeight: 'bold',
-      fontSize: 18,
+      fontSize: 20,
       marginTop: 10,
       marginBottom: 5,
       marginLeft: 10,
