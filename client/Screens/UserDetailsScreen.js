@@ -40,14 +40,14 @@ const UserDetailsScreen = () => {
             interests
         }
         addUserProfile(userProfile)
-        .then(() => {
-            console.log('User Added Succesfully');
-            navigation.navigate("Navigator")
-        })
-        .catch(error => {
-            console.log(error);
-            Alert.alert('Error', 'Failed to add user');
-        });
+            .then(() => {
+                console.log('User Added Succesfully');
+                navigation.navigate("Navigator")
+            })
+            .catch(error => {
+                console.log(error);
+                Alert.alert('Error', 'Failed to add user');
+            });
     }
 
 
@@ -56,9 +56,8 @@ const UserDetailsScreen = () => {
             style={styles.container}
             behaviour="padding"
         >
-            
             <View style={styles.inputContainer}>
-            <Text>Complete Registration</Text>
+                <Text>Complete Registration</Text>
                 <TextInput
                     placeholder="Name"
                     value={displayName}
@@ -122,7 +121,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     inputContainer: {
         width: '80%',
