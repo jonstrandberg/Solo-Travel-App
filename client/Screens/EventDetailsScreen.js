@@ -82,6 +82,10 @@ function EventDetailsScreen() {
         { cancelable: false }
     );
   }
+
+  const handleEditEvent = () => {
+    navigation.navigate('Edit Event', { event });
+  };
   
 
   const updateSignUps = async () => {
@@ -107,7 +111,10 @@ function EventDetailsScreen() {
         <Text>Meet-up Point: {event.meetingPoint}</Text>
         <Text>Available Spaces: {availableSpaces}</Text>
         {isEventCreator && (
+          <>
           <Button title="Delete Event" onPress={handleDeleteEvent} />
+          <Button title="Edit Event" onPress={handleEditEvent} />
+          </>
         )}
         {!isEventCreator && currentUser ? (
           <Button title="Cancel Attendance" onPress={handleCancelAttendance} />

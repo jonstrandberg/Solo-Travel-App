@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { getEventsBookedByUserProfileId, getEventsCreatedByUserProfileId } from "../services/EventService";
 import EventDetailsScreen from "./EventDetailsScreen";
+import EditEventScreen from "./EditEventScreen";
 
 const Stack = createStackNavigator();
 
@@ -84,6 +85,7 @@ const MyEventsScreen = () => {
         <Stack.Navigator>
             <Stack.Screen name="My Events List" component={MyEventsList} />
             <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
+            <Stack.Screen name="Edit Event" component={EditEventScreen} />
         </Stack.Navigator>
     );
 };

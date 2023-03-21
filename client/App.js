@@ -11,8 +11,8 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen  name="Login" component={LoginScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="User Registration" component={UserRegScreen} options={{ headerShown: false }}/>
+        {/* <Stack.Screen  name="Login" component={LoginScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="User Registration" component={UserRegScreen} options={{ headerShown: false }}/> */}
         <Stack.Screen name="Navigator" component={Navigator} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

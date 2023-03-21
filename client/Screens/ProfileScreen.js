@@ -133,7 +133,7 @@ const ProfileScreen = () => {
 
 
     return (
-
+        <ScrollView>
         <View style={styles.container}>
             <Image
                 source={{ uri: profile?.avatarUrl ? profile.avatarUrl : placeholderImage }}
@@ -328,6 +328,7 @@ const ProfileScreen = () => {
                 </View>
             </View>
         </View>
+        </ScrollView>
 
     );
 }
