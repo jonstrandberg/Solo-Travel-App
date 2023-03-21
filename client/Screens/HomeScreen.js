@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react"
 import { StyleSheet, SafeAreaView, Text, View, FlatList, TouchableOpacity, ImageBackground } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { createStackNavigator } from "@react-navigation/stack"
+import { createStackNavigator} from "@react-navigation/stack"
 import { getLocations } from "../services/LocationService"
 import CityDetailsScreen from "./CityDetailsScreen"
 import EventDetailsScreen from "./EventDetailsScreen"
+import Header from "../components/Header"
 
 const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
 
@@ -30,6 +31,7 @@ const CitiesList = () => {
   return (
 
     <SafeAreaView style={styles.container}>
+     <Header/>
     <View style={styles.titleContainer}>
         <Text style={styles.titleText}>Top Cities To Explore!</Text>
       </View>
@@ -58,9 +60,9 @@ const CitiesList = () => {
 
 const HomeScreen = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name='Explore Cities' component={CitiesList} options={{ headerShown: false }} />
-      <Stack.Screen name='City Details' component={CityDetailsScreen} options={({ route }) => ({ title: route.params.city.name })} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='Explore Cities' component={CitiesList} />
+      <Stack.Screen name='City Details' component={CityDetailsScreen} options={( { route }) => ({ title: route.params.city.name })} />
       <Stack.Screen name='Event Details' component={EventDetailsScreen} />
     </Stack.Navigator>
   );
