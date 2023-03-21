@@ -12,7 +12,6 @@ import {
     updateUserProfileInterests
 } from "../services/UserService";
 import SelectDropdownWithSearch from 'react-native-select-dropdown-with-search';
-
 import { getCountries } from "../services/CountryService";
 import { getLocations } from "../services/LocationService";
 
@@ -80,12 +79,9 @@ const ProfileScreen = () => {
     };
 
     const handleUpdateNationality = async () => {
-        const res = await updateUserProfileNationality(
-            profile.id,
-            value
-        );
+        const res = await updateUserProfileNationality(profile.id, newNationality); // needs to have new Nationaility 
         if (res) {
-            setProfile({ ...profile, nationality: value });
+            setProfile({ ...profile, nationality: newNationality });
             setNewNationality("");
             setEditingNationality(false)
         }
@@ -205,17 +201,13 @@ const ProfileScreen = () => {
                         <>
                         <SelectDropdownWithSearch
                         data={items}
-                        onSelect={(selectedItem, index) => {
-                            console.log(selectedItem, index)
+                        onSelect={(selectedNationality) => {
+                            setNewNationality(selectedNationality)
                         }}
-                        buttonTextAfterSelection={(selectedItem, index) => {
-                            // text represented after item is selected
-                            // if data array is an array of objects then return selectedItem.property to render after item is selected
+                        buttonTextAfterSelection={(selectedItem) => {
                             return selectedItem
                         }}
-                        rowTextForSelection={(item, index) => {
-                            // text represented for each item in dropdown
-                            // if data array is an array of objects then return item.property to represent item in dropdown
+                        rowTextForSelection={(item) => {
                             return item
                         }}
                     />
