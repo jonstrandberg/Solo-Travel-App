@@ -60,7 +60,7 @@ const CitiesList = () => {
 
 const HomeScreen = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: true }}>
       <Stack.Screen name='Explore Cities' component={CitiesList} />
       <Stack.Screen name='City Details' component={CityDetailsScreen} options={( { route }) => ({ title: route.params.city.name })} />
       <Stack.Screen name='Event Details' component={EventDetailsScreen} />

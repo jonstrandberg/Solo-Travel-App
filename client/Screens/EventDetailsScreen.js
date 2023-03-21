@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, FlatList, SafeAreaView, StyleSheet, Image, Alert } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import { createStackNavigator } from '@react-navigation/stack';
 import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/SignupService";
 import { deleteEvent } from "../services/EventService";
 import { getUserProfile } from "../services/UserService";
 import { Attendee } from "../components/Attendee";
+import EditEventScreen from "./EditEventScreen";
 
 function EventDetailsScreen() {
   const route = useRoute();
@@ -14,6 +16,7 @@ function EventDetailsScreen() {
   const currentUser = sign_ups.find((signUp) => signUp.userProfile.id === 5); //HARD CODED
   const isEventCreator = event.creator.id === 5; //HARD CODED
   const navigation = useNavigation()
+  const Stack = createStackNavigator()
 
 
 
@@ -95,40 +98,44 @@ function EventDetailsScreen() {
   };
 
   return (
-    <SafeAreaView>
-      <View>
-        <Text>Created By: {event.creator.displayName}</Text>
-        <Image source={{uri: event.creator.avatarUrl}}
+    <>
+  <SafeAreaView>
+    <View>
+      <Text>Created By: {event.creator.displayName}</Text>
+      <Image source={{uri: event.creator.avatarUrl}}
         style={{ width: 75, height: 75, borderRadius: 50, alignSelf: 'center' }} />
-        <Text>Event: {event.title}</Text>
-        <Text>Date: {event.date}</Text>
-        <Text>Time: {event.time}</Text>
-        <Text>Duration: {event.duration}</Text>
-        <Text>Description: {event.description}</Text>
-        <Text>
-          Location: {event.location.name}, {event.location.country.name}
-        </Text>
-        <Text>Meet-up Point: {event.meetingPoint}</Text>
-        <Text>Available Spaces: {availableSpaces}</Text>
-        {isEventCreator && (
-          <>
+      <Text>Event: {event.title}</Text>
+      <Text>Date: {event.date}</Text>
+      <Text>Time: {event.time}</Text>
+      <Text>Duration: {event.duration}</Text>
+      <Text>Description: {event.description}</Text>
+      <Text>Location: {event.location.name}, {event.location.country.name}</Text>
+      <Text>Meet-up Point: {event.meetingPoint}</Text>
+      <Text>Available Spaces: {availableSpaces}</Text>
+      {isEventCreator && (
+        <>
           <Button title="Delete Event" onPress={handleDeleteEvent} />
           <Button title="Edit Event" onPress={handleEditEvent} />
-          </>
-        )}
-        {!isEventCreator && currentUser ? (
-          <Button title="Cancel Attendance" onPress={handleCancelAttendance} />
-        ) : (
-          !isEventCreator && <Button title="Sign Up" onPress={handleSignUp} />
-        )}
-      </View>
-      <Text>Attendees: </Text>
-      <FlatList
-        data={sign_ups}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Attendee user={item.userProfile} />}
-      />
-    </SafeAreaView>
+        </>
+      )}
+      {!isEventCreator && currentUser ? (
+        <Button title="Cancel Attendance" onPress={handleCancelAttendance} />
+      ) : (
+        !isEventCreator && <Button title="Sign Up" onPress={handleSignUp} />
+      )}
+    </View>
+    <Text>Attendees: </Text>
+    <FlatList
+      data={sign_ups}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => <Attendee user={item.userProfile} />}
+    />
+  </SafeAreaView>
+  <Stack.Navigator>
+    <Stack.Screen name="Edit Event" component={EditEventScreen} options={{ title: 'Edit Event', headerShown: false }} />
+  </Stack.Navigator>
+</>
+
   );
 
 }

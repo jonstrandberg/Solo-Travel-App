@@ -31,7 +31,7 @@ function CityDetailsScreen({ navigation }) {
   };
 
   const handleAddEventPress = () => {
-    navigation.navigate('Edit Event', { cityId: city.id });
+    navigation.navigate('Add Event', { cityId: city.id });
   };
   
   return (
