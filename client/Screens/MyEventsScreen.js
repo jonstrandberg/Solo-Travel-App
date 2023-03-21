@@ -78,17 +78,17 @@ const MyEventsList = ({activeUser}) => {
     );
 };
 
-const MyEventsScreen = (props) => {
-    console.log('active user on my events stack', props)
+const MyEventsScreen = (activeUser) => {
+    console.log('active user on my events stack', activeUser)
     return (
         <Stack.Navigator>
             <Stack.Screen
                 name="My Events List"
-                children={() => <MyEventsList activeUser={props}/>}
+                children={() => <MyEventsList activeUser={activeUser}/>}
             />
             <Stack.Screen
                 name="EventDetails"
-                children={() => <EventDetailsScreen  activeUser={props}/>}
+                children={() => <EventDetailsScreen  activeUser={activeUser}/>}
             />
         </Stack.Navigator>
     );
