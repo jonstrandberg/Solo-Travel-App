@@ -7,15 +7,17 @@ import EventDetailsScreen from "./EventDetailsScreen";
 
 const Stack = createStackNavigator();
 
-const MyEventsList = ({activeUser}) => {
+const MyEventsList = (props) => {
     const navigation = useNavigation();
     const [eventsAttending, setEventsAttending] = useState([]);
     const [eventsCreated, setEventsCreated] = useState([]);
     const [activeTab, setActiveTab] = useState("created");
     const currentUserId = 5     //HARD CODED
 
-    console.log("activeUser in myEvents:", activeUser)
-    
+    // const activeUser = props.activeUser[0];
+    // console.log("activeUser in myEvents:",  activeUser)
+    const activeUser = props
+    console.log('active user on myevents', activeUser)
 
     useFocusEffect(
         React.useCallback(() => {

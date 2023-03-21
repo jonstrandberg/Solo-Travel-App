@@ -63,6 +63,8 @@ const ProfileScreen = (props) => {
             .catch(error => console.log(error))
     }, [activeUser.id]);
 
+    console.log('active user on profile', props)
+
     const handleUpdateName = async () => {
         const res = await updateUserProfileName(profile.id, newName);
         if (res) {
