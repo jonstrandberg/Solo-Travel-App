@@ -6,13 +6,13 @@ import { deleteEvent } from "../services/EventService";
 import { getUserProfile } from "../services/UserService";
 import { Attendee } from "../components/Attendee";
 
-function EventDetailsScreen() {
+function EventDetailsScreen({ activeUser }) {
   const route = useRoute();
   const { event, city } = route.params;
   const [sign_ups, setSignups] = useState([]);
   const [availableSpaces, setAvailableSpaces] = useState(event.capacity);
-  const currentUser = sign_ups.find((signUp) => signUp.userProfile.id === 5); //HARD CODED
-  const isEventCreator = event.creator.id === 5; //HARD CODED
+  const currentUser = sign_ups.find((signUp) => signUp.userProfile.id === activeUser.activeUser[0].id);
+  const isEventCreator = event.creator.id === activeUser.activeUser[0].id;
   const navigation = useNavigation()
 
 
@@ -29,7 +29,7 @@ function EventDetailsScreen() {
 
   const handleSignUp = async () => {
     const signUp = {
-      userProfile: { id: 5 },   // HARD CODED
+      userProfile: { id: activeUser.activeUser[0].id },
       event: { id: event.id },
     };
     try {
@@ -47,7 +47,7 @@ function EventDetailsScreen() {
 
   const handleCancelAttendance = async () => {
     try {
-      const userProfile = await getUserProfile(5);  // HARD CODED
+      const userProfile = await getUserProfile(activeUser.activeUser[0].id); 
       const signUps = await getSignUpsByEventId(event.id);
       const signUp = signUps.find((signUp) => signUp.userProfile.id === userProfile.id);
       const response = await deleteSignUp(signUp.id);

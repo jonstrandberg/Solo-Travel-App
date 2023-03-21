@@ -57,26 +57,28 @@ const CitiesList = () => {
   );
 };
 
-const HomeScreen = () => {
+const HomeScreen = (activeUser) => {
+  console.log('homescreen user', activeUser)
   return (
     <Stack.Navigator>
       <Stack.Screen
         name='Explore Cities'
-        component={CitiesList}
+        children={() => <CitiesList activeUser={activeUser}/>}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name='City Details'
-        component={CityDetailsScreen}
-        // options={({ route }) => ({ title: route.params.city })}
+        children={() => <CityDetailsScreen activeUser={activeUser}/>}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name='Event Details'
-        component={EventDetailsScreen}
+        children={() => <EventDetailsScreen activeUser={activeUser}/>}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Add Event"
-        component={AddEventScreen}
+        children={() => <AddEventScreen activeUser={activeUser}/>}
         options={{ title: 'Add Event', headerShown: false }}
       />
     </Stack.Navigator>
