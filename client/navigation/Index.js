@@ -16,36 +16,20 @@ const Navigator = () => {
 
     const [activeUser, setActiveUser] = useState('')
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         try {
-    //             const user = auth.currentUser
-    //             const userProfile = await getUserProfileByFirebaseId(user.uid);
-    //             setActiveUser(userProfile);
-    //             console.log ('current user:', user)
-    //             console.log('user profile:', userProfile)
-    //         } catch (error) {
-    //             console.error('Error fetching data:', error);
-    //         }
-    //     }
-    //     fetchData();
-    // }, []);
-    useFocusEffect(
-        React.useCallback(() => {
-            async function fetchData() {
-                try {
-                    const user = auth.currentUser
-                    const userProfile = await getUserProfileByFirebaseId(user.uid);
-                    setActiveUser(userProfile);
-                    console.log('current user:', user)
-                    console.log('user profile:', userProfile)
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const user = auth.currentUser
+                const userProfile = await getUserProfileByFirebaseId(user.uid);
+                setActiveUser(userProfile);
+                console.log ('current user:', user)
+                console.log('user profile:', userProfile)
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
-            fetchData();
-        }, [])
-    );
+        }
+        fetchData();
+    }, []);
 
     console.log('activeUser in index:', activeUser);
 
@@ -53,7 +37,7 @@ const Navigator = () => {
     return (
 
         <Tab.Navigator
-            initialRouteName='Home'
+            initialRouteName='Explore'
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName

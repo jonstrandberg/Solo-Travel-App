@@ -7,16 +7,13 @@ import EventDetailsScreen from "./EventDetailsScreen";
 
 const Stack = createStackNavigator();
 
-const MyEventsList = (props) => {
+const MyEventsList = ({activeUser}) => {
     const navigation = useNavigation();
     const [eventsAttending, setEventsAttending] = useState([]);
     const [eventsCreated, setEventsCreated] = useState([]);
     const [activeTab, setActiveTab] = useState("created");
     const currentUserId = 5     //HARD CODED
 
-    // const activeUser = props.activeUser[0];
-    // console.log("activeUser in myEvents:",  activeUser)
-    const activeUser = props
     console.log('active user on myevents', activeUser)
 
     useFocusEffect(
@@ -83,11 +80,18 @@ const MyEventsList = (props) => {
     );
 };
 
-const MyEventsScreen = () => {
+const MyEventsScreen = (props) => {
+    console.log('active user on my events stack', props)
     return (
         <Stack.Navigator>
-            <Stack.Screen name="My Events List" component={MyEventsList} />
-            <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
+            <Stack.Screen
+                name="My Events List"
+                children={() => <MyEventsList activeUser={props}/>}
+            />
+            <Stack.Screen
+                name="EventDetails"
+                children={() => <EventDetailsScreen  activeUser={props}/>}
+            />
         </Stack.Navigator>
     );
 };
