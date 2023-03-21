@@ -140,31 +140,7 @@ const ProfileScreen = (props) => {
                 </View>
             </View>
             <View style={styles.profileInfo}>
-                <View style={styles.row}>
-                    {editingName ? (
-                        <>
-                            <TextInput
-                                style={styles.input}
-                                value={newName}
-                                onChangeText={(text) => setNewName(text)}
-                            />
-                            <Button
-                                title="Save"
-                                onPress={handleUpdateName}
-                                style={styles.button}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <Text style={styles.title}>{profile.displayName}</Text>
-                            <Button
-                                title="Edit"
-                                onPress={() => setIsEditingName(true)}
-                                style={styles.button}
-                            />
-                        </>
-                    )}
-                </View>
+            <Text style={styles.title}>{profile.displayName}</Text>
             </View>
             <View style={styles.profileInfo}>
                 <Text style={styles.label}>Home town:</Text>
@@ -187,8 +163,8 @@ const ProfileScreen = (props) => {
                             <Text style={styles.text}>{profile.homeTown}</Text>
                             <Button
                                 title="Edit"
-                                onPress={() => setIsEditingHomeTown(true)}
-                                style={styles.button}
+                                onPress={() => setEditingLocation(true)}
+                                buttonStyle={styles.editButton}
                             />
                         </>
                     )}
@@ -222,8 +198,8 @@ const ProfileScreen = (props) => {
                             <Text style={styles.text}>{profile.nationality}</Text>
                             <Button
                                 title="Edit"
-                                onPress={() => setEditingNationality(true)}
-                                style={styles.button}
+                                onPress={() => setEditingLocation(true)}
+                                buttonStyle={styles.editButton}
                             />
                         </>
                     )}
@@ -250,8 +226,8 @@ const ProfileScreen = (props) => {
                             <Text style={styles.text}>{profile.age}</Text>
                             <Button
                                 title="Edit"
-                                onPress={() => setEditingAge(true)}
-                                style={styles.button}
+                                onPress={() => setEditingLocation(true)}
+                                buttonStyle={styles.editButton}
                             />
                         </>
                     )}
@@ -278,8 +254,8 @@ const ProfileScreen = (props) => {
                             <Text style={styles.text}>{profile.interests}</Text>
                             <Button
                                 title="Edit"
-                                onPress={() => setEditingInterests(true)}
-                                style={styles.button}
+                                onPress={() => setEditingLocation(true)}
+                                buttonStyle={styles.editButton}
                             />
                         </>
                     )}
@@ -313,7 +289,7 @@ const ProfileScreen = (props) => {
                             <Button
                                 title="Edit"
                                 onPress={() => setEditingLocation(true)}
-                                style={styles.button}
+                                buttonStyle={styles.editButton}
                             />
                         </>
                     )}
@@ -370,6 +346,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         paddingHorizontal: 20,
+    },
+    editButton: {
+        fontSize: 14,
+        color: 'white',
+        backgroundColor: '#002060',
+        padding: 10,
+        borderRadius: 5,
     },
 });
 
