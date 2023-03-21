@@ -86,6 +86,7 @@ const UserDetailsScreen = () => {
                 <TextInput
                     placeholder="Age"
                     value={age}
+                    keyboardType="numeric"
                     onChangeText={text => setAge(text)}
                     style={styles.input}
                 />

@@ -171,6 +171,7 @@ const AddEventScreen = ({ activeUser }) => {
         placeholderTextColor="#757575"
         placeholder="Maximum Capacity"
         value={capacity}
+        keyboardType="numeric"
         onChangeText={setCapacity}
       />
 
