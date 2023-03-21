@@ -19,7 +19,7 @@ import { getLocations } from "../services/LocationService";
 
 const placeholderImage = 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'
 
-const ProfileScreen = () => {
+const ProfileScreen = (props) => {
     const [user, setUser] = useState();
     const [profile, setProfile] = useState([]);
     const [newName, setNewName] = useState("")
@@ -50,15 +50,18 @@ const ProfileScreen = () => {
         })
     }, [])
 
+    const activeUser = props.activeUser[0];
 
     useEffect(() => {
-        getUserProfile(5)
+        getUserProfile(activeUser.id)
             .then(data => {
                 console.log(data)
                 setProfile(data);
             })
             .catch(error => console.log(error))
-    }, []);
+    }, [activeUser.id]);
+
+    console.log('active user on profile', props)
 
     const handleUpdateName = async () => {
         const res = await updateUserProfileName(profile.id, newName);

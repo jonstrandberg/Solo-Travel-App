@@ -14,17 +14,17 @@ const UserRegScreen = () => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                navigation.replace("Navigator")
+                navigation.replace("User Details")
             }
         })
         return unsubscribe
     }, [])
 
-    const handleSignUp = () => {
+    const handleRegistration = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log("registered with: ", user.email)
+                console.log("registered with: ", user.uid)
             })
             .catch((error) => {
                 if(error.code === 'auth/invalid-email'){
@@ -66,7 +66,7 @@ const UserRegScreen = () => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    onPress={handleSignUp}
+                    onPress={handleRegistration}
                     style={[styles.button, styles.button]}
                 >
                     <Text style={styles.buttonText}>Register</Text>
@@ -77,6 +77,7 @@ const UserRegScreen = () => {
 }
 
 export default UserRegScreen
+
 
 const styles = StyleSheet.create({
     container: {

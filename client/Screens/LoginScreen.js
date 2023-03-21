@@ -19,6 +19,7 @@ const LoginScreen = () => {
         })
         return unsubscribe
     }, [])
+    // add if statement within this useEffect checking user login against user profiles and direct to add user detail screen if no associated user 
 
 
     const handleMoveToUserReg = () => {

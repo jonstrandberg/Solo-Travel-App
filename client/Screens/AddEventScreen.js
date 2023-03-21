@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert} from "react-native";
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
 import { addEvent } from '../services/EventService';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import BottomDrawer from '../components/BottomDrawer';
@@ -7,7 +7,7 @@ import EventCalendar from '../components/EventCalender';
 import TimeSelector from '../components/TimeSelector';
 import DurationSelector from '../components/DurationSelector';
 
-const AddEventScreen = () => {
+const AddEventScreen = ({ activeUser }) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
@@ -25,14 +25,16 @@ const AddEventScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
+  console.log('Add event user:', activeUser)
+
   useEffect(() => {
-    setLocation(route.params.cityId);
+    setLocation(route.params.cityId)
   }, [route.params.cityId]);
 
   const handleAddEvent = () => {
-    if (!title || !date || !time|| !duration || !description || !location || !capacity || !meetingPoint){
+    if (!title || !date || !time || !duration || !description || !location || !capacity || !meetingPoint) {
       Alert.alert('Error', 'All fields are required!')
-    return 
+      return
     }
     const event = {
       title,
@@ -55,14 +57,14 @@ const AddEventScreen = () => {
       capacity,
     };
     addEvent(event)
-    .then((newEvent) => {
-      console.log('Event added successfully');
-      navigation.navigate('Event Details', { event: newEvent });
-    })
-    .catch(error => {
-      console.log(error);
-      Alert.alert('Error', 'Failed to add event');
-    });
+      .then((newEvent) => {
+        console.log('Event added successfully');
+        navigation.navigate('Event Details', { event: newEvent });
+      })
+      .catch(error => {
+        console.log(error);
+        Alert.alert('Error', 'Failed to add event');
+      });
   }
 
   const handleOpenCalendarSheet = () => {
@@ -108,7 +110,6 @@ const AddEventScreen = () => {
         onChangeText={setTitle}
       />
 
-      {/* ADDED CALENDAR PICKER */}
       <View style={styles.timeDateInputContainer}>
         <TextInput
           style={styles.timeDateInput}
@@ -128,7 +129,6 @@ const AddEventScreen = () => {
         <EventCalendar onAddDate={handleAddDate} />
       </BottomDrawer>
 
-      {/* ADDED TIME PICKER */}
       <View style={styles.timeDateInputContainer}>
         <TextInput
           style={styles.timeDateInput}
@@ -148,7 +148,6 @@ const AddEventScreen = () => {
         <TimeSelector onAddStartTime={handleAddStartTime} />
       </BottomDrawer>
 
-      {/* ADDED DURATION PICKER */}
       <View style={styles.timeDateInputContainer}>
         <TextInput
           style={styles.timeDateInput}

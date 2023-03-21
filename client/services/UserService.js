@@ -1,3 +1,19 @@
+export const getUserProfileByFirebaseId = async function(firebaseId) {
+    try {
+        const response = await fetch('http://localhost:8080/user_profiles?firebase_id=' + firebaseId.toString(), {
+            method: 'GET',
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('There was a problem with the request:', error);
+        throw error;
+    }
+};
+
 export const getUserProfiles = async function () {
     try {
         const res = await fetch('http://localhost:8080/user_profiles');

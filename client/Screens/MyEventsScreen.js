@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { FlatList, Text, View, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { getEventsBookedByUserProfileId, getEventsCreatedByUserProfileId } from "../services/EventService";
@@ -7,13 +7,12 @@ import EventDetailsScreen from "./EventDetailsScreen";
 
 const Stack = createStackNavigator();
 
-const MyEventsList = () => {
+const MyEventsList = ({activeUser}) => {
     const navigation = useNavigation();
     const [eventsAttending, setEventsAttending] = useState([]);
     const [eventsCreated, setEventsCreated] = useState([]);
     const [activeTab, setActiveTab] = useState("created");
-    const currentUserId = 5     //HARD CODED
-
+    const currentUserId = activeUser.activeUser[0].id;
 
     useFocusEffect(
         React.useCallback(() => {
@@ -21,13 +20,13 @@ const MyEventsList = () => {
                 getEventsBookedByUserProfileId(currentUserId),
                 getEventsCreatedByUserProfileId(currentUserId)
             ])
-            .then(([bookedEvents, createdEvents]) => {
-                setEventsAttending(bookedEvents);
-                setEventsCreated(createdEvents);
-            })
-            .catch((error) => {
-                console.error("Error getting events:", error);
-            });
+                .then(([bookedEvents, createdEvents]) => {
+                    setEventsAttending(bookedEvents);
+                    setEventsCreated(createdEvents);
+                })
+                .catch((error) => {
+                    console.error("Error getting events:", error);
+                });
         }, [])
     );
 
@@ -79,11 +78,18 @@ const MyEventsList = () => {
     );
 };
 
-const MyEventsScreen = () => {
+const MyEventsScreen = (activeUser) => {
+    console.log('active user on my events stack', activeUser)
     return (
         <Stack.Navigator>
-            <Stack.Screen name="My Events List" component={MyEventsList} />
-            <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
+            <Stack.Screen
+                name="My Events List"
+                children={() => <MyEventsList activeUser={activeUser}/>}
+            />
+            <Stack.Screen
+                name="EventDetails"
+                children={() => <EventDetailsScreen  activeUser={activeUser}/>}
+            />
         </Stack.Navigator>
     );
 };

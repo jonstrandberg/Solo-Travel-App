@@ -10,7 +10,7 @@ const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wild
 const Stack = createStackNavigator()
 
 
-function CityDetailsScreen({ navigation }) {
+function CityDetailsScreen({ navigation, activeUser }) {
 
   const route = useRoute();
   const { city } = route.params;
@@ -57,7 +57,10 @@ function CityDetailsScreen({ navigation }) {
           </View>
         )}
       </Stack.Screen>
-      <Stack.Screen name="Add Event" component={AddEventScreen} options={{ title: 'Add Event', headerShown: false }} />
+      <Stack.Screen name="Add Event" 
+      children={() => <AddEventScreen activeUser={activeUser}/>} 
+      options={{ title: 'Add Event', headerShown: false }} 
+      />
     </Stack.Navigator>
   );
 }

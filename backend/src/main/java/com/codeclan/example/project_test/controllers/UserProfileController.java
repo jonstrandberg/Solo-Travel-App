@@ -4,6 +4,7 @@ import com.codeclan.example.project_test.models.Location;
 import com.codeclan.example.project_test.models.UserProfile;
 import com.codeclan.example.project_test.repositories.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +24,17 @@ public class UserProfileController {
     @GetMapping(value = "/user_profiles")
     public ResponseEntity<List<UserProfile>> getAllUserProfiles(
             @RequestParam(name = "event_id", required = false) Long eventId,
-            @RequestParam(name = "location_id", required = false) Long locationId
+            @RequestParam(name = "location_id", required = false) Long locationId,
+            @RequestParam(name = "firebase_id", required = false) String firebaseId
     ){
         if (eventId != null) {
             return new ResponseEntity<>(userProfileRepository.findBySignUpListEventId(eventId), HttpStatus.OK);
         }
         if (locationId != null) {
             return new ResponseEntity<>(userProfileRepository.findByLocationId(locationId), HttpStatus.OK);
+        }
+        if (firebaseId != null) {
+            return new ResponseEntity<>(userProfileRepository.findByFirebaseId(firebaseId), HttpStatus.OK);
         }
         return new ResponseEntity<>(userProfileRepository.findAll(), HttpStatus.OK);
     }
