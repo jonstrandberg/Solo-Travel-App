@@ -22,8 +22,6 @@ const CityDetailsScreen = () => {
     .then(json => setCity(json))
   }, [])
 
-  console.log('City=', city)
-
 useFocusEffect(
   React.useCallback(() => {
     getEventsByLocationId(cityId)
