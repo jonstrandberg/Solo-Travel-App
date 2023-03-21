@@ -47,15 +47,6 @@ const UserDetailsScreen = () => {
         .catch(error => {
             console.log(error);
             Alert.alert('Error', 'Failed to add user');
-            console.log(userProfile)
-            // console.log('firebaseId:', firebaseId)
-            // console.log('Name:', displayName)
-            // console.log('Avatar:', avatarUrl)
-            // console.log('Home town:', homeTown)
-            // console.log('Nationality:', nationality)
-            // console.log('Age:', age)
-            // console.log('Location:', location)
-            // console.log('Interests:', interests)
         });
     }
 
