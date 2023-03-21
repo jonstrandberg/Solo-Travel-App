@@ -27,7 +27,7 @@ const DurationSelector = (props) => {
     }
 
     return (
-        <View style={styleSheet.MainContainer}>
+        <View style={styles.MainContainer}>
             <DateTimePicker
                 value={duration}
                 mode={'time'}
@@ -35,31 +35,24 @@ const DurationSelector = (props) => {
                 display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                 is24Hour={false}
                 onChange={onDurationSelected}
-                style={styleSheet.datePicker}
+                style={styles.datePicker}
                 date={new Date(new Date().setHours(0, 0, 0, 0))}
                 locale='en_GB'
             />
-            <TouchableOpacity>
-                <Text onPress={handleSelectDuration}>Set Duration</Text>
+            <TouchableOpacity style={styles.button} onPress={handleSelectDuration}>
+                <Text style={styles.buttonText} >Set Duration</Text>
             </TouchableOpacity>
 
         </View>
     );
 }
 
-const styleSheet = StyleSheet.create({
+const styles = StyleSheet.create({
     MainContainer: {
         flex: 1,
         padding: 6,
         alignItems: 'center',
         backgroundColor: 'white'
-    },
-    text: {
-        fontSize: 25,
-        color: 'red',
-        padding: 3,
-        marginBottom: 10,
-        textAlign: 'center'
     },
     datePicker: {
         justifyContent: 'center',
@@ -68,6 +61,19 @@ const styleSheet = StyleSheet.create({
         height: 260,
         display: 'flex',
     },
+    button: {
+        backgroundColor: '#0782F9',
+        alignItems: 'center',
+        width: '100%',
+        padding: 15,
+        borderRadius: 10,
+        alignItems: 'center'
+    },
+    buttonText: {
+        color: '#FFF',
+        fontSize: 20,
+        fontWeight: 600
+    }
 });
 
 export default DurationSelector

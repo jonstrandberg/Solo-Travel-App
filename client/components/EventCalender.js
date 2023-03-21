@@ -73,8 +73,8 @@ const EventCalendar = (props) => {
                     textDayHeaderFontSize: 14
                 }}
             />
-            <TouchableOpacity>
-                <Text onPress={handleAddDate}>Set Date</Text>
+            <TouchableOpacity style={styles.button} onPress={handleAddDate}>
+                <Text style={styles.buttonText} >Set Date</Text>
             </TouchableOpacity>
         </View>
     );
@@ -86,7 +86,21 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         width: 350
     },
+    button: {
+        backgroundColor: '#0782F9',
+        alignItems: 'center',
+        width: '100%',
+        padding: 15,
+        borderRadius: 10,
+        alignItems: 'center'
+    },
+    buttonText: {
+        color: '#FFF',
+        fontSize: 20,
+        fontWeight: 600
+    }
 })
+
 
 
 export default EventCalendar
