@@ -7,7 +7,7 @@ import EventDetailsScreen from "./EventDetailsScreen";
 
 const Stack = createStackNavigator();
 
-const MyEventsList = ({activeUser}) => {
+const MyEventsList = ({ activeUser }) => {
     const navigation = useNavigation();
     const [eventsAttending, setEventsAttending] = useState([]);
     const [eventsCreated, setEventsCreated] = useState([]);

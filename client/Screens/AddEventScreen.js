@@ -25,6 +25,8 @@ const AddEventScreen = ({ activeUser }) => {
   const navigation = useNavigation();
   const route = useRoute();
 
+
+
   useEffect(() => {
     setLocation(route.params.cityId)
   }, [route.params.cityId]);
@@ -50,7 +52,7 @@ const AddEventScreen = ({ activeUser }) => {
         },
       },
       creator: {
-        id: 5   //HARD CODED
+        id: activeUser.activeUser[0].id
       },
       capacity,
     };
