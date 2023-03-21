@@ -60,6 +60,7 @@ const ProfileScreen = (props) => {
             .catch(error => console.log(error))
     }, [activeUser.id]);
 
+
     const handleUpdateName = async () => {
         const res = await updateUserProfileName(profile.id, newName);
         if (res) {
@@ -140,7 +141,31 @@ const ProfileScreen = (props) => {
                 </View>
             </View>
             <View style={styles.profileInfo}>
-            <Text style={styles.title}>{profile.displayName}</Text>
+                <View style={styles.row}>
+                    {editingName ? (
+                        <>
+                            <TextInput
+                                style={styles.input}
+                                value={newName}
+                                onChangeText={(text) => setNewName(text)}
+                            />
+                            <Button
+                                title="Save"
+                                onPress={handleUpdateName}
+                                style={styles.button}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <Text style={styles.title}>{profile.displayName}</Text>
+                            <Button
+                                title="Edit"
+                                onPress={() => setIsEditingName(true)}
+                                style={styles.button}
+                            />
+                        </>
+                    )}
+                </View>
             </View>
             <View style={styles.profileInfo}>
                 <Text style={styles.label}>Home town:</Text>
@@ -163,8 +188,8 @@ const ProfileScreen = (props) => {
                             <Text style={styles.text}>{profile.homeTown}</Text>
                             <Button
                                 title="Edit"
-                                onPress={() => setEditingLocation(true)}
-                                buttonStyle={styles.editButton}
+                                onPress={() => setIsEditingHomeTown(true)}
+                                style={styles.button}
                             />
                         </>
                     )}
@@ -198,8 +223,8 @@ const ProfileScreen = (props) => {
                             <Text style={styles.text}>{profile.nationality}</Text>
                             <Button
                                 title="Edit"
-                                onPress={() => setEditingLocation(true)}
-                                buttonStyle={styles.editButton}
+                                onPress={() => setEditingNationality(true)}
+                                style={styles.button}
                             />
                         </>
                     )}
@@ -226,8 +251,8 @@ const ProfileScreen = (props) => {
                             <Text style={styles.text}>{profile.age}</Text>
                             <Button
                                 title="Edit"
-                                onPress={() => setEditingLocation(true)}
-                                buttonStyle={styles.editButton}
+                                onPress={() => setEditingAge(true)}
+                                style={styles.button}
                             />
                         </>
                     )}
@@ -254,8 +279,8 @@ const ProfileScreen = (props) => {
                             <Text style={styles.text}>{profile.interests}</Text>
                             <Button
                                 title="Edit"
-                                onPress={() => setEditingLocation(true)}
-                                buttonStyle={styles.editButton}
+                                onPress={() => setEditingInterests(true)}
+                                style={styles.button}
                             />
                         </>
                     )}
@@ -289,7 +314,7 @@ const ProfileScreen = (props) => {
                             <Button
                                 title="Edit"
                                 onPress={() => setEditingLocation(true)}
-                                buttonStyle={styles.editButton}
+                                style={styles.button}
                             />
                         </>
                     )}
@@ -346,13 +371,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         paddingHorizontal: 20,
-    },
-    editButton: {
-        fontSize: 14,
-        color: 'white',
-        backgroundColor: '#002060',
-        padding: 10,
-        borderRadius: 5,
     },
 });
 

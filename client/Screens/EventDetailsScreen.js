@@ -218,15 +218,15 @@ const styles = StyleSheet.create({
   },
   eventButton: {
     height: 30,
-    width: '30%',
     backgroundColor: '#254C94',
     borderRadius: 10,
     paddingVertical: 5,
-    paddingHorizontal: 10,
+    paddingHorizontal: 30,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'flex-start',
     marginTop: 10,
+    width: 200,
   },
   eventButtonTitle: {
     color: 'white',
