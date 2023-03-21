@@ -79,6 +79,7 @@ const MyEventsList = ({activeUser}) => {
 };
 
 const MyEventsScreen = (activeUser) => {
+
     return (
         <Stack.Navigator>
             <Stack.Screen

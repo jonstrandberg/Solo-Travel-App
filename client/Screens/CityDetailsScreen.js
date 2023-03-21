@@ -1,30 +1,35 @@
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import { getEventsByLocationId } from "../services/EventService";
-import AddEventScreen from './AddEventScreen';
+import { getLocation } from '../services/LocationService'
 
-const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
-
-const Stack = createStackNavigator()
+const placeholderCityImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
 
 
-function CityDetailsScreen({ navigation, activeUser }) {
-
-  const route = useRoute();
-  const { city } = route.params;
-
+const CityDetailsScreen = () => {
+  const [city, setCity] = useState({name: '', country: {name: ''}})
   const [event, setEvent] = useState([])
 
+  const navigation = useNavigation();
+
+  const route = useRoute();
+  const cityId = route.params.cityId;
+
   useEffect(() => {
-    getEventsByLocationId(city.id)
+    getLocation(cityId)
+    .then(json => setCity(json))
+  }, [])
+
+  console.log('City=', city)
+
+  useEffect(() => {
+    getEventsByLocationId(cityId)
       .then(json => {
         setEvent(json)
       })
-  }, [event])
-
-
+  }, [])
 
   const handleEventPress = (event) => {
     navigation.navigate('Event Details', { event: event, city: city });
@@ -33,45 +38,34 @@ function CityDetailsScreen({ navigation, activeUser }) {
   const handleAddEventPress = () => {
     navigation.navigate('Add Event', { cityId: city.id });
   };
-  
+
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Single City Details"
-      options={{ headerShown: false }}>
-        {() => (
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
-            </View>    
-            <Image source={{uri: city?.imageUrl ? city.imageUrl : placeholderCitiyImage}} resizeMode="contain" style={styles.imageUrl}></Image>
-            <Text style={styles.eventsHeader}>Events</Text>
-            <FlatList
-              data={event}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
-                  <Text style={styles.eventTitle}>{item.title}</Text>
-                </TouchableOpacity>
-              )}
-            />
-            <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
-              <Text style={styles.buttonText}>Add Event</Text>
-            </TouchableOpacity>
-          </View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
+      </View>
+      <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl}></Image>
+      <Text style={styles.eventsHeader}>Events</Text>
+      <FlatList
+        data={event}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
+            <Text style={styles.eventTitle}>{item.title}</Text>
+          </TouchableOpacity>
         )}
-      </Stack.Screen>
-      <Stack.Screen name="Add Event" 
-      children={() => <AddEventScreen activeUser={activeUser}/>} 
-      options={{ title: 'Add Event', headerShown: false }} 
       />
-    </Stack.Navigator>
-  );
+      <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
+        <Text style={styles.buttonText}>Add Event</Text>
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start', // Align items to the top
+    justifyContent: 'flex-start', 
     alignItems: 'center',
     backgroundColor: '#fff',
     paddingTop: 30,
@@ -96,9 +90,9 @@ const styles = StyleSheet.create({
   },
   eventsHeader: {
     fontSize: 22,
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
     marginBottom: 10,
-    color:'#254C94',
+    color: '#254C94',
   },
   button: {
     backgroundColor: '#254C94',
@@ -127,7 +121,7 @@ const styles = StyleSheet.create({
   },
   imageUrl: {
     width: '100%',
-    aspectRatio: 4/3, 
+    aspectRatio: 4 / 3,
   },
   eventButton: {
     backgroundColor: 'transparent',
