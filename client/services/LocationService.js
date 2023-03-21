@@ -32,9 +32,9 @@ export const getLocation = async function (locationId) {
         }
     }
 
-// export const getLocation = async function (locationId) {
-//     return fetch ('http://localhost:8080/locations/{locationId}')
-//     .then(res => {return res.json()})
-// }
+export const getLocationByName = async function (locationName) {
+    return fetch ('http://localhost:8080/locations/{locationName}')
+    .then(res => {return res.json()})
+}
 
 

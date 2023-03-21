@@ -184,11 +184,11 @@ export const updateUserProfileAvatarUrl = async function (userProfileId, newAvat
     }
 }
 
-export const updateUserProfileLocation = async function (userProfileId, newLocation) {
+export const updateUserProfileLocation = async function (userProfileId, newLocationId) {
     try {
         const response = await fetch("http://127.0.0.1:8080/user_profiles/" + userProfileId.toString() + "/set_location", {
             method: "PUT",
-            body: JSON.stringify({ new: newLocation }),
+            body: JSON.stringify({ new: newLocationId }),
             headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
