@@ -12,9 +12,7 @@ const MyEventsList = ({activeUser}) => {
     const [eventsAttending, setEventsAttending] = useState([]);
     const [eventsCreated, setEventsCreated] = useState([]);
     const [activeTab, setActiveTab] = useState("created");
-    const currentUserId = 5     //HARD CODED
-
-    console.log('active user on myevents', activeUser)
+    const currentUserId = activeUser.activeUser[0].id;
 
     useFocusEffect(
         React.useCallback(() => {
