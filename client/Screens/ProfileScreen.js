@@ -237,6 +237,7 @@ const ProfileScreen = (props) => {
                             <TextInput
                                 style={styles.input}
                                 value={newAge}
+                                keyboardType="numeric"
                                 onChangeText={(text) => setNewAge(text)}
                             />
                             <Button
