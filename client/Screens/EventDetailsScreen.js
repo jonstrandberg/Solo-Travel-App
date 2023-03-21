@@ -83,7 +83,6 @@ function EventDetailsScreen({ activeUser }) {
     );
   }
   
-
   const updateSignUps = async () => {
     const json = await getSignUpsByEventId(event.id);
     setSignups(json);

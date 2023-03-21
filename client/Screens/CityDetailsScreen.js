@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getEventsByLocationId } from "../services/EventService";
 import { getLocation } from '../services/LocationService'
 
@@ -22,14 +22,14 @@ const CityDetailsScreen = () => {
     .then(json => setCity(json))
   }, [])
 
-  console.log('City=', city)
-
-  useEffect(() => {
+useFocusEffect(
+  React.useCallback(() => {
     getEventsByLocationId(cityId)
       .then(json => {
-        setEvent(json)
-      })
-  }, [])
+        setEvent(json);
+      });
+  }, [navigation, cityId])
+);
 
   const handleEventPress = (event) => {
     navigation.navigate('Event Details', { event: event, city: city });

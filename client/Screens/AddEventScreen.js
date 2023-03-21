@@ -58,7 +58,7 @@ const AddEventScreen = ({ activeUser }) => {
     };
     addEvent(event)
       .then((newEvent) => {
-        navigation.navigate('Event Details', { event: newEvent });
+        navigation.goBack();
       })
       .catch(error => {
         console.log(error);
