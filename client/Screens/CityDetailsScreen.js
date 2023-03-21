@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { getEventsByLocationId } from "../services/EventService";
@@ -40,7 +40,7 @@ const CityDetailsScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
       </View>
@@ -58,7 +58,7 @@ const CityDetailsScreen = () => {
       <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
         <Text style={styles.buttonText}>Add Event</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, View, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
+import { FlatList, Text, View, TouchableOpacity, StyleSheet, ActivityIndicator, SafeAreaView } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { getEventsBookedByUserProfileId, getEventsCreatedByUserProfileId } from "../services/EventService";
@@ -48,7 +48,7 @@ const MyEventsList = ({ activeUser }) => {
     );
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {/* Display the events created and events attending tabs */}
             <View style={styles.tabContainer}>
                 <TouchableOpacity onPress={() => setActiveTab("created")} style={[styles.tabButton, activeTab === "created" && styles.activeTabButton]}>
@@ -74,7 +74,7 @@ const MyEventsList = ({ activeUser }) => {
                     keyExtractor={(item) => item.id.toString()}
                 />
             )}
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         marginBottom: 10,
+        padding:20
     },
     tabButton: {
         flex: 1,
@@ -131,11 +132,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderColor: "#ccc",
         marginVertical: 10,
+        marginRight: 20,
+        marginLeft: 20,
         padding: 10,
     },
     eventInfoContainer: {
         flex: 1,
         marginRight: 10,
+        
     },
     eventTitle: {
         fontSize: 18,

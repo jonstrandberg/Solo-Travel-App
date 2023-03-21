@@ -130,10 +130,10 @@ const ProfileScreen = (props) => {
 
     return (
 
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Image
                 source={{ uri: profile?.avatarUrl ? profile.avatarUrl : placeholderImage }}
-                style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center' }}
+                style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center', marginTop:10 }}
             />
             <View style={styles.profileInfo}>
                 <View style={styles.row}>
@@ -320,7 +320,7 @@ const ProfileScreen = (props) => {
                     )}
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
 
     );
 }
@@ -336,11 +336,15 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
+        marginTop:10,
         marginBottom: 20,
+
     },
     profileInfo: {
         flexDirection: 'column',
         marginBottom: 10,
+        paddingLeft:20,
+        paddingRight:20,
     },
     label: {
         fontWeight: 'bold',

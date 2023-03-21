@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, SafeAreaView } from "react-native";
 import { addEvent } from '../services/EventService';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import BottomDrawer from '../components/BottomDrawer';
@@ -100,7 +100,7 @@ const AddEventScreen = ({ activeUser }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TextInput
         style={styles.input}
         placeholderTextColor="#757575"
@@ -199,7 +199,7 @@ const AddEventScreen = ({ activeUser }) => {
       <TouchableOpacity style={styles.button} onPress={handleAddEvent}>
         <Text style={styles.buttonText}>Add Event</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    width: '100%',
+    width: '95%',
     marginVertical: 10,
     borderWidth: 1,
     borderRadius: 10,
@@ -225,11 +225,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
+    width: '95%',
   },
   timeDateInput: {
     height: 50,
-    width: '55%',
+    width: '53%',
     marginVertical: 10,
     borderWidth: 1,
     borderRadius: 10,
@@ -240,11 +240,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '44%'
+    width: '43%'
   },
   inputButton: {
     height: 40,
-    width: '100%',
+    width: '90%',
     marginLeft: 10,
     backgroundColor: '#BDBDBD',
     borderRadius: 10,
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 15,
-    alignSelf: 'stretch'
+    width: '95%'
   },
   buttonText: {
     color: '#FFFFFF',
