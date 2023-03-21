@@ -40,17 +40,20 @@ function CityDetailsScreen({ navigation }) {
       options={{ headerShown: false }}>
         {() => (
           <View style={styles.container}>
-            <Text style={styles.cityName}>City name: {city.name}</Text>
-            <Text style={styles.country}>Country: {city.country.name}</Text>
+            <View style={styles.header}>
+              <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
+            </View>    
             <Image source={{uri: city?.imageUrl ? city.imageUrl : placeholderCitiyImage}} resizeMode="contain" style={styles.imageUrl}></Image>
-            <Text>Events:</Text>
+            <Text style={styles.eventsHeader}>Events</Text>
             <FlatList
               data={event}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => handleEventPress(item)}>
-                  <Text>{item.title}</Text>
-                </TouchableOpacity>)} />
+                <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
+                  <Text style={styles.eventTitle}>{item.title}</Text>
+                </TouchableOpacity>
+              )}
+            />
             <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
               <Text style={styles.buttonText}>Add Event</Text>
             </TouchableOpacity>
@@ -65,23 +68,38 @@ function CityDetailsScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Align items to the top
     alignItems: 'center',
     backgroundColor: '#fff',
-    paddingHorizontal: 20,
+    paddingTop: 30,
   },
-  cityName: {
-    fontSize: 24,
+  header: {
+    backgroundColor: '#0B909B',
+    width: '100%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  headerText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20,
     fontWeight: 'bold',
-    marginVertical: 20,
+    zIndex: 1,
   },
   country: {
     fontSize: 20,
     marginVertical: 10,
   },
+  eventsHeader: {
+    fontSize: 22,
+    fontWeight: 'bold', 
+    marginBottom: 10,
+    color:'#254C94',
+  },
   button: {
     backgroundColor: '#254C94',
-    paddingVertical: 10,
+    paddingVertical: 6,
     paddingHorizontal: 20,
     borderRadius: 20,
     marginTop: 20,
@@ -93,12 +111,38 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  imageUrl: {
+  content: {
     flex: 1,
-    justifyContent: 'center',
-    width:'100%',
-  }
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
+    paddingHorizontal: 20,
+  },
+  imageContainer: {
+    width: '100%',
+    height: 200,
+  },
+  imageUrl: {
+    width: '100%',
+    aspectRatio: 4/3, 
+  },
+  eventButton: {
+    backgroundColor: 'transparent',
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: '#254C94',
+    marginVertical: 5,
+    paddingVertical: 6,
+    paddingHorizontal: 20,
+  },
+  eventTitle: {
+    color: '#254C94',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
+
 
 export default CityDetailsScreen;
 
