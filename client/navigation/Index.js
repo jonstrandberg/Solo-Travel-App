@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -8,6 +8,7 @@ import MyEventsScreen from "../Screens/MyEventsScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
 import { getUserProfileByFirebaseId } from "../services/UserService"
 import { auth } from "../firebase"
+import { useFocusEffect } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator()
 
@@ -15,23 +16,39 @@ const Navigator = () => {
 
     const [activeUser, setActiveUser] = useState('')
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const user = auth.currentUser
-                const userProfile = await getUserProfileByFirebaseId(user.uid);
-                setActiveUser(userProfile);
-                console.log ('current user:', user)
-                console.log('user profile:', userProfile)
-            } catch (error) {
-                console.error('Error fetching data:', error);
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         try {
+    //             const user = auth.currentUser
+    //             const userProfile = await getUserProfileByFirebaseId(user.uid);
+    //             setActiveUser(userProfile);
+    //             console.log ('current user:', user)
+    //             console.log('user profile:', userProfile)
+    //         } catch (error) {
+    //             console.error('Error fetching data:', error);
+    //         }
+    //     }
+    //     fetchData();
+    // }, []);
+    useFocusEffect(
+        React.useCallback(() => {
+            async function fetchData() {
+                try {
+                    const user = auth.currentUser
+                    const userProfile = await getUserProfileByFirebaseId(user.uid);
+                    setActiveUser(userProfile);
+                    console.log('current user:', user)
+                    console.log('user profile:', userProfile)
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
             }
-        }
-        fetchData();
-    }, []);
+            fetchData();
+        }, [])
+    );
 
     console.log('activeUser in index:', activeUser);
-    
+
 
     return (
 

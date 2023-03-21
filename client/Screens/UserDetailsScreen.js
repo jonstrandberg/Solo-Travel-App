@@ -56,7 +56,9 @@ const UserDetailsScreen = () => {
             style={styles.container}
             behaviour="padding"
         >
+            
             <View style={styles.inputContainer}>
+            <Text>Complete Registration</Text>
                 <TextInput
                     placeholder="Name"
                     value={displayName}
