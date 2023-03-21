@@ -79,7 +79,6 @@ const MyEventsList = ({activeUser}) => {
 };
 
 const MyEventsScreen = (activeUser) => {
-    console.log('active user on my events stack', activeUser)
     return (
         <Stack.Navigator>
             <Stack.Screen

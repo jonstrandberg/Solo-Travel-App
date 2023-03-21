@@ -24,7 +24,6 @@ const CitiesList = () => {
   }, []);
 
   const handleCityPress = (city) => {
-    console.log(city)
     navigation.navigate('City Details', { city })
   };
 
