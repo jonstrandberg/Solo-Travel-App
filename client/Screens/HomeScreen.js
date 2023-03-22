@@ -88,7 +88,10 @@ const HomeScreen = (activeUser) => {
         children={() => <AttendeeDetailsScreen activeUser={activeUser}/>}
         options={{ title: 'Add Event', headerShown: false }}
       />
-       <Stack.Screen name="Edit Event" component={EditEventScreen} options={{ title: 'Edit Event', headerShown: false }} />
+       <Stack.Screen 
+       name="Edit Event" 
+       children={() => <EditEventScreen activeUser={activeUser}/>}
+       options={{ title: 'Edit Event', headerShown: false }} />
     </Stack.Navigator>
   );
 };
