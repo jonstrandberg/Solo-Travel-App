@@ -43,7 +43,6 @@ const EditEventScreen = ({ activeUser }) => {
     };
     updateEvent(params.event.id, event)
     .then((updatedEvent) => {
-      console.log(event)
       navigation.navigate('Event Details', { event: updatedEvent });
     })
     .catch(error => {
