@@ -1,6 +1,7 @@
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react"
 import { Image, View, Text, StyleSheet, Button, SafeAreaView, TouchableOpacity } from "react-native";
+import UserProfileDetail from "../components/UserProfileDetails";
 
 export const AttendeeDetailsScreen = () => {
     const route = useRoute();
@@ -18,7 +19,7 @@ export const AttendeeDetailsScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <Text>Attendee:</Text>
-            <Image
+            {/* <Image
                 source={{ uri: attendee.userProfile?.avatarUrl ? attendee.userProfile.avatarUrl : placeholderImage }}
                 style={{ width: 100, height: 100, borderRadius: 50 }}
             />
@@ -28,12 +29,13 @@ export const AttendeeDetailsScreen = () => {
             <Text style={styles.detailsText}>Home Town: { attendee.userProfile.homeTown}</Text>
             <Text style={styles.detailsText}>Nationality: { attendee.userProfile.nationaliy}</Text>
             <Text style={styles.detailsText}>Age: { attendee.userProfile.age}</Text>
-            <Text style={styles.detailsText}>Interests { attendee.userProfile.interests}</Text>
-            
+            <Text style={styles.detailsText}>Interests { attendee.userProfile.interests}</Text> */}
+            <View>{UserProfileDetail}</View>
 
             <TouchableOpacity onPress={() => handleGoBackPress()} style={styles.button}>
                 <Text style={styles.buttonText}>Back to Event</Text>
             </TouchableOpacity>
+            
         </SafeAreaView>
     )
 }
