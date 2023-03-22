@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, FlatList, SafeAreaView, StyleSheet, Image, Alert, ScrollView } from "react-native";
+import { View, Text, Button, FlatList, SafeAreaView, StyleSheet, Image, Alert, ScrollView, TouchableOpacity } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/SignupService";
 import { deleteEvent } from "../services/EventService";
@@ -81,12 +81,18 @@ function EventDetailsScreen({ activeUser }) {
         { cancelable: false }
     );
   }
-  
+
   const updateSignUps = async () => {
     const json = await getSignUpsByEventId(event.id);
     setSignups(json);
     setAvailableSpaces(event.capacity - json.length)
   };
+
+  const handleAttendeePress = (attendee) => {
+    navigation.navigate('Attendee Details',{attendee : attendee});
+  };
+
+  
 
   return (
     <SafeAreaView>
@@ -116,13 +122,13 @@ function EventDetailsScreen({ activeUser }) {
         <Text style={styles.attendeesHeaderText}>Attendees:</Text>
         <View style={styles.attendeesContainer}>
           {sign_ups.map((sign_up) => (
-            <View key={sign_up.id} style={styles.attendeeContainer}>
+            <TouchableOpacity onPress={() => handleAttendeePress(sign_up)} key={sign_up.id} style={styles.attendeeContainer}>
               <Image
               source={{ uri: sign_up.userProfile.avatarUrl }}
               style={{ width: 50, height: 50, borderRadius: 25, marginLeft: 10 }}
               />
               <Text style={styles.attendeeName}>{sign_up.userProfile.displayName}</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
