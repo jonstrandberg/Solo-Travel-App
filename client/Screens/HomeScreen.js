@@ -7,6 +7,7 @@ import CityDetailsScreen from "./CityDetailsScreen"
 import EventDetailsScreen from "./EventDetailsScreen"
 import AddEventScreen from "./AddEventScreen"
 import Header from "../components/Header"
+import { AttendeeDetailsScreen } from "./AttendeeDetailsScreen"
 
 const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
 
@@ -79,6 +80,11 @@ const HomeScreen = (activeUser) => {
       <Stack.Screen
         name="Add Event"
         children={() => <AddEventScreen activeUser={activeUser}/>}
+        options={{ title: 'Add Event', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Attendee Details"
+        children={() => <AttendeeDetailsScreen activeUser={activeUser}/>}
         options={{ title: 'Add Event', headerShown: false }}
       />
     </Stack.Navigator>
