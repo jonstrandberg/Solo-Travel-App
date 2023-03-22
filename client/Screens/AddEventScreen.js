@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert} from "react-native";
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, SafeAreaView } from "react-native";
 import { addEvent } from '../services/EventService';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import BottomDrawer from '../components/BottomDrawer';
@@ -7,7 +7,7 @@ import EventCalendar from '../components/EventCalender';
 import TimeSelector from '../components/TimeSelector';
 import DurationSelector from '../components/DurationSelector';
 
-const AddEventScreen = () => {
+const AddEventScreen = ({ activeUser }) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
@@ -25,14 +25,16 @@ const AddEventScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
+
+
   useEffect(() => {
-    setLocation(route.params.cityId);
+    setLocation(route.params.cityId)
   }, [route.params.cityId]);
 
   const handleAddEvent = () => {
-    if (!title || !date || !time|| !duration || !description || !location || !capacity || !meetingPoint){
+    if (!title || !date || !time || !duration || !description || !location || !capacity || !meetingPoint) {
       Alert.alert('Error', 'All fields are required!')
-    return 
+      return
     }
     const event = {
       title,
@@ -50,19 +52,18 @@ const AddEventScreen = () => {
         },
       },
       creator: {
-        id: 2   //HARD CODED
+        id: activeUser.activeUser[0].id
       },
       capacity,
     };
     addEvent(event)
-    .then((newEvent) => {
-      console.log('Event added successfully');
-      navigation.navigate('Event Details', { event: newEvent });
-    })
-    .catch(error => {
-      console.log(error);
-      Alert.alert('Error', 'Failed to add event');
-    });
+      .then((newEvent) => {
+        navigation.goBack();
+      })
+      .catch(error => {
+        console.log(error);
+        Alert.alert('Error', 'Failed to add event');
+      });
   }
 
   const handleOpenCalendarSheet = () => {
@@ -99,7 +100,7 @@ const AddEventScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TextInput
         style={styles.input}
         placeholderTextColor="#757575"
@@ -108,7 +109,6 @@ const AddEventScreen = () => {
         onChangeText={setTitle}
       />
 
-      {/* ADDED CALENDAR PICKER */}
       <View style={styles.timeDateInputContainer}>
         <TextInput
           style={styles.timeDateInput}
@@ -128,7 +128,6 @@ const AddEventScreen = () => {
         <EventCalendar onAddDate={handleAddDate} />
       </BottomDrawer>
 
-      {/* ADDED TIME PICKER */}
       <View style={styles.timeDateInputContainer}>
         <TextInput
           style={styles.timeDateInput}
@@ -148,7 +147,6 @@ const AddEventScreen = () => {
         <TimeSelector onAddStartTime={handleAddStartTime} />
       </BottomDrawer>
 
-      {/* ADDED DURATION PICKER */}
       <View style={styles.timeDateInputContainer}>
         <TextInput
           style={styles.timeDateInput}
@@ -173,6 +171,7 @@ const AddEventScreen = () => {
         placeholderTextColor="#757575"
         placeholder="Maximum Capacity"
         value={capacity}
+        keyboardType="numeric"
         onChangeText={setCapacity}
       />
 
@@ -200,7 +199,7 @@ const AddEventScreen = () => {
       <TouchableOpacity style={styles.button} onPress={handleAddEvent}>
         <Text style={styles.buttonText}>Add Event</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -214,7 +213,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    width: '100%',
+    width: '95%',
     marginVertical: 10,
     borderWidth: 1,
     borderRadius: 10,
@@ -226,11 +225,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
+    width: '95%',
   },
   timeDateInput: {
     height: 50,
-    width: '55%',
+    width: '53%',
     marginVertical: 10,
     borderWidth: 1,
     borderRadius: 10,
@@ -241,11 +240,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '44%'
+    width: '43%'
   },
   inputButton: {
     height: 40,
-    width: '100%',
+    width: '90%',
     marginLeft: 10,
     backgroundColor: '#BDBDBD',
     borderRadius: 10,
@@ -259,7 +258,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 15,
-    alignSelf: 'stretch'
+    width: '95%'
   },
   buttonText: {
     color: '#FFFFFF',

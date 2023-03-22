@@ -10,7 +10,7 @@ const BottomDrawer = ({ visible, onClose, children }) => {
             visible={visible}
             onRequestClose={onClose} >
             <View style={[styles.drawer, { height: windowHeight * 0.75 }]}>
-                <View style={{ flex: 0, width: '95%', justifyContent: 'space-between', flexDirection: 'row', padding:10 }}>
+                <View style={{ flex: 0, width: '95%', justifyContent: 'space-between', flexDirection: 'row', padding: 10 }}>
                     <TouchableOpacity onPress={onClose} style={styles.closeButton}>
                         <Text style={styles.closeText}>Close</Text>
                     </TouchableOpacity>

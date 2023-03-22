@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, FlatList, SafeAreaView, StyleSheet, Image, Alert } from "react-native";
+
+import { View, Text, Button, FlatList, SafeAreaView, StyleSheet, Image, Alert, ScrollView, TouchableOpacity } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/SignupService";
 import { deleteEvent } from "../services/EventService";
 import { getUserProfile } from "../services/UserService";
-import { Attendee } from "../components/Attendee";
-import EditEventScreen from "./EditEventScreen";
 
-function EventDetailsScreen() {
+import { Attendee } from "../components/Attendee";
+
+function EventDetailsScreen({ activeUser }) {
   const route = useRoute();
   const { event, city } = route.params;
   const [sign_ups, setSignups] = useState([]);
   const [availableSpaces, setAvailableSpaces] = useState(event ? event.capacity : 0);
-  const currentUser = sign_ups.find((signUp) => signUp.userProfile.id === 5); //HARD CODED
-  const isEventCreator = event?.creator.id === 5; //HARD CODED
+  const currentUser = sign_ups.find((signUp) => signUp.userProfile.id === activeUser.activeUser[0].id);
+  const isEventCreator = event.creator.id === activeUser.activeUser[0].id;
   const navigation = useNavigation()
   const Stack = createStackNavigator()
 
@@ -32,7 +33,7 @@ function EventDetailsScreen() {
 
   const handleSignUp = async () => {
     const signUp = {
-      userProfile: { id: 5 },   // HARD CODED
+      userProfile: { id: activeUser.activeUser[0].id },
       event: { id: event.id },
     };
     try {
@@ -50,7 +51,7 @@ function EventDetailsScreen() {
 
   const handleCancelAttendance = async () => {
     try {
-      const userProfile = await getUserProfile(5);  // HARD CODED
+      const userProfile = await getUserProfile(activeUser.activeUser[0].id); 
       const signUps = await getSignUpsByEventId(event.id);
       const signUp = signUps.find((signUp) => signUp.userProfile.id === userProfile.id);
       const response = await deleteSignUp(signUp.id);
@@ -88,7 +89,6 @@ function EventDetailsScreen() {
   const handleEditEvent = () => {
     navigation.navigate('Edit Event', { event, updateSignUps });
   };
-  
 
   const updateSignUps = async () => {
     const json = await getSignUpsByEventId(event.id);
@@ -96,54 +96,155 @@ function EventDetailsScreen() {
     setAvailableSpaces(event.capacity - json.length)
   };
 
+
+  const handleAttendeePress = (attendee) => {
+    navigation.navigate('Attendee Details',{attendee : attendee});
+  };
+
   return (
-    <>
-  <SafeAreaView>
-    <View>
-      <Text>Created By: {event?.creator.displayName}</Text>
-      <Image source={{uri: event?.creator.avatarUrl}}
-        style={{ width: 75, height: 75, borderRadius: 50, alignSelf: 'center' }} />
-      <Text>Event: {event?.title}</Text>
-      <Text>Date: {event?.date}</Text>
-      <Text>Time: {event?.time}</Text>
-      <Text>Duration: {event?.duration}</Text>
-      <Text>Description: {event?.description}</Text>
-      <Text>Location: {event?.location.name}, {event?.location.country.name}</Text>
-      <Text>Meet-up Point: {event?.meetingPoint}</Text>
-      <Text>Available Spaces: {event?.capacity - sign_ups.length}</Text>
-      {isEventCreator && (
-        <>
-          <Button title="Delete Event" onPress={handleDeleteEvent} />
-          <Button title="Edit Event" onPress={handleEditEvent} />
-        </>
-      )}
-      {!isEventCreator && currentUser ? (
-        <Button title="Cancel Attendance" onPress={handleCancelAttendance} />
-      ) : (
-        !isEventCreator && <Button title="Sign Up" onPress={handleSignUp} />
-      )}
-    </View>
-    <Text>Attendees: </Text>
-    <FlatList
-      data={sign_ups}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => <Attendee user={item.userProfile} />}
-    />
-  </SafeAreaView>
-  {/* <Stack.Navigator>
-    <Stack.Screen name="Edit Event" component={EditEventScreen} options={{ title: 'Edit Event', headerShown: false }} />
-  </Stack.Navigator> */}
-</>
 
+    <SafeAreaView>
+      <ScrollView>
+        <View>
+          <Image
+            source={{ uri: event.creator.avatarUrl }}
+            style={{
+              width: 80,
+              height: 80,
+              borderRadius: 50,
+              alignSelf: 'center',
+              marginTop: 20,
+            }}
+          />
+          <Text style={styles.createdBy}>
+            Created By: {event.creator.displayName}
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.eventDetailsContainer}>
+            <Text style={styles.eventTitle}>Event: {event?.title}</Text>
+            <View style={styles.eventDetails}>
+            <Text style={{fontSize: 16}}>Date: {event?.date}</Text>
+            <Text style={{fontSize: 16}}>Time: {event?.time}</Text>
+            <Text style={{fontSize: 16}}>Duration: {event?.duration}</Text>
+            <Text style={{fontSize: 16}}>Description: {event?.description}</Text>
+            <Text style={{fontSize: 16}}>Location: {event?.location.name}, {event.location.country.name}</Text>
+            <Text style={{fontSize: 16}}>Meet-up Point: {event?.meetingPoint}</Text>
+            <Text style={{fontSize: 16}}>Available Spaces: {event?.capacity - sign_ups.length}</Text>
+            </View>
+            <TouchableOpacity
+              style={styles.eventButton}
+              onPress={
+                isEventCreator
+                  ? handleDeleteEvent
+                  : currentUser
+                  ? handleCancelAttendance
+                  : handleSignUp
+              }>
+              <Text style={styles.eventButtonTitle}>
+                {isEventCreator
+                  ? 'Delete Event'
+                  : currentUser
+                  ? 'Cancel Attendance'
+                  : 'Sign Up'}
+              </Text>
+            </TouchableOpacity>
+            <Button title="Edit Event" onPress={handleEditEvent} />
+          </View>
+        </View>
+        <View style={styles.attendeesContainer}>
+        <Text style={styles.attendeesHeaderText}>Attendees:</Text>
+          {sign_ups.map((sign_up) => (
+            <TouchableOpacity onPress={() => handleAttendeePress(sign_up)} key={sign_up.id} style={styles.attendeeContainer}>
+              <Image
+                source={{ uri: sign_up.userProfile.avatarUrl }}
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: 25,
+                  marginLeft: 10,
+                }}
+              />
+
+              <Text style={styles.attendeeName}>{sign_up.userProfile.displayName}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
-
 }
-
+  
 const styles = StyleSheet.create({
-    avatar: {
-      width: 50,
-      height: 50
-    }
-  });
+  container: {
+    margin: 10,
+    marginTop: 20,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#002060'
+  },
+  createdBy: {   
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  eventDetailsContainer: {
+    marginLeft: 10,
+  },
+  eventTitle: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  eventDetails: {
+    marginVertical: 5,
+    fontSize: 12,
+  },
+  attendeesHeaderText: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginTop: 10,
+    marginBottom: 5,
+    marginLeft: 10,
+  },
+  attendeesContainer: {
+    marginTop: 10,
+    marginHorizontal: 10,
+    borderWidth: 1,
+    borderColor: '#002060',
+    borderRadius: 10,
+    padding: 10,
+  },
+  attendeeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  attendeeName: {
+    marginLeft: 12,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  eventButton: {
+    height: 30,
+    backgroundColor: '#254C94',
+    borderRadius: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-start',
+    marginTop: 10,
+    width: 200,
+  },
+  eventButtonTitle: {
+    color: 'white',
+    fontSize: 14,
+    paddingHorizontal: 5,
+    fontWeight: 'bold',
+  },
+});
 
 export default EventDetailsScreen;

@@ -20,26 +20,10 @@ const EditEventScreen = ({ route }) => {
     const [capacity, setCapacity] = useState(params.event.capacity);
     const [meetingPoint, setMeetingPoint] = useState(params.event.meetingPoint);
     const [description, setDescription] = useState(params.event.description);
-    // const [location, setLocation] = useState(params.event.location);
-    // const [countryName, setCountryName] = useState('');
-    // const [cityName, setCityName] = useState('');
     const [isCalendarSheetOpen, setIsCalendarSheetOpen] = useState(false)
     const [isStartTimeSheetOpen, setIsStartTimeSheetOpen] = useState(false)
     const [isDurationSheetOpen, setIsDurationSheetOpen] = useState(false)
     
-  
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //       setTitle(params.event.title);
-    //       setDate(params.event.date);
-    //       setTime(params.event.time);
-    //       setDuration(params.event.duration);
-    //       setCapacity(params.event.capacity);
-    //       setMeetingPoint(params.event.meetingPoint);
-    //       setDescription(params.event.description);
-    //     }, [event])
-    //   );
-
 
   const handleEditEvent = () => {
     if (!title || !date || !time|| !duration || !description || !capacity || !meetingPoint){
@@ -213,7 +197,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#002060',
+    backgroundColor: '#254C94',
   },
   input: {
     height: 50,
@@ -224,6 +208,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: '#BDBDBD',
     backgroundColor: 'white',
+    color: 'black',
   },
   timeDateInputContainer: {
     flexDirection: 'row',
@@ -240,6 +225,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: '#BDBDBD',
     backgroundColor: 'white',
+    color: 'black',
   },
   buttonContainer: {
     flexDirection: 'row',

@@ -12,15 +12,14 @@ import {
     updateUserProfileInterests
 } from "../services/UserService";
 import SelectDropdownWithSearch from 'react-native-select-dropdown-with-search';
-
 import { getCountries } from "../services/CountryService";
-import { getLocations } from "../services/LocationService";
+import { getLocations, getLocation } from "../services/LocationService";
 
 
 
 const placeholderImage = 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'
 
-const ProfileScreen = () => {
+const ProfileScreen = (props) => {
     const [user, setUser] = useState();
     const [profile, setProfile] = useState([]);
     const [newName, setNewName] = useState("")
@@ -38,28 +37,39 @@ const ProfileScreen = () => {
     const [editingLocation, setEditingLocation] = useState(false);
     const [editingInterests, setEditingInterests] = useState(false)
     const [isSavingHomeTown, setIsSavingHomeTown] = useState(false);
-
     const [items, setItems] = useState([
-        {label: 'Egypt', value: 'egypt'},
-        {label: 'Scotland', value: 'scotland'}
+        { label: 'Egypt', value: 'egypt' },
+        { label: 'Scotland', value: 'scotland' }
     ]);
+    const [itemsLocations, setItemsLocations] = useState({});
 
     useEffect(() => {
         getCountries()
-        .then(data => { 
-            setItems( data.map(x =>  x.name));
-        })
+            .then(data => {
+                setItems(data.map(x => x.name));
+            })
     }, [])
 
 
     useEffect(() => {
-        getUserProfile(5)
+        getLocations()
+            .then((data) => {
+                setItemsLocations(data);
+            })
+            .catch((error) => console.log(error));
+        }, []);
+
+    const activeUser = props.activeUser[0];
+
+
+    useEffect(() => {
+        getUserProfile(activeUser.id)
             .then(data => {
-                console.log(data)
                 setProfile(data);
             })
             .catch(error => console.log(error))
-    }, []);
+    }, [activeUser.id]);
+
 
     const handleUpdateName = async () => {
         const res = await updateUserProfileName(profile.id, newName);
@@ -80,12 +90,9 @@ const ProfileScreen = () => {
     };
 
     const handleUpdateNationality = async () => {
-        const res = await updateUserProfileNationality(
-            profile.id,
-            value
-        );
+        const res = await updateUserProfileNationality(profile.id, newNationality); // needs to have new Nationaility 
         if (res) {
-            setProfile({ ...profile, nationality: value });
+            setProfile({ ...profile, nationality: newNationality });
             setNewNationality("");
             setEditingNationality(false)
         }
@@ -119,10 +126,9 @@ const ProfileScreen = () => {
 
     const handleUpdateLocation = async () => {
         try {
-            const updatedLocation = { ...profile.location, name: newLocation };
-            const res = await updateUserProfileLocation(profile.id, updatedLocation);
+            const res = await updateUserProfileLocation(profile.id, newLocation.id);
             if (res) {
-                setProfile({ ...profile, location: updatedLocation });
+                setProfile({ ...profile, location: newLocation });
                 setNewLocation("");
                 setEditingLocation(false);
             }
@@ -131,177 +137,159 @@ const ProfileScreen = () => {
         }
     };
 
-
     return (
+        <SafeAreaView>
         <ScrollView>
         <View style={styles.container}>
             <Image
                 source={{ uri: profile?.avatarUrl ? profile.avatarUrl : placeholderImage }}
-                style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center' }}
+                style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center', marginTop:10 }}
             />
             <View style={styles.profileInfo}>
                 <View style={styles.row}>
                 </View>
-            </View>
-            <View style={styles.profileInfo}>
-                <View style={styles.row}>
-                    {editingName ? (
-                        <>
-                            <TextInput
-                                style={styles.input}
-                                value={newName}
-                                onChangeText={(text) => setNewName(text)}
-                            />
-                            <Button
-                                title="Save"
-                                onPress={handleUpdateName}
-                                style={styles.button}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <Text style={styles.title}>{profile.displayName}</Text>
-                            <Button
-                                title="Edit"
-                                onPress={() => setIsEditingName(true)}
-                                style={styles.button}
-                            />
-                        </>
-                    )}
+                <View style={styles.profileInfo}>
+                    <Text style={styles.title}>{profile.displayName}</Text>
                 </View>
-            </View>
-            <View style={styles.profileInfo}>
-                <Text style={styles.label}>Home town:</Text>
-                <View style={styles.row}>
-                    {isEditingHomeTown ? (
-                        <>
-                            <TextInput
-                                style={styles.input}
-                                value={newHomeTown}
-                                onChangeText={(text) => setNewHomeTown(text)}
-                            />
-                            <Button
-                                title="Save"
-                                onPress={handleUpdateHomeTown}
-                                style={styles.button}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <Text style={styles.text}>{profile.homeTown}</Text>
-                            <Button
-                                title="Edit"
-                                onPress={() => setIsEditingHomeTown(true)}
-                                style={styles.button}
-                            />
-                        </>
-                    )}
-                </View>
-            </View>
-            <View style={styles.profileInfo}>
-                <Text style={styles.label}>Nationality:</Text>
-                <View style={styles.row}>
-                    {editingNationality ? (
-                        <>
-                        <SelectDropdownWithSearch
-                        data={items}
-                        onSelect={(selectedItem, index) => {
-                            console.log(selectedItem, index)
-                        }}
-                        buttonTextAfterSelection={(selectedItem, index) => {
-                            // text represented after item is selected
-                            // if data array is an array of objects then return selectedItem.property to render after item is selected
-                            return selectedItem
-                        }}
-                        rowTextForSelection={(item, index) => {
-                            // text represented for each item in dropdown
-                            // if data array is an array of objects then return item.property to represent item in dropdown
-                            return item
-                        }}
-                    />
-                    <Button
-                                title="Save"
-                                onPress={handleUpdateNationality}
-                                style={styles.button}
-                            />
+                <View style={styles.profileInfo}>
+                    <Text style={styles.label}>Home town:</Text>
+                    <View style={styles.row}>
+                        {isEditingHomeTown ? (
+                            <>
+                                <TextInput
+                                    style={styles.input}
+                                    value={newHomeTown}
+                                    onChangeText={(text) => setNewHomeTown(text)}
+                                />
+                                <Button
+                                    title="Save"
+                                    onPress={handleUpdateHomeTown}
+                                    style={styles.button}
+                                />
                             </>
-                    ) : (
-                        <>
-                            <Text style={styles.text}>{profile.nationality}</Text>
-                            <Button
-                                title="Edit"
-                                onPress={() => setEditingNationality(true)}
-                                style={styles.button}
-                            />
-                        </>
-                    )}
+                        ) : (
+                            <>
+                                <Text style={styles.text}>{profile.homeTown}</Text>
+                                <Button
+    title="Edit"
+    onPress={() => setIsEditingHomeTown(true)}
+    style={styles.button}
+    titleStyle={styles.buttonTitle}
+/>
+                            </>
+                        )}
+                    </View>
                 </View>
-            </View>
-            <View style={styles.profileInfo}>
-                <Text style={styles.label}>Age:</Text>
-                <View style={styles.row}>
-                    {editingAge ? (
-                        <>
-                            <TextInput
-                                style={styles.input}
-                                value={newAge}
-                                onChangeText={(text) => setNewAge(text)}
-                            />
-                            <Button
-                                title="Save"
-                                onPress={handleUpdateAge}
-                                style={styles.button}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <Text style={styles.text}>{profile.age}</Text>
-                            <Button
-                                title="Edit"
-                                onPress={() => setEditingAge(true)}
-                                style={styles.button}
-                            />
-                        </>
-                    )}
+                <View style={styles.profileInfo}>
+                    <Text style={styles.label}>Nationality:</Text>
+                    <View style={styles.row}>
+                        {editingNationality ? (
+                            <>
+                                <SelectDropdownWithSearch
+                                    data={items}
+                                    onSelect={(selectedNationality) => {
+                                        setNewNationality(selectedNationality)
+                                    }}
+                                    buttonTextAfterSelection={(selectedItem) => {
+                                        return selectedItem
+                                    }}
+                                    rowTextForSelection={(item) => {
+                                        return item
+                                    }}
+                                />
+                                <Button
+                                    title="Save"
+                                    onPress={handleUpdateNationality}
+                                    style={styles.button}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <Text style={styles.text}>{profile.nationality}</Text>
+                                <Button
+                                    title="Edit"
+                                    onPress={() => setEditingNationality(true)}
+                                    style={styles.button}
+                                />
+                            </>
+                        )}
+                    </View>
                 </View>
-            </View>
-            <View style={styles.profileInfo}>
-                <Text style={styles.label}>Interests:</Text>
-                <View style={styles.row}>
-                    {editingInterests ? (
-                        <>
-                            <TextInput
-                                style={styles.input}
-                                value={newInterests}
-                                onChangeText={(text) => setNewInterests(text)}
-                            />
-                            <Button
-                                title="Save"
-                                onPress={handleUpdateUserInterests}
-                                style={styles.button}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <Text style={styles.text}>{profile.interests}</Text>
-                            <Button
-                                title="Edit"
-                                onPress={() => setEditingInterests(true)}
-                                style={styles.button}
-                            />
-                        </>
-                    )}
+                <View style={styles.profileInfo}>
+                    <Text style={styles.label}>Age:</Text>
+                    <View style={styles.row}>
+                        {editingAge ? (
+                            <>
+                                <TextInput
+                                    style={styles.input}
+                                    value={newAge}
+                                    keyboardType="numeric"
+                                    onChangeText={(text) => setNewAge(text)}
+                                />
+                                <Button
+                                    title="Save"
+                                    onPress={handleUpdateAge}
+                                    style={styles.button}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <Text style={styles.text}>{profile.age}</Text>
+                                <Button
+                                    title="Edit"
+                                    onPress={() => setEditingAge(true)}
+                                    style={styles.button}
+                                />
+                            </>
+                        )}
+                    </View>
                 </View>
+                <View style={styles.profileInfo}>
+                    <Text style={styles.label}>Interests:</Text>
+                    <View style={styles.row}>
+                        {editingInterests ? (
+                            <>
+                                <TextInput
+                                    style={styles.input}
+                                    value={newInterests}
+                                    onChangeText={(text) => setNewInterests(text)}
+                                />
+                                <Button
+                                    title="Save"
+                                    onPress={handleUpdateUserInterests}
+                                    style={styles.button}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <Text style={styles.text}>{profile.interests}</Text>
+                                <Button
+                                    title="Edit"
+                                    onPress={() => setEditingInterests(true)}
+                                    style={styles.button}
+                                />
+                            </>
+                        )}
+                    </View>
+                </View>
+
             </View>
             <View style={styles.profileInfo}>
                 <Text style={styles.label}>Location:</Text>
                 <View style={styles.row}>
                     {editingLocation ? (
                         <>
-                            <TextInput
-                                style={styles.input}
-                                value={newLocation}
-                                onChangeText={(text) => setNewLocation(text)}
+                            <SelectDropdownWithSearch
+                            data={itemsLocations}
+                            onSelect={(selectedLocation) => {
+                                setNewLocation(selectedLocation)
+                            }}
+                            buttonTextAfterSelection={(selectedItem) => {
+                                return selectedItem.name
+                            }}
+                            rowTextForSelection={(item) => {
+                                return item.name
+                            }}
                             />
                             <Button
                                 title="Save"
@@ -327,8 +315,10 @@ const ProfileScreen = () => {
                     )}
                 </View>
             </View>
+
         </View>
         </ScrollView>
+        </SafeAreaView>
 
     );
 }
@@ -344,11 +334,14 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
+        marginTop: 10,
         marginBottom: 20,
     },
     profileInfo: {
         flexDirection: 'column',
         marginBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
     },
     label: {
         fontWeight: 'bold',
@@ -372,6 +365,16 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         padding: 10,
         borderRadius: 5,
+    },
+    button: {
+        backgroundColor: '#FF9900',
+        color: '#FFFFFF',
+        padding: 10,
+        borderRadius: 5,
+    },
+    buttonTitle: {
+        height: 40,
+        paddingVertical: 10,
     },
     userContainer: {
         flex: 1,
