@@ -5,7 +5,10 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { getLocations } from "../services/LocationService"
 import CityDetailsScreen from "./CityDetailsScreen"
 import EventDetailsScreen from "./EventDetailsScreen"
+
+import EditEventScreen from "./EditEventScreen";
 import AddEventScreen from "./AddEventScreen"
+
 import Header from "../components/Header"
 import AttendeeDetailsScreen from "./AttendeeDetailsScreen"
 import SingleUserDetailScreen from "./SingleUserDetailScreen" 
@@ -91,6 +94,11 @@ const HomeScreen = (activeUser) => {
         children={() => <SingleUserDetailScreen activeUser={activeUser}/>}
         options={{ title: 'Add Event', headerShown: false }}
       />
+       <Stack.Screen 
+       name="Edit Event" 
+       children={() => <EditEventScreen activeUser={activeUser}/>}
+       options={{ title: 'Edit Event', headerShown: false }} />
+
     </Stack.Navigator>
 
   );
