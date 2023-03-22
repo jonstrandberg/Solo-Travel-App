@@ -144,10 +144,10 @@ public class DataLoader implements ApplicationRunner {
         UserProfile user2 = new UserProfile("Ben Barlow", "https://ca.slack-edge.com/T0TN401HD-U049AJUBB34-93680e4cc47f-512", "Paisley, Scotland", "Scotland", 39, munich, "Pizza, Football, Darwin Nunez", "2si5bEZ02pTJtK72rRTlI0UqQtw2");
         userProfileRepository.save(user2);
 
-        UserProfile user3 = new UserProfile("Maggie Amin", "https://ca.slack-edge.com/T0TN401HD-U049P8B5HU1-5520e1f8828b-512", "Cairo, Egypt", "Egypt", 28, edinburgh, "Puppies, Long walks on the beach, Architecture", "sTVxexzZ6hhytl8tPWHF5H2k46n2");
+        UserProfile user3 = new UserProfile("Maggie Amin", "https://ca.slack-edge.com/T0TN401HD-U049P8B5HU1-5520e1f8828b-512", "Cairo, Egypt", "Egypt", 28, berlin, "Puppies, Long walks on the beach, Architecture", "sTVxexzZ6hhytl8tPWHF5H2k46n2");
         userProfileRepository.save(user3);
 
-        UserProfile user4 = new UserProfile("Gareth Evans", "https://ca.slack-edge.com/T0TN401HD-U049D2VFCJY-a61e16c3db6f-512", "Lossiemouth, Scotland", "Scotland", 30, berlin, "Football, Sobriety, Puns", "rthjt");
+        UserProfile user4 = new UserProfile("Gareth Evans", "https://ca.slack-edge.com/T0TN401HD-U049D2VFCJY-a61e16c3db6f-512", "Lossiemouth, Scotland", "Scotland", 30, edinburgh, "Football, Sobriety, Puns", "rthjt");
         userProfileRepository.save(user4);
 
         UserProfile user5 = new UserProfile("The Almighty Creator", "https://xsgames.co/randomusers/assets/avatars/male/5.jpg", "Heaven", "Godly", 30, null, "Church, Resurrection, Smiting", "Wkdd3oJeZlWMA8xktKyszQgnB4g1");
@@ -216,7 +216,7 @@ public class DataLoader implements ApplicationRunner {
         UserProfile user26 = new UserProfile("Amina Kadirov", "https://xsgames.co/randomusers/assets/avatars/female/19.jpg", "Baku, Azerbaijan", "Azerbaijan", 29, lisbon, "Cooking, Traveling, Art", "amnkdrv2");
         userProfileRepository.save(user26);
 
-        UserProfile user27 = new UserProfile("Janek Novak", "https://xsgames.co/randomusers/assets/avatars/male/23.jpg", "Prague, Czech Republic", "Czech Republic", 30, porto, "Beer, Football, History", "jnnvk7");
+        UserProfile user27 = new UserProfile("Janek Novak", "https://xsgames.co/randomusers/assets/avatars/male/29.jpg", "Prague, Czech Republic", "Czech Republic", 30, porto, "Beer, Football, History", "jnnvk7");
         userProfileRepository.save(user27);
 
         UserProfile user28 = new UserProfile("Karolina Szewczyk", "https://xsgames.co/randomusers/assets/avatars/female/8.jpg", "Warsaw, Poland", "Poland", 27, porto, "Art, Fashion, Literature", "krlszw3");
