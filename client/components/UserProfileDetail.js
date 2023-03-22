@@ -14,10 +14,12 @@ const UserProfileDetail = (props) => {
             <Text style={styles.titleText}>{user.displayName}</Text>
             <Text style={styles.locationText}>Current Location: {user.location.name}</Text>
 
-            <Text style={styles.detailsText}>Home Town: {user.homeTown}</Text>
-            <Text style={styles.detailsText}>Nationality: {user.nationaliy}</Text>
-            <Text style={styles.detailsText}>Age: {user.age}</Text>
-            <Text style={styles.detailsText}>Interests {user.interests}</Text>
+            <View style={styles.detailsContainer}>
+                <Text style={styles.detailsText}>Hometown: {user.homeTown}</Text>
+                <Text style={styles.detailsText}>Nationality: {user.nationality}</Text>
+                <Text style={styles.detailsText}>Age: {user.age}</Text>
+                <Text style={styles.detailsText}>Interests: {user.interests}</Text>
+            </View>
         </View>
     )
 }
@@ -29,21 +31,38 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 30,
     },
     titleText: {
         marginTop: 10,
         fontSize: 30,
-        fontWeight: 700
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
     locationText: {
         marginTop: 10,
         fontSize: 20,
-        fontWeight: 500
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    detailsContainer: {
+        marginTop: 20,
+        alignItems: 'flex-start',
+        marginLeft: 10
     },
     detailsText: {
         marginTop: 10,
-        fontSize: 15
+        marginBottom: 6,
+        fontSize: 15,
+        textAlign: 'left'
+    },
+    boldDetailsText: {
+        marginTop: 10,
+        marginBottom: 6,
+        fontSize: 15,
+        fontWeight: 'bold',
+        textAlign: 'left'
     },
     button: {
         alignItems: 'center',
@@ -62,4 +81,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-})
+});
+
+
+
+
