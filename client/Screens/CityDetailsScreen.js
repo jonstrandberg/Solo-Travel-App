@@ -11,7 +11,7 @@ import UsersList from '../components/UsersList';
 
 const CityDetailsScreen = () => {
   const [city, setCity] = useState({ name: '', country: { name: '' } })
-  const [event, setEvent] = useState([])
+  const [events, setEvents] = useState([])
   const [usersInCity, setUsersInCity] = useState([])
   const [isCurrentUsersOpen, setIsCurrentUsersOpen] = useState(false)
 
@@ -31,7 +31,7 @@ const CityDetailsScreen = () => {
     React.useCallback(() => {
       getEventsByLocationId(cityId)
         .then(json => {
-          setEvent(json);
+          setEvents(json);
         });
     }, [navigation, cityId])
   );
@@ -56,6 +56,14 @@ const CityDetailsScreen = () => {
     setIsCurrentUsersOpen(false)
   }
 
+  const eventsList = events.map((event) => {
+    return <View style={styles.buttonContainer}>
+      <TouchableOpacity onPress={() => handleEventPress(event)} style={styles.eventButton}>
+        <Text style={styles.eventTitle}>{event.title}</Text>
+      </TouchableOpacity>
+    </View>
+  })
+
   return (
     <ScrollView>
       <View style={styles.header}>
@@ -66,21 +74,10 @@ const CityDetailsScreen = () => {
         <Text style={styles.buttonText}>Who's here!</Text>
       </TouchableOpacity>
       <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
-        <UsersList users={usersInCity}/>
+        <UsersList users={usersInCity} />
       </BottomDrawer>
-  
       <Text style={styles.eventsHeader}>Events</Text>
-      <FlatList
-        data={event}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
-              <Text style={styles.eventTitle}>{item.title}</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+      {eventsList}
       <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
         <Text style={styles.buttonText}>Add Event</Text>
       </TouchableOpacity>
