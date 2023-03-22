@@ -9,7 +9,7 @@ const singleUserDetailScreen = () => {
     navigation=useNavigation()
 
     const handleGoBackPress = () => {
-        navigation.navigate('Explore Cities');
+        navigation.goBack();
     }
 
     return (

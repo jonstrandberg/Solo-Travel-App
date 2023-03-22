@@ -9,6 +9,25 @@ const UsersList = ( props ) => {
       navigation.navigate('Single User Detail', {user: user})
     }
 
+    const userList = users.map((user) =>{
+
+      return <TouchableOpacity onPress={() => handleOnUserPress(user)} key={user.id} style={styles.attendeeContainer}>
+                            <Image
+                                source={{ uri: user.avatarUrl }}
+                                style={{
+                                    width: 50,
+                                    height: 50,
+                                    borderRadius: 25,
+                                    marginLeft: 10,
+                                }}
+                            />
+
+                            <Text style={styles.attendeeName}>{user.displayName}</Text>
+                        </TouchableOpacity>
+    })
+
+
+
     return (
         <View>
             <FlatList
@@ -32,7 +51,6 @@ const UsersList = ( props ) => {
                     </View>
                 )}
             />
-
         </View>
     )
 }
