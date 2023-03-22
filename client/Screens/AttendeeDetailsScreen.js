@@ -1,6 +1,5 @@
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react"
-import { Image, View, Text, StyleSheet, Button, SafeAreaView, TouchableOpacity } from "react-native";
+import { Image, View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import UserProfileDetail from "../components/UserProfileDetails";
 
 export const AttendeeDetailsScreen = () => {
@@ -18,19 +17,8 @@ export const AttendeeDetailsScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Attendee:</Text>
-            {/* <Image
-                source={{ uri: attendee.userProfile?.avatarUrl ? attendee.userProfile.avatarUrl : placeholderImage }}
-                style={{ width: 100, height: 100, borderRadius: 50 }}
-            />
-            <Text style={styles.titleText}>{ attendee.userProfile.displayName}</Text>
-            <Text style={styles.locationText}>Current Location: { attendee.userProfile.location.name}</Text>
-            
-            <Text style={styles.detailsText}>Home Town: { attendee.userProfile.homeTown}</Text>
-            <Text style={styles.detailsText}>Nationality: { attendee.userProfile.nationaliy}</Text>
-            <Text style={styles.detailsText}>Age: { attendee.userProfile.age}</Text>
-            <Text style={styles.detailsText}>Interests { attendee.userProfile.interests}</Text> */}
-            <View>{UserProfileDetail}</View>
+            <Text style={styles.titleText}>Attendee:</Text>
+            <UserProfileDetail user={attendee} />
 
             <TouchableOpacity onPress={() => handleGoBackPress()} style={styles.button}>
                 <Text style={styles.buttonText}>Back to Event</Text>
