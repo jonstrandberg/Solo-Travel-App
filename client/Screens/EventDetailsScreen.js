@@ -90,8 +90,8 @@ function EventDetailsScreen({ activeUser }) {
   };
 
 
-  const handleAttendeePress = (attendee) => {
-    navigation.navigate('Attendee Details',{attendee : attendee});
+  const handleAttendeePress = (user) => {
+    navigation.navigate('Attendee Details',{user : user});
   };
 
   return (

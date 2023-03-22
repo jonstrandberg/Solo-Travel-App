@@ -2,9 +2,10 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import { Image, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import GeneralUserProfileDetail from "../components/GeneralUserProfileDetail";
 
+
 export const AttendeeDetailsScreen = () => {
     const route = useRoute();
-    const { attendee, city } = route.params;
+    const { user, city } = route.params;
     const navigation = useNavigation();
 
     const handleGoBackPress = () => {
@@ -15,7 +16,7 @@ export const AttendeeDetailsScreen = () => {
         <ScrollView >
                 <View style={styles.container}>
                 <Text style={styles.titleText}>Attendee:</Text>
-                <GeneralUserProfileDetail user={attendee} />
+                <GeneralUserProfileDetail user={user} />
                 <TouchableOpacity onPress={() => handleGoBackPress()} style={styles.button}>
                     <Text style={styles.buttonText}>Back to Event</Text>
                 </TouchableOpacity>
