@@ -22,17 +22,12 @@ const Navigator = () => {
                 const user = auth.currentUser
                 const userProfile = await getUserProfileByFirebaseId(user.uid);
                 setActiveUser(userProfile);
-                console.log ('current user:', user)
-                console.log('user profile:', userProfile)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         }
         fetchData();
     }, []);
-
-    console.log('activeUser in index:', activeUser);
-
 
     return (
 

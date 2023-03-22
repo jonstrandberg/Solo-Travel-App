@@ -22,6 +22,7 @@ public class LocationController {
     @GetMapping(value = "/locations")
     public ResponseEntity<List<Location>> getAllLocations(
             @RequestParam(name = "country_id", required = false) Long countryId
+
     ){
         if (countryId != null){
             return new ResponseEntity<>(locationRepository.findByCountryId(countryId), HttpStatus.OK);
@@ -33,5 +34,9 @@ public class LocationController {
     @GetMapping(value = "/locations/{id}")
     public ResponseEntity getLocation(@PathVariable Long id){
         return new ResponseEntity<>(locationRepository.findById(id), HttpStatus.OK);
+    }
+
+    public ResponseEntity getLocations(@PathVariable String name) {
+        return new ResponseEntity<>(locationRepository.findByName(name), HttpStatus.OK);
     }
 }

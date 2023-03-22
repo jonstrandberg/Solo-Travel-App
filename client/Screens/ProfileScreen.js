@@ -13,7 +13,7 @@ import {
 } from "../services/UserService";
 import SelectDropdownWithSearch from 'react-native-select-dropdown-with-search';
 import { getCountries } from "../services/CountryService";
-import { getLocations } from "../services/LocationService";
+import { getLocations, getLocation } from "../services/LocationService";
 
 
 
@@ -37,11 +37,11 @@ const ProfileScreen = (props) => {
     const [editingLocation, setEditingLocation] = useState(false);
     const [editingInterests, setEditingInterests] = useState(false)
     const [isSavingHomeTown, setIsSavingHomeTown] = useState(false);
-
     const [items, setItems] = useState([
         { label: 'Egypt', value: 'egypt' },
         { label: 'Scotland', value: 'scotland' }
     ]);
+    const [itemsLocations, setItemsLocations] = useState({});
 
     useEffect(() => {
         getCountries()
@@ -50,7 +50,17 @@ const ProfileScreen = (props) => {
             })
     }, [])
 
+
+    useEffect(() => {
+        getLocations()
+            .then((data) => {
+                setItemsLocations(data);
+            })
+            .catch((error) => console.log(error));
+        }, []);
+
     const activeUser = props.activeUser[0];
+
 
     useEffect(() => {
         getUserProfile(activeUser.id)
@@ -116,10 +126,9 @@ const ProfileScreen = (props) => {
 
     const handleUpdateLocation = async () => {
         try {
-            const updatedLocation = { ...profile.location, name: newLocation };
-            const res = await updateUserProfileLocation(profile.id, updatedLocation);
+            const res = await updateUserProfileLocation(profile.id, newLocation.id);
             if (res) {
-                setProfile({ ...profile, location: updatedLocation });
+                setProfile({ ...profile, location: newLocation });
                 setNewLocation("");
                 setEditingLocation(false);
             }
@@ -128,18 +137,18 @@ const ProfileScreen = (props) => {
         }
     };
 
-
     return (
 
-        <SafeAreaView style={styles.container}>
-            <ScrollView>
-                <Image
-                    source={{ uri: profile?.avatarUrl ? profile.avatarUrl : placeholderImage }}
-                    style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center', marginTop: 10 }}
-                />
-                <View style={styles.profileInfo}>
-                    <View style={styles.row}>
-                    </View>
+
+        <SafeAreaView>
+        <ScrollView>
+        <View style={styles.container}>
+            <Image
+                source={{ uri: profile?.avatarUrl ? profile.avatarUrl : placeholderImage }}
+                style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center', marginTop:10 }}
+            />
+            <View style={styles.profileInfo}>
+                <View style={styles.row}>
                 </View>
                 <View style={styles.profileInfo}>
                     <Text style={styles.title}>{profile.displayName}</Text>
@@ -265,41 +274,52 @@ const ProfileScreen = (props) => {
                         )}
                     </View>
                 </View>
-                <View style={styles.profileInfo}>
-                    <Text style={styles.label}>Location:</Text>
-                    <View style={styles.row}>
-                        {editingLocation ? (
-                            <>
-                                <TextInput
-                                    style={styles.input}
-                                    value={newLocation}
-                                    onChangeText={(text) => setNewLocation(text)}
-                                />
-                                <Button
-                                    title="Save"
-                                    onPress={handleUpdateLocation}
-                                    style={styles.button}
-                                />
-                            </>
-                        ) : (
-                            <>
-                                {profile.location && profile.location.name ? (
-                                    <Text style={{ marginRight: 10 }}>
-                                        {profile.location.name}
-                                    </Text>
-                                ) : (
-                                    <Text style={{ marginRight: 10 }}>N/A</Text>
-                                )}
-                                <Button
-                                    title="Edit"
-                                    onPress={() => setEditingLocation(true)}
-                                    style={styles.button}
-                                />
-                            </>
-                        )}
-                    </View>
+
+            </View>
+            <View style={styles.profileInfo}>
+                <Text style={styles.label}>Location:</Text>
+                <View style={styles.row}>
+                    {editingLocation ? (
+                        <>
+                            <SelectDropdownWithSearch
+                            data={itemsLocations}
+                            onSelect={(selectedLocation) => {
+                                setNewLocation(selectedLocation)
+                            }}
+                            buttonTextAfterSelection={(selectedItem) => {
+                                return selectedItem.name
+                            }}
+                            rowTextForSelection={(item) => {
+                                return item.name
+                            }}
+                            />
+                            <Button
+                                title="Save"
+                                onPress={handleUpdateLocation}
+                                style={styles.button}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            {profile.location && profile.location.name ? (
+                                <Text style={{ marginRight: 10 }}>
+                                    {profile.location.name}
+                                </Text>
+                            ) : (
+                                <Text style={{ marginRight: 10 }}>N/A</Text>
+                            )}
+                            <Button
+                                title="Edit"
+                                onPress={() => setEditingLocation(true)}
+                                style={styles.button}
+                            />
+                        </>
+                    )}
                 </View>
-            </ScrollView>
+            </View>
+
+        </View>
+        </ScrollView>
         </SafeAreaView>
 
     );

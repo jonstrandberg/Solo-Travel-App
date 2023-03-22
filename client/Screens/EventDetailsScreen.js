@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, TouchableOpacity, SafeAreaView, StyleSheet, Image, Alert, ScrollView } from "react-native";
+
+import { View, Text, Button, FlatList, SafeAreaView, StyleSheet, Image, Alert, ScrollView, TouchableOpacity } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/SignupService";
 import { deleteEvent } from "../services/EventService";
 import { getUserProfile } from "../services/UserService";
-import { Attendee } from "../components/Attendee";
 
 function EventDetailsScreen({ activeUser }) {
   const route = useRoute();
@@ -82,13 +82,17 @@ function EventDetailsScreen({ activeUser }) {
         { cancelable: false }
     );
   }
-  
+
   const updateSignUps = async () => {
     const json = await getSignUpsByEventId(event.id);
     setSignups(json);
     setAvailableSpaces(event.capacity - json.length)
   };
 
+
+  const handleAttendeePress = (attendee) => {
+    navigation.navigate('Attendee Details',{attendee : attendee});
+  };
 
   return (
     <SafeAreaView>
@@ -142,7 +146,7 @@ function EventDetailsScreen({ activeUser }) {
         <View style={styles.attendeesContainer}>
         <Text style={styles.attendeesHeaderText}>Attendees:</Text>
           {sign_ups.map((sign_up) => (
-            <View key={sign_up.id} style={styles.attendeeContainer}>
+            <TouchableOpacity onPress={() => handleAttendeePress(sign_up)} key={sign_up.id} style={styles.attendeeContainer}>
               <Image
                 source={{ uri: sign_up.userProfile.avatarUrl }}
                 style={{
@@ -152,10 +156,9 @@ function EventDetailsScreen({ activeUser }) {
                   marginLeft: 10,
                 }}
               />
-              <Text style={styles.attendeeName}>
-                {sign_up.userProfile.displayName}
-              </Text>
-            </View>
+
+              <Text style={styles.attendeeName}>{sign_up.userProfile.displayName}</Text>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>

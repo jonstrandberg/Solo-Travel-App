@@ -2,6 +2,7 @@ package com.codeclan.example.project_test.controllers;
 
 import com.codeclan.example.project_test.models.Location;
 import com.codeclan.example.project_test.models.UserProfile;
+import com.codeclan.example.project_test.repositories.LocationRepository;
 import com.codeclan.example.project_test.repositories.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableMBeanExport;
@@ -19,6 +20,9 @@ public class UserProfileController {
 
     @Autowired
     UserProfileRepository userProfileRepository;
+
+    @Autowired
+    LocationRepository locationRepository;
 
     //  Get all UserProfiles
     @GetMapping(value = "/user_profiles")
@@ -172,13 +176,15 @@ public class UserProfileController {
     @PutMapping("/user_profiles/{id}/set_location")
     public ResponseEntity<UserProfile> setUserProfileLocation(
             @PathVariable long id,
-            @RequestBody HashMap<String, Location> location) {
+            @RequestBody HashMap<String, Long> bodyParameters) {
 
         UserProfile updatedUserProfile = userProfileRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("user profile not found: " + id));
 
-        updatedUserProfile.setLocation(location.get("new"));
+        Long locationId = bodyParameters.get("new");
+        Location newLocation = locationRepository.findById(locationId).orElseThrow(RuntimeException::new);
+        updatedUserProfile.setLocation(newLocation);
 
         userProfileRepository.save(updatedUserProfile);
 
