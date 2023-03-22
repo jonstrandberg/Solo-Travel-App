@@ -1,30 +1,35 @@
-import { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getEventsByLocationId } from "../services/EventService";
-import AddEventScreen from './AddEventScreen';
+import { getLocation } from '../services/LocationService'
 
-const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
-
-const Stack = createStackNavigator()
+const placeholderCityImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
 
 
-function CityDetailsScreen({ navigation }) {
-
-  const route = useRoute();
-  const { city } = route.params;
-
+const CityDetailsScreen = () => {
+  const [city, setCity] = useState({name: '', country: {name: ''}})
   const [event, setEvent] = useState([])
 
+  const navigation = useNavigation();
+
+  const route = useRoute();
+  const cityId = route.params.cityId;
+
   useEffect(() => {
-    getEventsByLocationId(city.id)
+    getLocation(cityId)
+    .then(json => setCity(json))
+  }, [])
+
+useFocusEffect(
+  React.useCallback(() => {
+    getEventsByLocationId(cityId)
       .then(json => {
-        setEvent(json)
-      })
-  }, [event])
-
-
+        setEvent(json);
+      });
+  }, [navigation, cityId])
+);
 
   const handleEventPress = (event) => {
     navigation.navigate('Event Details', { event: event, city: city });
@@ -33,59 +38,73 @@ function CityDetailsScreen({ navigation }) {
   const handleAddEventPress = () => {
     navigation.navigate('Add Event', { cityId: city.id });
   };
-  
+
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Single City Details"
-      options={{ headerShown: false }}>
-        {() => (
-          <View style={styles.container}>
-            <Text style={styles.cityName}>City name: {city.name}</Text>
-            <Text style={styles.country}>Country: {city.country.name}</Text>
-            <Image source={{uri: city?.imageUrl ? city.imageUrl : placeholderCitiyImage}} resizeMode="contain" style={styles.imageUrl}></Image>
-            <Text>Events:</Text>
-            <FlatList
-              data={event}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => handleEventPress(item)}>
-                  <Text>{item.title}</Text>
-                </TouchableOpacity>)} />
-            <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
-              <Text style={styles.buttonText}>Add Event</Text>
-            </TouchableOpacity>
-          </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
+      </View>
+      <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl}></Image>
+      <Text style={styles.eventsHeader}>Events</Text>
+      <FlatList
+        data={event}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+<View style={styles.buttonContainer}>
+  <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
+    <Text style={styles.eventTitle}>{item.title}</Text>
+  </TouchableOpacity>
+</View>
+
         )}
-      </Stack.Screen>
-      <Stack.Screen name="Add Event" component={AddEventScreen} options={{ title: 'Add Event', headerShown: false }} />
-    </Stack.Navigator>
-  );
+      />
+      <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
+        <Text style={styles.buttonText}>Add Event</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', 
     alignItems: 'center',
     backgroundColor: '#fff',
-    paddingHorizontal: 20,
+    paddingTop: 40,
   },
-  cityName: {
-    fontSize: 24,
+  header: {
+    backgroundColor: '#0B909B',
+    width: '100%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  headerText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 22,
     fontWeight: 'bold',
-    marginVertical: 20,
+    zIndex: 1,
   },
   country: {
     fontSize: 20,
     marginVertical: 10,
   },
+  eventsHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#254C94',
+  },
   button: {
     backgroundColor: '#254C94',
-    paddingVertical: 10,
+    paddingVertical: 6,
     paddingHorizontal: 20,
-    borderRadius: 20,
+    borderRadius: 10,
+
     marginTop: 20,
-    marginBottom: 10,
+    marginBottom: 30,
   },
   buttonText: {
     color: '#FFFFFF',
@@ -93,12 +112,39 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  imageUrl: {
+  content: {
     flex: 1,
-    justifyContent: 'center',
-    width:'100%',
-  }
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
+  },
+  imageContainer: {
+    width: '100%',
+    height: 200,
+  },
+  imageUrl: {
+    width: '100%',
+    aspectRatio: 4 / 3,
+  },
+  eventButton: {
+    backgroundColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    alignSelf: 'center',
+    marginTop: 10,
+    borderWidth: 2,
+    borderColor: '#254C94',
+    width: 300,
+  },
+  eventTitle: {
+    color: '#254C94',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
+
 
 export default CityDetailsScreen;
 

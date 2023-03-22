@@ -12,4 +12,5 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Long> 
 
     List<UserProfile> findByLocationId(Long Id);
     List<UserProfile> findBySignUpListEventId(Long Id);
+    List<UserProfile> findByFirebaseId(String Id);
 }

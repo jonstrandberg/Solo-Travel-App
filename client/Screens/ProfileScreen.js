@@ -19,7 +19,7 @@ import { getLocations, getLocation } from "../services/LocationService";
 
 const placeholderImage = 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'
 
-const ProfileScreen = () => {
+const ProfileScreen = (props) => {
     const [user, setUser] = useState();
     const [profile, setProfile] = useState([]);
     const [newName, setNewName] = useState("")
@@ -50,6 +50,7 @@ const ProfileScreen = () => {
         })
     }, [])
 
+
     useEffect(() => {
         getLocations()
             .then((data) => {
@@ -58,14 +59,17 @@ const ProfileScreen = () => {
             .catch((error) => console.log(error));
         }, []);
 
+    const activeUser = props.activeUser[0];
+
+
     useEffect(() => {
-        getUserProfile(5)
+        getUserProfile(activeUser.id)
             .then(data => {
-                console.log(data)
                 setProfile(data);
             })
             .catch(error => console.log(error))
-    }, []);
+    }, [activeUser.id]);
+
 
     const handleUpdateName = async () => {
         const res = await updateUserProfileName(profile.id, newName);
@@ -134,11 +138,16 @@ const ProfileScreen = () => {
     };
 
     return (
+
+        <SafeAreaView>
         <ScrollView>
         <View style={styles.container}>
+
+
+
             <Image
                 source={{ uri: profile?.avatarUrl ? profile.avatarUrl : placeholderImage }}
-                style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center' }}
+                style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center', marginTop:10 }}
             />
             <View style={styles.profileInfo}>
                 <View style={styles.row}>
@@ -242,6 +251,7 @@ const ProfileScreen = () => {
                             <TextInput
                                 style={styles.input}
                                 value={newAge}
+                                keyboardType="numeric"
                                 onChangeText={(text) => setNewAge(text)}
                             />
                             <Button
@@ -331,8 +341,12 @@ const ProfileScreen = () => {
                     )}
                 </View>
             </View>
+
         </View>
         </ScrollView>
+
+        </SafeAreaView>
+
     );
 }
 
@@ -347,11 +361,15 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
+        marginTop:10,
         marginBottom: 20,
+
     },
     profileInfo: {
         flexDirection: 'column',
         marginBottom: 10,
+        paddingLeft:20,
+        paddingRight:20,
     },
     label: {
         fontWeight: 'bold',
