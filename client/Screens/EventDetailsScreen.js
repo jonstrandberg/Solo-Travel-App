@@ -7,7 +7,6 @@ import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/Signup
 import { deleteEvent } from "../services/EventService";
 import { getUserProfile } from "../services/UserService";
 
-
 function EventDetailsScreen({ activeUser }) {
   const route = useRoute();
   const { event, city } = route.params;
@@ -120,37 +119,39 @@ function EventDetailsScreen({ activeUser }) {
           </Text>
         </View>
         <View style={styles.container}>
-          <View style={styles.eventDetailsContainer}>
-            <Text style={styles.eventTitle}>Event: {event?.title}</Text>
-            <View style={styles.eventDetails}>
-            <Text style={{fontSize: 16}}>Date: {event?.date}</Text>
-            <Text style={{fontSize: 16}}>Time: {event?.time}</Text>
-            <Text style={{fontSize: 16}}>Duration: {event?.duration}</Text>
-            <Text style={{fontSize: 16}}>Description: {event?.description}</Text>
-            <Text style={{fontSize: 16}}>Location: {event?.location.name}, {event.location.country.name}</Text>
-            <Text style={{fontSize: 16}}>Meet-up Point: {event?.meetingPoint}</Text>
-            <Text style={{fontSize: 16}}>Available Spaces: {event?.capacity - sign_ups.length}</Text>
-            </View>
-            <TouchableOpacity
-              style={styles.eventButton}
-              onPress={
-                isEventCreator
-                  ? handleDeleteEvent
-                  : currentUser
-                  ? handleCancelAttendance
-                  : handleSignUp
-              }>
-              <Text style={styles.eventButtonTitle}>
-                {isEventCreator
-                  ? 'Delete Event'
-                  : currentUser
-                  ? 'Cancel Attendance'
-                  : 'Sign Up'}
-              </Text>
-            </TouchableOpacity>
-            <Button title="Edit Event" onPress={handleEditEvent} />
-          </View>
-        </View>
+  <View style={styles.eventDetailsContainer}>
+    <Text style={styles.eventTitle}>Event: {event?.title}</Text>
+    <View style={styles.eventDetails}>
+      <Text style={{fontSize: 16}}>Date: {event?.date}</Text>
+      <Text style={{fontSize: 16}}>Time: {event?.time}</Text>
+      <Text style={{fontSize: 16}}>Duration: {event?.duration}</Text>
+      <Text style={{fontSize: 16}}>Description: {event?.description}</Text>
+      <Text style={{fontSize: 16}}>Location: {event?.location.name}, {event.location.country.name}</Text>
+      <Text style={{fontSize: 16}}>Meet-up Point: {event?.meetingPoint}</Text>
+      <Text style={{fontSize: 16}}>Available Spaces: {event?.capacity - sign_ups.length}</Text>
+    </View>
+    {isEventCreator && (
+      <TouchableOpacity style={styles.eventButton} onPress={handleDeleteEvent}>
+        <Text style={styles.eventButtonTitle}>Delete Event</Text>
+      </TouchableOpacity>
+    )}
+    {!isEventCreator && currentUser && (
+      <TouchableOpacity style={styles.eventButton} onPress={handleCancelAttendance}>
+        <Text style={styles.eventButtonTitle}>Cancel Attendance</Text>
+      </TouchableOpacity>
+    )}
+    {!isEventCreator && !currentUser && (
+      <TouchableOpacity style={styles.eventButton} onPress={handleSignUp}>
+        <Text style={styles.eventButtonTitle}>Sign Up</Text>
+      </TouchableOpacity>
+    )}
+    {isEventCreator && (
+      <TouchableOpacity style={styles.eventButton} onPress={handleEditEvent}>
+        <Text style={styles.eventButtonTitle}>Edit Event</Text>
+      </TouchableOpacity>
+    )}
+  </View>
+</View>
         <View style={styles.attendeesContainer}>
         <Text style={styles.attendeesHeaderText}>Attendees:</Text>
           {sign_ups.map((sign_up) => (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { responsiveWidth, responsiveHeight, responsiveScreenFontSize } from 'react-native-responsive-dimensions'
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -57,7 +57,7 @@ const CityDetailsScreen = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+      <ScrollView >
       <View style={styles.header}>
         <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
       </View>
@@ -79,13 +79,12 @@ const CityDetailsScreen = () => {
               <Text style={styles.eventTitle}>{item.title}</Text>
             </TouchableOpacity>
           </View>
-
         )}
       />
       <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
         <Text style={styles.buttonText}>Add Event</Text>
       </TouchableOpacity>
-    </SafeAreaView>
+      </ScrollView>
   )
 }
 
@@ -95,14 +94,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#fff',
-    marginTop: responsiveHeight(6)
   },
   header: {
     backgroundColor: '#0B909B',
     width: '100%',
     height: responsiveHeight(8),
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 40,
   },
   headerText: {
     color: '#fff',
@@ -120,14 +119,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#254C94',
+    textAlign: 'center'
   },
   button: {
     backgroundColor: '#254C94',
     paddingVertical: 8,
-    paddingHorizontal: 20,
+    paddingHorizontal: 50,
     borderRadius: 10,
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: 15,
+    marginBottom: 40,
+    width: responsiveWidth(50),
+    alignSelf: 'center',
   },
   buttonText: {
     color: '#FFFFFF',

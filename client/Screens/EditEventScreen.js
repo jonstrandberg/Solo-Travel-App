@@ -155,13 +155,13 @@ const EditEventScreen = ({ activeUser }) => {
         <DurationSelector onAddDuration={handleAddDuration} />
       </BottomDrawer>
 
-      <TextInput
-        style={styles.input}
-        placeholderTextColor="#757575"
-        placeholder="Maximum Capacity"
-        value={capacity.toString()}
-        onChangeText={setCapacity}
-      />
+<TextInput
+style={styles.input}
+placeholderTextColor="#757575"
+placeholder="Maximum Capacity"
+value={capacity && capacity.toString()}
+onChangeText={setCapacity}
+/>
 
       <TextInput
         style={styles.input}
