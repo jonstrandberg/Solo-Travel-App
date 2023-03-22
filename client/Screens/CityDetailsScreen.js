@@ -5,13 +5,17 @@ import { responsiveWidth, responsiveHeight, responsiveScreenFontSize } from 'rea
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getEventsByLocationId } from "../services/EventService";
 import { getLocation } from '../services/LocationService'
-
-const placeholderCityImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
-
+import { getUserProfilesByLocationId } from '../services/UserService';
+import BottomDrawer from '../components/BottomDrawer';
+import UsersList from '../components/UsersList';
 
 const CityDetailsScreen = () => {
-  const [city, setCity] = useState({name: '', country: {name: ''}})
+  const [city, setCity] = useState({ name: '', country: { name: '' } })
   const [event, setEvent] = useState([])
+  const [usersInCity, setUsersInCity] = useState([])
+  const [isCurrentUsersOpen, setIsCurrentUsersOpen] = useState(false)
+
+  const placeholderCityImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
 
   const navigation = useNavigation();
 
@@ -27,17 +31,22 @@ const CityDetailsScreen = () => {
 
   useEffect(() => {
     getLocation(cityId)
-    .then(json => setCity(json))
+      .then(json => setCity(json))
   }, [])
 
-useFocusEffect(
-  React.useCallback(() => {
-    getEventsByLocationId(cityId)
-      .then(json => {
-        setEvent(json);
-      });
-  }, [navigation, cityId])
-);
+  useFocusEffect(
+    React.useCallback(() => {
+      getEventsByLocationId(cityId)
+        .then(json => {
+          setEvent(json);
+        });
+    }, [navigation, cityId])
+  );
+
+  useEffect(() => {
+    getUserProfilesByLocationId(cityId)
+      .then(json => setUsersInCity(json))
+  }, [])
 
   const handleEventPress = (event) => {
     navigation.navigate('Event Details', { event: event, city: city });
@@ -47,22 +56,39 @@ useFocusEffect(
     navigation.navigate('Add Event', { cityId: city.id });
   };
 
+  const handleOpenCurrentUsers = () => {
+    setIsCurrentUsersOpen(true)
+  }
+  const handleCloseCurrentUsers = () => {
+    setIsCurrentUsersOpen(false)
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
       </View>
       <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl}></Image>
+
+      <Text>Who's Here:</Text>
+      <TouchableOpacity style={styles.button} onPress={handleOpenCurrentUsers}>
+        <Text style={styles.buttonText}>See everyone!</Text>
+      </TouchableOpacity>
+      <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
+        <Text>users</Text>
+        <UsersList users={usersInCity}/>
+      </BottomDrawer>
+
       <Text style={styles.eventsHeader}>Events</Text>
       <FlatList
         data={event}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-<View style={styles.buttonContainer}>
-  <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
-    <Text style={styles.eventTitle}>{item.title}</Text>
-  </TouchableOpacity>
-</View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
+              <Text style={styles.eventTitle}>{item.title}</Text>
+            </TouchableOpacity>
+          </View>
 
         )}
       />
@@ -76,7 +102,7 @@ useFocusEffect(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start', 
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#fff',
     marginTop: responsiveHeight(6)
