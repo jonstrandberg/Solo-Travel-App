@@ -5,7 +5,7 @@ const UsersList = ( props ) => {
     const navigation = useNavigation()
     
     const handleOnUserPress = (user) => {
-      navigation.navigate('Single User Detail', {user: user})
+      // navigation.navigate('Single User Detail', {user: user})
     }
 
     const users = props.users
