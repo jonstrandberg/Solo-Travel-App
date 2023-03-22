@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getEventsByLocationId } from "../services/EventService";
 import { getLocation } from '../services/LocationService'
-import GeneralUserProfileDetail from '../components/GenralUserProfileDetail';
+import GeneralUserProfileDetail from '../components/GeneralUserProfileDetail';
 import { getUserProfilesByLocationId } from '../services/UserService';
 import BottomDrawer from '../components/BottomDrawer';
 
@@ -50,8 +50,6 @@ const CityDetailsScreen = () => {
     setIsCurrentTravellersOpen(false)
   }
 
-  console.log('city details: ', city)
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -65,7 +63,7 @@ const CityDetailsScreen = () => {
       </TouchableOpacity>
       <BottomDrawer visible={isCurrentTravellersOpen} onClose={handleCloseCurrentTravellers}>
         <Text>users</Text>
-        {/* <GeneralUserProfileDetail  /> */}
+        <GeneralUserProfileDetail  user={user}/>
       </BottomDrawer>
 
 

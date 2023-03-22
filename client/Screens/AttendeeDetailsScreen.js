@@ -1,6 +1,6 @@
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { Image, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
-import GenralUserProfileDetail from "../components/GenralUserProfileDetail";
+import GeneralUserProfileDetail from "../components/GeneralUserProfileDetail";
 
 export const AttendeeDetailsScreen = () => {
     const route = useRoute();
