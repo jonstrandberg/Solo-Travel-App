@@ -3,12 +3,12 @@ import { useNavigation } from "@react-navigation/native"
 
 const UsersList = ( props ) => {
     const navigation = useNavigation()
-    
-    const handleOnUserPress = (user) => {
-      // navigation.navigate('Single User Detail', {user: user})
-    }
-
     const users = props.users
+
+    const handleOnUserPress = (user) => {
+      navigation.navigate('Single User Detail', {user: user})
+      console.log('userlist user: ' , user)
+    }
 
     return (
         <View>

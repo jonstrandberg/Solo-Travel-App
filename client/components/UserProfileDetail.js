@@ -8,16 +8,16 @@ const UserProfileDetail = (props) => {
     return (
         <View style={styles.container}>
             <Image
-                source={{ uri: user.userProfile?.avatarUrl ? user.userProfile.avatarUrl : placeholderImage }}
+                source={{ uri: user?.avatarUrl ? user.avatarUrl : placeholderImage }}
                 style={{ width: 100, height: 100, borderRadius: 50 }}
             />
-            <Text style={styles.titleText}>{user.userProfile.displayName}</Text>
-            <Text style={styles.locationText}>Current Location: {user.userProfile.location.name}</Text>
+            <Text style={styles.titleText}>{user.displayName}</Text>
+            <Text style={styles.locationText}>Current Location: {user.location.name}</Text>
 
-            <Text style={styles.detailsText}>Home Town: {user.userProfile.homeTown}</Text>
-            <Text style={styles.detailsText}>Nationality: {user.userProfile.nationaliy}</Text>
-            <Text style={styles.detailsText}>Age: {user.userProfile.age}</Text>
-            <Text style={styles.detailsText}>Interests {user.userProfile.interests}</Text>
+            <Text style={styles.detailsText}>Home Town: {user.homeTown}</Text>
+            <Text style={styles.detailsText}>Nationality: {user.nationaliy}</Text>
+            <Text style={styles.detailsText}>Age: {user.age}</Text>
+            <Text style={styles.detailsText}>Interests {user.interests}</Text>
         </View>
     )
 }

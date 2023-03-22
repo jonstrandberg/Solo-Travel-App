@@ -16,7 +16,7 @@ const AttendeeDetailsScreen = () => {
         <ScrollView >
                 <View style={styles.container}>
                 <Text style={styles.titleText}>Attendee:</Text>
-                <UserProfileDetail user={user} />
+                <UserProfileDetail user={user.userProfile} />
                 <TouchableOpacity onPress={() => handleGoBackPress()} style={styles.button}>
                     <Text style={styles.buttonText}>Back to Event</Text>
                 </TouchableOpacity>

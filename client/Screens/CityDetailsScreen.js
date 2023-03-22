@@ -54,6 +54,7 @@ const CityDetailsScreen = () => {
   const handleCloseCurrentUsers = () => {
     setIsCurrentUsersOpen(false)
   }
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -68,7 +69,7 @@ const CityDetailsScreen = () => {
       </TouchableOpacity>
       <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
         <Text>users</Text>
-        <UsersList  users={usersInCity}/>
+        <UsersList users={usersInCity}/>
       </BottomDrawer>
 
       <Text style={styles.eventsHeader}>Events</Text>
