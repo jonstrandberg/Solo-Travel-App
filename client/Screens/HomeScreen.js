@@ -25,7 +25,6 @@ const CitiesList = () => {
 
   const handleCityPress = (city) => {
     navigation.navigate('City Details', { cityId : city.id })
-    console.log('City Details City is:', city)
   };
 
   return (
@@ -59,7 +58,6 @@ const CitiesList = () => {
 };
 
 const HomeScreen = (activeUser) => {
-  console.log('homescreen user', activeUser)
   return (
     <Stack.Navigator>
       <Stack.Screen
