@@ -12,9 +12,9 @@ function EventDetailsScreen() {
   const route = useRoute();
   const { event, city } = route.params;
   const [sign_ups, setSignups] = useState([]);
-  const [availableSpaces, setAvailableSpaces] = useState(event.capacity);
+  const [availableSpaces, setAvailableSpaces] = useState(event ? event.capacity : 0);
   const currentUser = sign_ups.find((signUp) => signUp.userProfile.id === 5); //HARD CODED
-  const isEventCreator = event.creator.id === 5; //HARD CODED
+  const isEventCreator = event?.creator.id === 5; //HARD CODED
   const navigation = useNavigation()
   const Stack = createStackNavigator()
 
@@ -28,7 +28,7 @@ function EventDetailsScreen() {
     };
 
     fetchSignUps();
-  }, [event.id]);
+  }, [event?.id]);
 
   const handleSignUp = async () => {
     const signUp = {
@@ -75,7 +75,6 @@ function EventDetailsScreen() {
               const promises = signUps.map(signUp => deleteSignUp(signUp.id));
               await Promise.all(promises);
               const response = await deleteEvent(event.id);
-              console.log(response);
               navigation.goBack();
             } catch (error) {
               console.error('Error deleting event:', error);
@@ -101,16 +100,16 @@ function EventDetailsScreen() {
     <>
   <SafeAreaView>
     <View>
-      <Text>Created By: {event.creator.displayName}</Text>
-      <Image source={{uri: event.creator.avatarUrl}}
+      <Text>Created By: {event?.creator.displayName}</Text>
+      <Image source={{uri: event?.creator.avatarUrl}}
         style={{ width: 75, height: 75, borderRadius: 50, alignSelf: 'center' }} />
-      <Text>Event: {event.title}</Text>
-      <Text>Date: {event.date}</Text>
-      <Text>Time: {event.time}</Text>
-      <Text>Duration: {event.duration}</Text>
-      <Text>Description: {event.description}</Text>
-      <Text>Location: {event.location.name}, {event.location.country.name}</Text>
-      <Text>Meet-up Point: {event.meetingPoint}</Text>
+      <Text>Event: {event?.title}</Text>
+      <Text>Date: {event?.date}</Text>
+      <Text>Time: {event?.time}</Text>
+      <Text>Duration: {event?.duration}</Text>
+      <Text>Description: {event?.description}</Text>
+      <Text>Location: {event?.location.name}, {event?.location.country.name}</Text>
+      <Text>Meet-up Point: {event?.meetingPoint}</Text>
       <Text>Available Spaces: {availableSpaces}</Text>
       {isEventCreator && (
         <>
@@ -131,9 +130,9 @@ function EventDetailsScreen() {
       renderItem={({ item }) => <Attendee user={item.userProfile} />}
     />
   </SafeAreaView>
-  <Stack.Navigator>
+  {/* <Stack.Navigator>
     <Stack.Screen name="Edit Event" component={EditEventScreen} options={{ title: 'Edit Event', headerShown: false }} />
-  </Stack.Navigator>
+  </Stack.Navigator> */}
 </>
 
   );

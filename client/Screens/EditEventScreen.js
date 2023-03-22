@@ -1,53 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert} from "react-native";
 import { updateEvent } from '../services/EventService';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { getLocation } from '../services/LocationService';
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import BottomDrawer from '../components/BottomDrawer';
 import EventCalendar from '../components/EventCalender';
 import TimeSelector from '../components/TimeSelector';
 import DurationSelector from '../components/DurationSelector';
 
 const EditEventScreen = ({ route }) => {
-//   const [title, setTitle] = useState(event.title);
-//   const [date, setDate] = useState(event.date);
-//   const [time, setTime] = useState(event.time);
-//   const [duration, setDuration] = useState(event.duration);
-//   const [capacity, setCapacity] = useState(event.capacity);
-//   const [meetingPoint, setMeetingPoint] = useState(event.meetingPoint);
-//   const [description, setDescription] = useState(event.description);
-//   const [location, setLocation] = useState(null);
-//   const [countryName, setCountryName] = useState('');
-//   const [cityName, setCityName] = useState('');
-//   const [isCalendarSheetOpen, setIsCalendarSheetOpen] = useState(false)
-//   const [isStartTimeSheetOpen, setIsStartTimeSheetOpen] = useState(false)
-//   const [isDurationSheetOpen, setIsDurationSheetOpen] = useState(false)
+    const { params } = useRoute();
+    const event = params && params.event;
+    const navigation = useNavigation();
 
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [duration, setDuration] = useState('');
-  const [capacity, setCapacity] = useState('');
-  const [meetingPoint, setMeetingPoint] = useState('');
-  const [description, setDescription] = useState('');
-  const [location, setLocation] = useState(null);
-  const [countryName, setCountryName] = useState('');
-  const [cityName, setCityName] = useState('');
-  const [isCalendarSheetOpen, setIsCalendarSheetOpen] = useState(false)
-  const [isStartTimeSheetOpen, setIsStartTimeSheetOpen] = useState(false)
-  const [isDurationSheetOpen, setIsDurationSheetOpen] = useState(false)
+    const [title, setTitle] = useState(params.event.title);
+    const [date, setDate] = useState(params.event.date);
+    const [time, setTime] = useState(params.event.time);
+    const [duration, setDuration] = useState(params.event.duration);
+    const [capacity, setCapacity] = useState(params.event.capacity);
+    const [meetingPoint, setMeetingPoint] = useState(params.event.meetingPoint);
+    const [description, setDescription] = useState(params.event.description);
+    // const [location, setLocation] = useState(params.event.location);
+    // const [countryName, setCountryName] = useState('');
+    // const [cityName, setCityName] = useState('');
+    const [isCalendarSheetOpen, setIsCalendarSheetOpen] = useState(false)
+    const [isStartTimeSheetOpen, setIsStartTimeSheetOpen] = useState(false)
+    const [isDurationSheetOpen, setIsDurationSheetOpen] = useState(false)
+    
+  
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //       setTitle(params.event.title);
+    //       setDate(params.event.date);
+    //       setTime(params.event.time);
+    //       setDuration(params.event.duration);
+    //       setCapacity(params.event.capacity);
+    //       setMeetingPoint(params.event.meetingPoint);
+    //       setDescription(params.event.description);
+    //     }, [event])
+    //   );
 
-  const navigation = useNavigation();
-//   const event = route.params.event;
-//   const route = useRoute();
-const { params } = useRoute();
-const event = params && params.event;
-
-//   useEffect(() => {
-//     setLocation(route.params.cityId);
-//   }, [route.params.cityId]);
 
   const handleEditEvent = () => {
-    if (!title || !date || !time|| !duration || !description || !location || !capacity || !meetingPoint){
+    if (!title || !date || !time|| !duration || !description || !capacity || !meetingPoint){
       Alert.alert('Error', 'All fields are required!')
     return 
     }
@@ -58,22 +53,13 @@ const event = params && params.event;
       duration,
       description,
       meetingPoint,
-      location: {
-        id: location,
-        name: cityName,
-        country: {
-          id: route.params.countryId,
-          name: countryName,
-        },
-      },
-      creator: {
-        id: 5   //HARD CODED
-      },
-      capacity,
+      location: params.event.location,
+      creator: {id:5},
+      capacity: parseInt(capacity, 10)
     };
-    updateEvent(event)
+    updateEvent(params.event.id, event)
     .then((updatedEvent) => {
-      console.log('Event edited successfully');
+      console.log(event)
       navigation.navigate('Event Details', { event: updatedEvent });
     })
     .catch(error => {
@@ -189,7 +175,7 @@ const event = params && params.event;
         style={styles.input}
         placeholderTextColor="#757575"
         placeholder="Maximum Capacity"
-        value={capacity}
+        value={capacity.toString()}
         onChangeText={setCapacity}
       />
 
@@ -208,14 +194,14 @@ const event = params && params.event;
         value={description}
         onChangeText={setDescription}
       />
-      <View style={{ display: 'none' }}>
+      {/* <View style={{ display: 'none' }}>
         <TextInput
           value={location ? location.toString() : ''}
           onChangeText={setLocation}
         />
-      </View>
+      </View> */}
       <TouchableOpacity style={styles.button} onPress={handleEditEvent}>
-        <Text style={styles.buttonText}>Add Event</Text>
+        <Text style={styles.buttonText}>Edit Event</Text>
       </TouchableOpacity>
     </View>
   );

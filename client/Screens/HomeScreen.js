@@ -6,6 +6,7 @@ import { createStackNavigator} from "@react-navigation/stack"
 import { getLocations } from "../services/LocationService"
 import CityDetailsScreen from "./CityDetailsScreen"
 import EventDetailsScreen from "./EventDetailsScreen"
+import EditEventScreen from "./EditEventScreen";
 import Header from "../components/Header"
 
 const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
@@ -64,6 +65,7 @@ const HomeScreen = () => {
       <Stack.Screen name='Explore Cities' component={CitiesList} />
       <Stack.Screen name='City Details' component={CityDetailsScreen} options={( { route }) => ({ title: route.params.city.name })} />
       <Stack.Screen name='Event Details' component={EventDetailsScreen} />
+      <Stack.Screen name="Edit Event" component={EditEventScreen} options={{ title: 'Edit Event', headerShown: false }} />
     </Stack.Navigator>
   );
 };

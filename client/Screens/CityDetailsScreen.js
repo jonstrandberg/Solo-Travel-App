@@ -22,7 +22,7 @@ function CityDetailsScreen({ navigation }) {
       .then(json => {
         setEvent(json)
       })
-  }, [event])
+  }, [])
 
 
 
