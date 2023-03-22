@@ -23,11 +23,13 @@ export const AttendeeDetailsScreen = () => {
                 style={{ width: 100, height: 100, borderRadius: 50 }}
             />
             <Text style={styles.titleText}>{ attendee.userProfile.displayName}</Text>
+            <Text style={styles.locationText}>Current Location: { attendee.userProfile.location.name}</Text>
+            
             <Text style={styles.detailsText}>Home Town: { attendee.userProfile.homeTown}</Text>
             <Text style={styles.detailsText}>Nationality: { attendee.userProfile.nationaliy}</Text>
             <Text style={styles.detailsText}>Age: { attendee.userProfile.age}</Text>
             <Text style={styles.detailsText}>Interests { attendee.userProfile.interests}</Text>
-            <Text style={styles.detailsText}>Current Location:{ attendee.userProfile.location.name}</Text>
+            
 
             <TouchableOpacity onPress={() => handleGoBackPress()} style={styles.button}>
                 <Text style={styles.buttonText}>Back to Event</Text>
@@ -46,6 +48,11 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontSize: 30,
         fontWeight:700
+    },
+    locationText:{
+        marginTop: 10,
+        fontSize: 20,
+        fontWeight:500
     },
     detailsText: {
         marginTop: 10,
