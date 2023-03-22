@@ -48,9 +48,9 @@ const ProfileScreen = (props) => {
     const getCountries = async function () {
         return fetch ("https://restcountries.com/v3.1/all")
             .then(res => res.json())
-            .then(res => res.filter(country => country.unMember))
-            .then(res => {
-                return res.map(country => ({name: country.name.common}))})
+            .then(json => json.filter(country => country.unMember))
+            .then(filteredCountries => {
+                return filteredCountries.map(country => ({name: country.name.common}))})
     }
 
     useEffect(() => {
@@ -96,15 +96,21 @@ const ProfileScreen = (props) => {
         }
     };
 
-    const handleUpdateNewNationality = async () => {
-        const res = await updateUserProfileNationality(profile.id, newNationality); // needs to have new Nationaility 
-        if (res) {
-            setProfile({ ...profile, nationality: newNationality.id });
-            setNewNationality("");
-            setEditingNationality(false)
-        }
-    };
-
+    const handleUpdateNationality = async () => {
+        try {
+            const res = await updateUserProfileNationality(profile.id, newNationality.name);
+            if (res) {
+                setProfile({ ...profile, nationality: newNationality.name});
+                setNewNationality("");
+                setEditingNationality(false);
+            }
+            } catch (error) {
+            console.error("Error updating user nationality", error);
+            // Display a user-friendly error message
+            alert("There was an error updating your nationality. Please try again later.");
+            }
+        };
+        
     const handleUpdateAge = async () => {
         const res = await updateUserProfileAge(profile.id, newAge)
         if (res) {
@@ -232,7 +238,7 @@ const ProfileScreen = (props) => {
                     />
                     <Button
                                 title="Save"
-                                onPress={handleUpdateNewNationality}
+                                onPress={handleUpdateNationality}
                                 style={styles.button}
                             />
                             </>
