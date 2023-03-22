@@ -7,7 +7,6 @@ import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/Signup
 import { deleteEvent } from "../services/EventService";
 import { getUserProfile } from "../services/UserService";
 
-import { Attendee } from "../components/Attendee";
 
 function EventDetailsScreen({ activeUser }) {
   const route = useRoute();
