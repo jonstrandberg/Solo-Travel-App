@@ -13,16 +13,22 @@ export const AttendeeDetailsScreen = () => {
         navigation.goBack()
     }
 
-    console.log('attendee detail: ', attendee)
+    console.log('attendee detail: ', attendee.userProfile)
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Attendee</Text>
-            {/* <Image
-                source={{ uri: props.user?.avatarUrl ? props.user.avatarUrl : placeholderImage }}
-                style={{ width: 50, height: 50, borderRadius: 25 }}
+            <Text>Attendee:</Text>
+            <Image
+                source={{ uri: attendee.userProfile?.avatarUrl ? attendee.userProfile.avatarUrl : placeholderImage }}
+                style={{ width: 100, height: 100, borderRadius: 50 }}
             />
-            <Text style={styles.displayName}>{props.user.displayName}</Text> */}
+            <Text style={styles.titleText}>{ attendee.userProfile.displayName}</Text>
+            <Text style={styles.detailsText}>Home Town: { attendee.userProfile.homeTown}</Text>
+            <Text style={styles.detailsText}>Nationality: { attendee.userProfile.nationaliy}</Text>
+            <Text style={styles.detailsText}>Age: { attendee.userProfile.age}</Text>
+            <Text style={styles.detailsText}>Interests { attendee.userProfile.interests}</Text>
+            <Text style={styles.detailsText}>Current Location:{ attendee.userProfile.location.name}</Text>
+
             <TouchableOpacity onPress={() => handleGoBackPress()} style={styles.button}>
                 <Text style={styles.buttonText}>Back to Event</Text>
             </TouchableOpacity>
@@ -36,11 +42,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-
-    displayName: {
+    titleText:{
+        marginTop: 10,
+        fontSize: 30,
+        fontWeight:700
+    },
+    detailsText: {
         marginTop: 10,
         fontSize: 15
-
     },
     button: {
         alignItems: 'center',
