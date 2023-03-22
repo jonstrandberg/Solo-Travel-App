@@ -15,8 +15,6 @@ import SelectDropdownWithSearch from 'react-native-select-dropdown-with-search';
 import { getCountries } from "../services/CountryService";
 import { getLocations, getLocation } from "../services/LocationService";
 
-
-
 const placeholderImage = 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'
 
 const ProfileScreen = (props) => {
@@ -37,19 +35,28 @@ const ProfileScreen = (props) => {
     const [editingLocation, setEditingLocation] = useState(false);
     const [editingInterests, setEditingInterests] = useState(false)
     const [isSavingHomeTown, setIsSavingHomeTown] = useState(false);
-    const [items, setItems] = useState([
-        {label: 'Egypt', value: 'egypt'},
-        {label: 'Scotland', value: 'scotland'}
-    ]);
+    const [items, setItems] = useState([]);
     const [itemsLocations, setItemsLocations] = useState({});
+
+    // useEffect(() => {
+    //     getCountries()
+    //     .then(data => { 
+    //         setItems( data.map(x =>  x.name));
+    //     })
+    // }, [])
+
+    const getCountries = async function () {
+        return fetch ("https://restcountries.com/v3.1/all")
+            .then(res => res.json())
+            .then(res => res.filter(country => country.unMember))
+            .then(res => {
+                return res.map(country => ({name: country.name.common}))})
+    }
 
     useEffect(() => {
         getCountries()
-        .then(data => { 
-            setItems( data.map(x =>  x.name));
-        })
-    }, [])
-
+        .then(data => setItems(data));
+    }, []);
 
     useEffect(() => {
         getLocations()
@@ -89,10 +96,10 @@ const ProfileScreen = (props) => {
         }
     };
 
-    const handleUpdateNationality = async () => {
+    const handleUpdateNewNationality = async () => {
         const res = await updateUserProfileNationality(profile.id, newNationality); // needs to have new Nationaility 
         if (res) {
-            setProfile({ ...profile, nationality: newNationality });
+            setProfile({ ...profile, nationality: newNationality.id });
             setNewNationality("");
             setEditingNationality(false)
         }
@@ -142,8 +149,6 @@ const ProfileScreen = (props) => {
         <SafeAreaView>
         <ScrollView>
         <View style={styles.container}>
-
-
 
             <Image
                 source={{ uri: profile?.avatarUrl ? profile.avatarUrl : placeholderImage }}
@@ -219,15 +224,15 @@ const ProfileScreen = (props) => {
                             setNewNationality(selectedNationality)
                         }}
                         buttonTextAfterSelection={(selectedItem) => {
-                            return selectedItem
+                            return selectedItem.name
                         }}
                         rowTextForSelection={(item) => {
-                            return item
+                            return item.name
                         }}
                     />
                     <Button
                                 title="Save"
-                                onPress={handleUpdateNationality}
+                                onPress={handleUpdateNewNationality}
                                 style={styles.button}
                             />
                             </>
