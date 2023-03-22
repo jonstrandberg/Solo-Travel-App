@@ -75,7 +75,7 @@ export const getEventsByLocationId = async function(locationId) {
 
 export const updateEvent = async function (eventId, newEvent){
     try {
-        const response = await fetch("http://127.0.0.1:8080/events/" + eventId.toString() + "/update", {
+        const response = await fetch("http://localhost:8080/events/" + eventId.toString() + "/update", {
             method: "PUT",
             body: JSON.stringify(newEvent),
             headers: { "Content-Type": "application/json" },

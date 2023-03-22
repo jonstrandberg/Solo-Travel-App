@@ -2,18 +2,22 @@ import React, { useEffect, useState } from "react";
 
 import { View, Text, Button, FlatList, SafeAreaView, StyleSheet, Image, Alert, ScrollView, TouchableOpacity } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import { createStackNavigator } from '@react-navigation/stack';
 import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/SignupService";
 import { deleteEvent } from "../services/EventService";
 import { getUserProfile } from "../services/UserService";
+
+import { Attendee } from "../components/Attendee";
 
 function EventDetailsScreen({ activeUser }) {
   const route = useRoute();
   const { event, city } = route.params;
   const [sign_ups, setSignups] = useState([]);
-  const [availableSpaces, setAvailableSpaces] = useState(event.capacity);
+  const [availableSpaces, setAvailableSpaces] = useState(event ? event.capacity : 0);
   const currentUser = sign_ups.find((signUp) => signUp.userProfile.id === activeUser.activeUser[0].id);
   const isEventCreator = event.creator.id === activeUser.activeUser[0].id;
   const navigation = useNavigation()
+  const Stack = createStackNavigator()
 
 
 
@@ -25,7 +29,7 @@ function EventDetailsScreen({ activeUser }) {
     };
 
     fetchSignUps();
-  }, [event.id]);
+  }, [event?.id]);
 
   const handleSignUp = async () => {
     const signUp = {
@@ -72,7 +76,6 @@ function EventDetailsScreen({ activeUser }) {
               const promises = signUps.map(signUp => deleteSignUp(signUp.id));
               await Promise.all(promises);
               const response = await deleteEvent(event.id);
-              console.log(response);
               navigation.goBack();
             } catch (error) {
               console.error('Error deleting event:', error);
@@ -82,6 +85,10 @@ function EventDetailsScreen({ activeUser }) {
         { cancelable: false }
     );
   }
+
+  const handleEditEvent = () => {
+    navigation.navigate('Edit Event', { event, updateSignUps });
+  };
 
   const updateSignUps = async () => {
     const json = await getSignUpsByEventId(event.id);
@@ -95,6 +102,7 @@ function EventDetailsScreen({ activeUser }) {
   };
 
   return (
+
     <SafeAreaView>
       <ScrollView>
         <View>
@@ -114,15 +122,15 @@ function EventDetailsScreen({ activeUser }) {
         </View>
         <View style={styles.container}>
           <View style={styles.eventDetailsContainer}>
-            <Text style={styles.eventTitle}>Event: {event.title}</Text>
+            <Text style={styles.eventTitle}>Event: {event?.title}</Text>
             <View style={styles.eventDetails}>
-            <Text style={{fontSize: 16}}>Date: {event.date}</Text>
-            <Text style={{fontSize: 16}}>Time: {event.time}</Text>
-            <Text style={{fontSize: 16}}>Duration: {event.duration}</Text>
-            <Text style={{fontSize: 16}}>Description: {event.description}</Text>
-            <Text style={{fontSize: 16}}>Location: {event.location.name}, {event.location.country.name}</Text>
-            <Text style={{fontSize: 16}}>Meet-up Point: {event.meetingPoint}</Text>
-            <Text style={{fontSize: 16}}>Available Spaces: {availableSpaces}</Text>
+            <Text style={{fontSize: 16}}>Date: {event?.date}</Text>
+            <Text style={{fontSize: 16}}>Time: {event?.time}</Text>
+            <Text style={{fontSize: 16}}>Duration: {event?.duration}</Text>
+            <Text style={{fontSize: 16}}>Description: {event?.description}</Text>
+            <Text style={{fontSize: 16}}>Location: {event?.location.name}, {event.location.country.name}</Text>
+            <Text style={{fontSize: 16}}>Meet-up Point: {event?.meetingPoint}</Text>
+            <Text style={{fontSize: 16}}>Available Spaces: {event?.capacity - sign_ups.length}</Text>
             </View>
             <TouchableOpacity
               style={styles.eventButton}
@@ -141,6 +149,7 @@ function EventDetailsScreen({ activeUser }) {
                   : 'Sign Up'}
               </Text>
             </TouchableOpacity>
+            <Button title="Edit Event" onPress={handleEditEvent} />
           </View>
         </View>
         <View style={styles.attendeesContainer}>

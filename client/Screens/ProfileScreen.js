@@ -138,8 +138,6 @@ const ProfileScreen = (props) => {
     };
 
     return (
-
-
         <SafeAreaView>
         <ScrollView>
         <View style={styles.container}>

@@ -18,6 +18,13 @@ const CityDetailsScreen = () => {
   const route = useRoute();
   const cityId = route.params.cityId;
 
+  useEffect(() => {   //LOOK HERE GET RIUD OF ME OMG
+    getEventsByLocationId(city.id)
+      .then(json => {
+        setEvent(json)
+      })
+  }, [])
+
   useEffect(() => {
     getLocation(cityId)
     .then(json => setCity(json))
