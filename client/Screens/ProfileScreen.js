@@ -326,8 +326,8 @@ const ProfileScreen = (props) => {
                 </View>
             </View>
 
-        </View>
         </ScrollView>
+    
         </SafeAreaView>
 
     );
