@@ -1,31 +1,31 @@
-import { useRoute, useNavigation } from "@react-navigation/native";
-import { Image, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity} from "react-native"
+import { ScrollView } from "react-native-gesture-handler";
 import UserProfileDetail from "../components/UserProfileDetail";
 
-
-const AttendeeDetailsScreen = () => {
-    const route = useRoute();
-    const { user, city } = route.params;
-    const navigation = useNavigation();
+const singleUserDetailScreen = () => {
+    const route = useRoute ();
+    const user = route.params.user
+    navigation=useNavigation()
 
     const handleGoBackPress = () => {
-        navigation.goBack()
+        navigation.navigate('Explore Cities');
     }
 
     return (
-        <ScrollView >
-                <View style={styles.container}>
-                <Text style={styles.titleText}>Attendee:</Text>
-                <UserProfileDetail user={user.userProfile} />
+        <ScrollView>
+            <View style={styles.container}>
+                <Text style={styles.titleText}>Profile:</Text>
+                <UserProfileDetail user={user}/>
                 <TouchableOpacity onPress={() => handleGoBackPress()} style={styles.button}>
-                    <Text style={styles.buttonText}>Back to Event</Text>
+                    <Text style={styles.buttonText}>Back to City</Text>
                 </TouchableOpacity>
                 </View>
         </ScrollView>
     )
 }
 
-export default AttendeeDetailsScreen
+export default singleUserDetailScreen
 
 const styles = StyleSheet.create({
     container: {
@@ -59,4 +59,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
+
+
 

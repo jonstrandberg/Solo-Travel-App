@@ -15,8 +15,6 @@ import SelectDropdownWithSearch from 'react-native-select-dropdown-with-search';
 import { getCountries } from "../services/CountryService";
 import { getLocations, getLocation } from "../services/LocationService";
 
-
-
 const placeholderImage = 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'
 
 const ProfileScreen = (props) => {
@@ -37,18 +35,22 @@ const ProfileScreen = (props) => {
     const [editingLocation, setEditingLocation] = useState(false);
     const [editingInterests, setEditingInterests] = useState(false)
     const [isSavingHomeTown, setIsSavingHomeTown] = useState(false);
-    const [items, setItems] = useState([
-        { label: 'Egypt', value: 'egypt' },
-        { label: 'Scotland', value: 'scotland' }
-    ]);
+    const [items, setItems] = useState([]);
+
     const [itemsLocations, setItemsLocations] = useState({});
+
+    const getCountries = async function () {
+        return fetch ("https://restcountries.com/v3.1/all")
+            .then(res => res.json())
+            .then(json => json.filter(country => country.unMember))
+            .then(filteredCountries => {
+                return filteredCountries.map(country => ({name: country.name.common}))})
+    }
 
     useEffect(() => {
         getCountries()
-            .then(data => {
-                setItems(data.map(x => x.name));
-            })
-    }, [])
+        .then(data => setItems(data));
+    }, []);
 
 
     useEffect(() => {
@@ -90,14 +92,20 @@ const ProfileScreen = (props) => {
     };
 
     const handleUpdateNationality = async () => {
-        const res = await updateUserProfileNationality(profile.id, newNationality); // needs to have new Nationaility 
-        if (res) {
-            setProfile({ ...profile, nationality: newNationality });
-            setNewNationality("");
-            setEditingNationality(false)
-        }
-    };
-
+        try {
+            const res = await updateUserProfileNationality(profile.id, newNationality.name);
+            if (res) {
+                setProfile({ ...profile, nationality: newNationality.name});
+                setNewNationality("");
+                setEditingNationality(false);
+            }
+            } catch (error) {
+            console.error("Error updating user nationality", error);
+            // Display a user-friendly error message
+            alert("There was an error updating your nationality. Please try again later.");
+            }
+        };
+        
     const handleUpdateAge = async () => {
         const res = await updateUserProfileAge(profile.id, newAge)
         if (res) {
@@ -141,6 +149,7 @@ const ProfileScreen = (props) => {
         <SafeAreaView>
         <ScrollView>
         <View style={styles.container}>
+
             <Image
                 source={{ uri: profile?.avatarUrl ? profile.avatarUrl : placeholderImage }}
                 style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center', marginTop:10 }}
@@ -180,28 +189,29 @@ const ProfileScreen = (props) => {
                         )}
                     </View>
                 </View>
-                <View style={styles.profileInfo}>
-                    <Text style={styles.label}>Nationality:</Text>
-                    <View style={styles.row}>
-                        {editingNationality ? (
-                            <>
-                                <SelectDropdownWithSearch
-                                    data={items}
-                                    onSelect={(selectedNationality) => {
-                                        setNewNationality(selectedNationality)
-                                    }}
-                                    buttonTextAfterSelection={(selectedItem) => {
-                                        return selectedItem
-                                    }}
-                                    rowTextForSelection={(item) => {
-                                        return item
-                                    }}
-                                />
-                                <Button
-                                    title="Save"
-                                    onPress={handleUpdateNationality}
-                                    style={styles.button}
-                                />
+            </View>
+            <View style={styles.profileInfo}>
+                <Text style={styles.label}>Nationality:</Text>
+                <View style={styles.row}>
+                    {editingNationality ? (
+                        <>
+                        <SelectDropdownWithSearch
+                        data={items}
+                        onSelect={(selectedNationality) => {
+                            setNewNationality(selectedNationality)
+                        }}
+                        buttonTextAfterSelection={(selectedItem) => {
+                            return selectedItem.name
+                        }}
+                        rowTextForSelection={(item) => {
+                            return item.name
+                        }}
+                    />
+                    <Button
+                                title="Save"
+                                onPress={handleUpdateNationality}
+                                style={styles.button}
+                            />
                             </>
                         ) : (
                             <>
@@ -316,8 +326,8 @@ const ProfileScreen = (props) => {
                 </View>
             </View>
 
-        </View>
         </ScrollView>
+    
         </SafeAreaView>
 
     );

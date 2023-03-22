@@ -8,7 +8,7 @@ import EventCalendar from '../components/EventCalender';
 import TimeSelector from '../components/TimeSelector';
 import DurationSelector from '../components/DurationSelector';
 
-const EditEventScreen = ({ route }) => {
+const EditEventScreen = ({ activeUser }) => {
     const { params } = useRoute();
     const event = params && params.event;
     const navigation = useNavigation();
@@ -38,7 +38,7 @@ const EditEventScreen = ({ route }) => {
       description,
       meetingPoint,
       location: params.event.location,
-      creator: {id:5},
+      creator: {id : activeUser.activeUser[0].id},
       capacity: parseInt(capacity, 10)
     };
     updateEvent(params.event.id, event)
