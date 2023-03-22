@@ -69,7 +69,6 @@ const CityDetailsScreen = () => {
   }
 
   const topUsersList = usersInCity.slice(0, 4).map((user) => {
-    console.log('user here', user)
     return <TouchableOpacity onPress={() => handleOnUserPress(user)}>
       <Image
         source={{ uri: user.avatarUrl }}
