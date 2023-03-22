@@ -65,7 +65,7 @@ const CityDetailsScreen = () => {
   })
 
   const handleOnUserPress = (user) => {
-    navigation.navigate('Single User Detail', {user: user})
+    navigation.navigate('Single User Detail', { user: user })
   }
 
   const topUsersList = usersInCity.slice(0, 4).map((user) => {
@@ -86,49 +86,53 @@ const CityDetailsScreen = () => {
 
   return (
     <View>
-    <ScrollView>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>
-          {city.name}, {city.country.name}
-        </Text>
-      </View>
-      <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl} />
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText}>
-          {city.description}
-        </Text>
-      </View>
-     
-      <Text style={styles.eventsHeader}>
-        Events
-      </Text>
-      {eventsList}
-      <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
-        <Text style={styles.buttonText}>
-          Add Event
-        </Text>
-      </TouchableOpacity>
-    </ScrollView>
-    <View>
-    <View style={styles.topUserContainer}>
-        <Text style={styles.eventsHeader} Title>
-          Solo'ers in {city.name}
-        </Text>
-        <View style={styles.topUsersItems}>
-          {topUsersList}
-          <TouchableOpacity style={styles.whoIsHereButton} onPress={handleOpenCurrentUsers}>
-        <Text style={styles.whoIsHereButtonText}>
-          +
-        </Text>
-      </TouchableOpacity>
+
+      <ScrollView>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>
+            {city.name}, {city.country.name}
+          </Text>
         </View>
-      </View>
-      
-      <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
-        <UsersList users={usersInCity} />
-      </BottomDrawer>
-      </View>
-      </View>
+
+        <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl} />
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>
+            {city.description}
+          </Text>
+        </View>
+
+        <View style={styles.topUserContainer}>
+          <View>
+            <Text style={styles.eventsHeader} Title>
+              Solo'ers in {city.name}
+            </Text>
+            <View style={styles.topUsersItems}>
+              {topUsersList}
+              <TouchableOpacity style={styles.whoIsHereButton} onPress={handleOpenCurrentUsers}>
+                <Text style={styles.whoIsHereButtonText}>
+                  +
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
+            <UsersList users={usersInCity} />
+          </BottomDrawer>
+        </View>
+
+        <Text style={styles.eventsHeader}>
+          Events
+        </Text>
+        {eventsList}
+        <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
+          <Text style={styles.buttonText}>
+            Add Event
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+
+    </View>
   )
 }
 
@@ -138,7 +142,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#fff',
-   
+
   },
   header: {
     backgroundColor: '#0B909B',
@@ -161,6 +165,7 @@ const styles = StyleSheet.create({
   },
   topUserContainer: {
     alignItems: 'center',
+    marginBottom:10
   },
   topUsersItems: {
     flexDirection: 'row',
@@ -226,15 +231,15 @@ const styles = StyleSheet.create({
   },
   whoIsHereButton: {
     backgroundColor: '#E0AE0E',
-    paddingVertical:4,
-    height:50,
-    width:50,
+    paddingVertical: 4,
+    height: 50,
+    width: 50,
     borderRadius: 50,
-    marginLeft:10,
+    marginLeft: 10,
     marginBottom: 10,
     alignSelf: 'center',
   },
-  whoIsHereButtonText:{
+  whoIsHereButtonText: {
     color: '#FFFFFF',
     textAlign: 'center',
     fontSize: 30,
