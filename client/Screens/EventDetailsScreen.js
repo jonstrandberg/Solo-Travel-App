@@ -86,7 +86,7 @@ function EventDetailsScreen() {
   }
 
   const handleEditEvent = () => {
-    navigation.navigate('Edit Event', { event });
+    navigation.navigate('Edit Event', { event, updateSignUps });
   };
   
 
@@ -110,7 +110,7 @@ function EventDetailsScreen() {
       <Text>Description: {event?.description}</Text>
       <Text>Location: {event?.location.name}, {event?.location.country.name}</Text>
       <Text>Meet-up Point: {event?.meetingPoint}</Text>
-      <Text>Available Spaces: {availableSpaces}</Text>
+      <Text>Available Spaces: {event?.capacity - sign_ups.length}</Text>
       {isEventCreator && (
         <>
           <Button title="Delete Event" onPress={handleDeleteEvent} />

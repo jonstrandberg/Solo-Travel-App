@@ -50,7 +50,7 @@ const AddEventScreen = () => {
         },
       },
       creator: {
-        id: 5   //HARD CODED
+        id: 2   //HARD CODED
       },
       capacity,
     };
