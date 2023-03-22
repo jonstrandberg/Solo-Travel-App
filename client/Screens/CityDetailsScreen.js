@@ -57,18 +57,18 @@ const CityDetailsScreen = () => {
   }
 
   return (
-      <ScrollView >
+    <ScrollView>
       <View style={styles.header}>
         <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
       </View>
       <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl}></Image>
-      <TouchableOpacity style={styles.button} onPress={handleOpenCurrentUsers}>
+      <TouchableOpacity style={styles.whoIsHereButton} onPress={handleOpenCurrentUsers}>
         <Text style={styles.buttonText}>Who's here!</Text>
       </TouchableOpacity>
       <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
         <UsersList users={usersInCity}/>
       </BottomDrawer>
-
+  
       <Text style={styles.eventsHeader}>Events</Text>
       <FlatList
         data={event}
@@ -84,7 +84,7 @@ const CityDetailsScreen = () => {
       <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
         <Text style={styles.buttonText}>Add Event</Text>
       </TouchableOpacity>
-      </ScrollView>
+    </ScrollView>
   )
 }
 
@@ -166,6 +166,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  whoIsHereButton: {
+    backgroundColor: '#E0AE0E',
+    paddingVertical: 8,
+    paddingHorizontal: 50,
+    borderRadius: 10,
+    marginBottom: 10,
+    width: responsiveWidth(70),
+    alignSelf: 'center',
   },
 });
 
