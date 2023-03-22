@@ -64,24 +64,71 @@ const CityDetailsScreen = () => {
     </View>
   })
 
+  const handleOnUserPress = (user) => {
+    navigation.navigate('Single User Detail', {user: user})
+  }
+
+  const topUsersList = usersInCity.slice(0, 4).map((user) => {
+    console.log('user here', user)
+    return <TouchableOpacity onPress={() => handleOnUserPress(user)}>
+      <Image
+        source={{ uri: user.avatarUrl }}
+        style={{
+          width: 50,
+          height: 50,
+          borderRadius: 25,
+          marginLeft: 10,
+        }}
+      />
+
+    </TouchableOpacity>
+  })
+
   return (
+    <View>
     <ScrollView>
       <View style={styles.header}>
-        <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
+        <Text style={styles.headerText}>
+          {city.name}, {city.country.name}
+        </Text>
       </View>
-      <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl}></Image>
-      <TouchableOpacity style={styles.whoIsHereButton} onPress={handleOpenCurrentUsers}>
-        <Text style={styles.buttonText}>Who's here!</Text>
+      <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl} />
+      <View style={styles.descriptionContainer}>
+        <Text style={styles.descriptionText}>
+          {city.description}
+        </Text>
+      </View>
+     
+      <Text style={styles.eventsHeader}>
+        Events
+      </Text>
+      {eventsList}
+      <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
+        <Text style={styles.buttonText}>
+          Add Event
+        </Text>
       </TouchableOpacity>
+    </ScrollView>
+    <View>
+    <View style={styles.topUserContainer}>
+        <Text style={styles.eventsHeader} Title>
+          Solo'ers in {city.name}
+        </Text>
+        <View style={styles.topUsersItems}>
+          {topUsersList}
+          <TouchableOpacity style={styles.whoIsHereButton} onPress={handleOpenCurrentUsers}>
+        <Text style={styles.whoIsHereButtonText}>
+          +
+        </Text>
+      </TouchableOpacity>
+        </View>
+      </View>
+      
       <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
         <UsersList users={usersInCity} />
       </BottomDrawer>
-      <Text style={styles.eventsHeader}>Events</Text>
-      {eventsList}
-      <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
-        <Text style={styles.buttonText}>Add Event</Text>
-      </TouchableOpacity>
-    </ScrollView>
+      </View>
+      </View>
   )
 }
 
@@ -91,6 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#fff',
+   
   },
   header: {
     backgroundColor: '#0B909B',
@@ -111,8 +159,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
   },
+  topUserContainer: {
+    alignItems: 'center',
+  },
+  topUsersItems: {
+    flexDirection: 'row',
+  },
+  descriptionContainer: {
+    marginHorizontal: 10,
+    marginBottom: 15
+  },
+  descriptionText: {
+  },
   eventsHeader: {
-    fontSize: responsiveScreenFontSize(3),
+    fontSize: responsiveScreenFontSize(2.5),
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#254C94',
@@ -166,13 +226,21 @@ const styles = StyleSheet.create({
   },
   whoIsHereButton: {
     backgroundColor: '#E0AE0E',
-    paddingVertical: 8,
-    paddingHorizontal: 50,
-    borderRadius: 10,
+    paddingVertical:4,
+    height:50,
+    width:50,
+    borderRadius: 50,
+    marginLeft:10,
     marginBottom: 10,
-    width: responsiveWidth(70),
     alignSelf: 'center',
   },
+  whoIsHereButtonText:{
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 700,
+  }
+
 });
 
 

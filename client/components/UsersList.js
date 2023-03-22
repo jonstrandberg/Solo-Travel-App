@@ -26,7 +26,7 @@ const UsersList = ( props ) => {
                         </TouchableOpacity>
     })
 
-    console.log('list users', users)
+
 
     return (
         <View>
