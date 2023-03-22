@@ -50,9 +50,12 @@ useFocusEffect(
         data={event}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
-            <Text style={styles.eventTitle}>{item.title}</Text>
-          </TouchableOpacity>
+<View style={styles.buttonContainer}>
+  <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
+    <Text style={styles.eventTitle}>{item.title}</Text>
+  </TouchableOpacity>
+</View>
+
         )}
       />
       <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start', 
     alignItems: 'center',
     backgroundColor: '#fff',
-    paddingTop: 30,
+    paddingTop: 40,
   },
   header: {
     backgroundColor: '#0B909B',
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
     zIndex: 1,
   },
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   eventsHeader: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#254C94',
@@ -98,9 +101,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#254C94',
     paddingVertical: 6,
     paddingHorizontal: 20,
-    borderRadius: 20,
+    borderRadius: 10,
+
     marginTop: 20,
-    marginBottom: 10,
+    marginBottom: 30,
   },
   buttonText: {
     color: '#FFFFFF',
@@ -113,7 +117,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: '100%',
-    paddingHorizontal: 20,
   },
   imageContainer: {
     width: '100%',
@@ -124,13 +127,15 @@ const styles = StyleSheet.create({
     aspectRatio: 4 / 3,
   },
   eventButton: {
-    backgroundColor: 'transparent',
-    borderRadius: 20,
+    backgroundColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    alignSelf: 'center',
+    marginTop: 10,
     borderWidth: 2,
     borderColor: '#254C94',
-    marginVertical: 5,
-    paddingVertical: 6,
-    paddingHorizontal: 20,
+    width: 300,
   },
   eventTitle: {
     color: '#254C94',
