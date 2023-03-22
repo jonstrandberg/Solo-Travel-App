@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { responsiveWidth, responsiveHeight, responsiveScreenFontSize } from 'react-native-responsive-dimensions'
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getEventsByLocationId } from "../services/EventService";
 import { getLocation } from '../services/LocationService'
@@ -71,12 +72,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start', 
     alignItems: 'center',
     backgroundColor: '#fff',
-    paddingTop: 40,
+    marginTop: responsiveHeight(6)
   },
   header: {
     backgroundColor: '#0B909B',
     width: '100%',
-    height: 50,
+    height: responsiveHeight(8),
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -92,17 +93,16 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   eventsHeader: {
-    fontSize: 18,
+    fontSize: responsiveScreenFontSize(3),
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#254C94',
   },
   button: {
     backgroundColor: '#254C94',
-    paddingVertical: 6,
+    paddingVertical: 8,
     paddingHorizontal: 20,
     borderRadius: 10,
-
     marginTop: 20,
     marginBottom: 30,
   },
@@ -128,14 +128,13 @@ const styles = StyleSheet.create({
   },
   eventButton: {
     backgroundColor: 'white',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: responsiveHeight(1),
     borderRadius: 10,
     alignSelf: 'center',
     marginTop: 10,
     borderWidth: 2,
     borderColor: '#254C94',
-    width: 300,
+    width: responsiveWidth(80),
   },
   eventTitle: {
     color: '#254C94',
