@@ -192,37 +192,37 @@ public class DataLoader implements ApplicationRunner {
         UserProfile user18 = new UserProfile("Alessandra Conti", "https://xsgames.co/randomusers/assets/avatars/female/1.jpg", "Milan, Italy", "Italy", 30, milan, "Fashion, Food, Architecture", "alscn79");
         userProfileRepository.save(user18);
 
-        UserProfile user19 = new UserProfile("Isaac Wong", "https://xsgames.co/randomusers/assets/avatars/male/19.jpg", "Hong Kong, China", "China", 25, null, "Basketball, Traveling, Photography", "iwcng5");
+        UserProfile user19 = new UserProfile("Isaac Wong", "https://xsgames.co/randomusers/assets/avatars/male/19.jpg", "Hong Kong, China", "China", 25, munich, "Basketball, Traveling, Photography", "iwcng5");
         userProfileRepository.save(user19);
 
-        UserProfile user20 = new UserProfile("Anna Ivanova", "https://xsgames.co/randomusers/assets/avatars/female/11.jpg", "Moscow, Russia", "Russia", 27, null, "Reading, Ballet, Coffee", "annivn3");
+        UserProfile user20 = new UserProfile("Anna Ivanova", "https://xsgames.co/randomusers/assets/avatars/female/11.jpg", "Moscow, Russia", "Russia", 27, milan, "Reading, Ballet, Coffee", "annivn3");
         userProfileRepository.save(user20);
 
-        UserProfile user21 = new UserProfile("Sebastian Fernandez", "https://xsgames.co/randomusers/assets/avatars/male/15.jpg", "Buenos Aires, Argentina", "Argentina", 29, null, "Soccer, Music, Cooking", "sebfrndz7");
+        UserProfile user21 = new UserProfile("Sebastian Fernandez", "https://xsgames.co/randomusers/assets/avatars/male/15.jpg", "Buenos Aires, Argentina", "Argentina", 29, rome, "Soccer, Music, Cooking", "sebfrndz7");
         userProfileRepository.save(user21);
 
-        UserProfile user22 = new UserProfile("Mila Kowalski", "https://xsgames.co/randomusers/assets/avatars/female/5.jpg", "Krakow, Poland", "Poland", 28, null, "Hiking, Yoga, Painting", "mlkwlsk2");
+        UserProfile user22 = new UserProfile("Mila Kowalski", "https://xsgames.co/randomusers/assets/avatars/female/5.jpg", "Krakow, Poland", "Poland", 28, stockholm, "Hiking, Yoga, Painting", "mlkwlsk2");
         userProfileRepository.save(user22);
 
         UserProfile user23 = new UserProfile("Khaled Elsayed", "https://xsgames.co/randomusers/assets/avatars/male/4.jpg", "Alexandria, Egypt", "Egypt", 31, cairo, "Soccer, Politics, History", "khlsyd1");
         userProfileRepository.save(user23);
 
-        UserProfile user24 = new UserProfile("Eva Torres", "https://xsgames.co/randomusers/assets/avatars/female/3.jpg", "Barcelona, Spain", "Spain", 24, null, "Dancing, Literature, Travel", "evtrrs8");
+        UserProfile user24 = new UserProfile("Eva Torres", "https://xsgames.co/randomusers/assets/avatars/female/3.jpg", "Barcelona, Spain", "Spain", 24, vienna, "Dancing, Literature, Travel", "evtrrs8");
         userProfileRepository.save(user24);
 
-        UserProfile user25 = new UserProfile("Tomasz Nowak", "https://xsgames.co/randomusers/assets/avatars/male/27.jpg", "Gdansk, Poland", "Poland", 26, null, "Cycling, Photography, Beer", "tmnszk5");
+        UserProfile user25 = new UserProfile("Tomasz Nowak", "https://xsgames.co/randomusers/assets/avatars/male/27.jpg", "Gdansk, Poland", "Poland", 26, lisbon, "Cycling, Photography, Beer", "tmnszk5");
         userProfileRepository.save(user25);
 
-        UserProfile user26 = new UserProfile("Amina Kadirov", "https://xsgames.co/randomusers/assets/avatars/female/19.jpg", "Baku, Azerbaijan", "Azerbaijan", 29, null, "Cooking, Traveling, Art", "amnkdrv2");
+        UserProfile user26 = new UserProfile("Amina Kadirov", "https://xsgames.co/randomusers/assets/avatars/female/19.jpg", "Baku, Azerbaijan", "Azerbaijan", 29, lisbon, "Cooking, Traveling, Art", "amnkdrv2");
         userProfileRepository.save(user26);
 
-        UserProfile user27 = new UserProfile("Janek Novak", "https://xsgames.co/randomusers/assets/avatars/male/23.jpg", "Prague, Czech Republic", "Czech Republic", 30, null, "Beer, Football, History", "jnnvk7");
+        UserProfile user27 = new UserProfile("Janek Novak", "https://xsgames.co/randomusers/assets/avatars/male/23.jpg", "Prague, Czech Republic", "Czech Republic", 30, porto, "Beer, Football, History", "jnnvk7");
         userProfileRepository.save(user27);
 
-        UserProfile user28 = new UserProfile("Karolina Szewczyk", "https://xsgames.co/randomusers/assets/avatars/female/8.jpg", "Warsaw, Poland", "Poland", 27, null, "Art, Fashion, Literature", "krlszw3");
+        UserProfile user28 = new UserProfile("Karolina Szewczyk", "https://xsgames.co/randomusers/assets/avatars/female/8.jpg", "Warsaw, Poland", "Poland", 27, porto, "Art, Fashion, Literature", "krlszw3");
         userProfileRepository.save(user28);
 
-        UserProfile user29 = new UserProfile("Fernando Perez", "https://xsgames.co/randomusers/assets/avatars/male/9.jpg", "Mexico City, Mexico", "Mexico", 32, null, "Soccer, Music, Travel", "frnpz10");
+        UserProfile user29 = new UserProfile("Fernando Perez", "https://xsgames.co/randomusers/assets/avatars/male/9.jpg", "Mexico City, Mexico", "Mexico", 32, berlin, "Soccer, Music, Travel", "frnpz10");
         userProfileRepository.save(user29);
 
         // Events
