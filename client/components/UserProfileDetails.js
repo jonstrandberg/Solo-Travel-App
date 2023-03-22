@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native"
+import { View, Text, Image, StyleSheet } from "react-native"
 
 
 const UserProfileDetail = (props) => {
@@ -7,26 +7,23 @@ const UserProfileDetail = (props) => {
     const user = props.user
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <Image
-                    source={{ uri: user.userProfile?.avatarUrl ? user.userProfile.avatarUrl : placeholderImage }}
-                    style={{ width: 100, height: 100, borderRadius: 50 }}
-                />
-                <Text style={styles.titleText}>{user.userProfile.displayName}</Text>
-                <Text style={styles.locationText}>Current Location: {user.userProfile.location.name}</Text>
+        <View style={styles.container}>
+            <Image
+                source={{ uri: user.userProfile?.avatarUrl ? user.userProfile.avatarUrl : placeholderImage }}
+                style={{ width: 100, height: 100, borderRadius: 50 }}
+            />
+            <Text style={styles.titleText}>{user.userProfile.displayName}</Text>
+            <Text style={styles.locationText}>Current Location: {user.userProfile.location.name}</Text>
 
-                <Text style={styles.detailsText}>Home Town: {user.userProfile.homeTown}</Text>
-                <Text style={styles.detailsText}>Nationality: {user.userProfile.nationaliy}</Text>
-                <Text style={styles.detailsText}>Age: {user.userProfile.age}</Text>
-                <Text style={styles.detailsText}>Interests {user.userProfile.interests}</Text>
-            </View>
-        </ScrollView>
+            <Text style={styles.detailsText}>Home Town: {user.userProfile.homeTown}</Text>
+            <Text style={styles.detailsText}>Nationality: {user.userProfile.nationaliy}</Text>
+            <Text style={styles.detailsText}>Age: {user.userProfile.age}</Text>
+            <Text style={styles.detailsText}>Interests {user.userProfile.interests}</Text>
+        </View>
     )
 }
 
 export default UserProfileDetail
-
 
 const styles = StyleSheet.create({
     container: {

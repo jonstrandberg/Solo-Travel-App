@@ -1,13 +1,11 @@
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { Image, View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import { Image, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import UserProfileDetail from "../components/UserProfileDetails";
 
 export const AttendeeDetailsScreen = () => {
     const route = useRoute();
     const { attendee, city } = route.params;
     const navigation = useNavigation();
-
-    const placeholderImage = 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'
 
     const handleGoBackPress = () => {
         navigation.goBack()
@@ -16,37 +14,31 @@ export const AttendeeDetailsScreen = () => {
     console.log('attendee detail: ', attendee.userProfile)
 
     return (
-        <SafeAreaView style={styles.container}>
-            <Text style={styles.titleText}>Attendee:</Text>
-            <UserProfileDetail user={attendee} />
-
-            <TouchableOpacity onPress={() => handleGoBackPress()} style={styles.button}>
-                <Text style={styles.buttonText}>Back to Event</Text>
-            </TouchableOpacity>
-            
-        </SafeAreaView>
+        <ScrollView >
+                <View style={styles.container}>
+                <Text style={styles.titleText}>Attendee:</Text>
+                <UserProfileDetail user={attendee} />
+                <TouchableOpacity onPress={() => handleGoBackPress()} style={styles.button}>
+                    <Text style={styles.buttonText}>Back to Event</Text>
+                </TouchableOpacity>
+                </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        padding: 45,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    titleText:{
+    titleText: {
         marginTop: 10,
         fontSize: 30,
-        fontWeight:700
-    },
-    locationText:{
-        marginTop: 10,
-        fontSize: 20,
-        fontWeight:500
-    },
-    detailsText: {
-        marginTop: 10,
-        fontSize: 15
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 10
     },
     button: {
         alignItems: 'center',
@@ -65,4 +57,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-})
+});
+
