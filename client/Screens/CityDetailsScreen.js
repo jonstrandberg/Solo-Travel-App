@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getEventsByLocationId } from "../services/EventService";
 import { getLocation } from '../services/LocationService'
-import GeneralUserProfileDetail from '../components/GeneralUserProfileDetail';
+import GeneralUserProfileDetail from '../components/UserProfileDetail';
 import { getUserProfilesByLocationId } from '../services/UserService';
 import BottomDrawer from '../components/BottomDrawer';
 import UsersList from '../components/UsersList';
@@ -67,7 +67,7 @@ const CityDetailsScreen = () => {
       <TouchableOpacity style={styles.button} onPress={handleOpenCurrentUsers}>
         <Text style={styles.buttonText}>See everyone!</Text>
       </TouchableOpacity>
-      <BottomDrawer visible={isCurrentTravellersOpen} onClose={handleCloseCurrentTravellers}>
+      <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
         <Text>users</Text>
         {/* <GeneralUserProfileDetail  /> */}
       </BottomDrawer>
