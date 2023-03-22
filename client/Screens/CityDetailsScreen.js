@@ -54,7 +54,6 @@ const CityDetailsScreen = () => {
   const handleCloseCurrentUsers = () => {
     setIsCurrentUsersOpen(false)
   }
-  
 
   return (
     <SafeAreaView style={styles.container}>
