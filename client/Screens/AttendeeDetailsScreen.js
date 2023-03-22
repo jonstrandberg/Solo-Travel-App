@@ -11,8 +11,6 @@ export const AttendeeDetailsScreen = () => {
         navigation.goBack()
     }
 
-    console.log('attendee detail: ', attendee.userProfile)
-
     return (
         <ScrollView >
                 <View style={styles.container}>
