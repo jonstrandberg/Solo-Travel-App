@@ -4,7 +4,6 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import { addSignUp, getSignUpsByEventId, deleteSignUp } from "../services/SignupService";
 import { deleteEvent } from "../services/EventService";
 import { getUserProfile } from "../services/UserService";
-import { Attendee } from "../components/Attendee";
 
 function EventDetailsScreen({ activeUser }) {
   const route = useRoute();
