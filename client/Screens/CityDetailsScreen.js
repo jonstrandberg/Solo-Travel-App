@@ -22,13 +22,6 @@ const CityDetailsScreen = () => {
   const route = useRoute();
   const cityId = route.params.cityId;
 
-  useEffect(() => {   //LOOK HERE GET RIUD OF ME OMG
-    getEventsByLocationId(city.id)
-      .then(json => {
-        setEvent(json)
-      })
-  }, [])
-
   useEffect(() => {
     getLocation(cityId)
       .then(json => setCity(json))
@@ -69,13 +62,10 @@ const CityDetailsScreen = () => {
         <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
       </View>
       <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl}></Image>
-
-      <Text>Who's Here:</Text>
       <TouchableOpacity style={styles.button} onPress={handleOpenCurrentUsers}>
-        <Text style={styles.buttonText}>See everyone!</Text>
+        <Text style={styles.buttonText}>Who's here!</Text>
       </TouchableOpacity>
       <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
-        <Text>users</Text>
         <UsersList users={usersInCity}/>
       </BottomDrawer>
 

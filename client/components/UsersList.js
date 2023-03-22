@@ -7,12 +7,10 @@ const UsersList = ( props ) => {
 
     const handleOnUserPress = (user) => {
       navigation.navigate('Single User Detail', {user: user})
-      console.log('userlist user: ' , user)
     }
 
     return (
         <View>
-            <Text>People</Text>
             <FlatList
                 data={users}
                 keyExtractor={(item, index) => index.toString()}
