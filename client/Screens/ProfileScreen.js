@@ -14,6 +14,9 @@ import {
 import SelectDropdownWithSearch from 'react-native-select-dropdown-with-search';
 import { getCountries } from "../services/CountryService";
 import { getLocations, getLocation } from "../services/LocationService";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { responsiveWidth} from 'react-native-responsive-dimensions'
+import { useNavigation } from '@react-navigation/native';
 
 const placeholderImage = 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'
 
@@ -36,8 +39,9 @@ const ProfileScreen = (props) => {
     const [editingInterests, setEditingInterests] = useState(false)
     const [isSavingHomeTown, setIsSavingHomeTown] = useState(false);
     const [items, setItems] = useState([]);
-
     const [itemsLocations, setItemsLocations] = useState({});
+
+    const navigation = useNavigation()
 
     const getCountries = async function () {
         return fetch("https://restcountries.com/v3.1/all")
@@ -284,48 +288,53 @@ const ProfileScreen = (props) => {
                         </View>
                     </View>
 
-                
-                <View style={styles.profileInfo}>
-                    <Text style={styles.label}>Location:</Text>
-                    <View style={styles.row}>
-                        {editingLocation ? (
-                            <>
-                                <SelectDropdownWithSearch
-                                    data={itemsLocations}
-                                    onSelect={(selectedLocation) => {
-                                        setNewLocation(selectedLocation)
-                                    }}
-                                    buttonTextAfterSelection={(selectedItem) => {
-                                        return selectedItem.name
-                                    }}
-                                    rowTextForSelection={(item) => {
-                                        return item.name
-                                    }}
-                                />
-                                <Button
-                                    title="Save"
-                                    onPress={handleUpdateLocation}
-                                    style={styles.button}
-                                />
-                            </>
-                        ) : (
-                            <>
-                                {profile.location && profile.location.name ? (
-                                    <Text style={{ marginRight: 10 }}>
-                                        {profile.location.name}
-                                    </Text>
-                                ) : (
-                                    <Text style={{ marginRight: 10 }}>N/A</Text>
-                                )}
-                                <Button
-                                    title="Edit"
-                                    onPress={() => setEditingLocation(true)}
-                                    style={styles.button}
-                                />
-                            </>
-                        )}
+
+                    <View style={styles.profileInfo}>
+                        <Text style={styles.label}>Location:</Text>
+                        <View style={styles.row}>
+                            {editingLocation ? (
+                                <>
+                                    <SelectDropdownWithSearch
+                                        data={itemsLocations}
+                                        onSelect={(selectedLocation) => {
+                                            setNewLocation(selectedLocation)
+                                        }}
+                                        buttonTextAfterSelection={(selectedItem) => {
+                                            return selectedItem.name
+                                        }}
+                                        rowTextForSelection={(item) => {
+                                            return item.name
+                                        }}
+                                    />
+                                    <Button
+                                        title="Save"
+                                        onPress={handleUpdateLocation}
+                                        style={styles.button}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    {profile.location && profile.location.name ? (
+                                        <Text style={{ marginRight: 10 }}>
+                                            {profile.location.name}
+                                        </Text>
+                                    ) : (
+                                        <Text style={{ marginRight: 10 }}>N/A</Text>
+                                    )}
+                                    <Button
+                                        title="Edit"
+                                        onPress={() => setEditingLocation(true)}
+                                        style={styles.button}
+                                    />
+                                </>
+                            )}
+                        </View>
                     </View>
-                    </View>
+                    {/* <TouchableOpacity style={styles.signOutButton} onPress={handleLogOut}>
+                        <Text style={styles.signOutButtonText}>
+                            Log Out
+                        </Text>
+                    </TouchableOpacity> */}
                 </View>
 
             </ScrollView>
@@ -341,7 +350,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: '#F2F2F2',
-        marginTop: 50,
+        // marginTop: 50,
     },
     title: {
         fontSize: 24,
@@ -394,6 +403,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         paddingHorizontal: 20,
+    },
+    signOutButton: {
+        backgroundColor: '#254C94',
+        paddingVertical: 8,
+        paddingHorizontal: 50,
+        borderRadius: 10,
+        marginTop: 15,
+        marginBottom: 40,
+        width: responsiveWidth(50),
+        alignSelf: 'center',
+    },
+    signOutButtonText: {
+        color: '#FFFFFF',
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold',
     },
 });
 

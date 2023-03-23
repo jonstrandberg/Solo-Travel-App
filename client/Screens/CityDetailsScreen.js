@@ -58,7 +58,7 @@ const CityDetailsScreen = () => {
 
   const eventsList = events.map((event) => {
     return <View style={styles.buttonContainer}>
-      <TouchableOpacity onPress={() => handleEventPress(event)} style={styles.eventButton}>
+      <TouchableOpacity key={event.id} onPress={() => handleEventPress(event)} style={styles.eventButton}>
         <Text style={styles.eventTitle}>{event.title}</Text>
       </TouchableOpacity>
     </View>
@@ -69,7 +69,7 @@ const CityDetailsScreen = () => {
   }
 
   const topUsersList = usersInCity.slice(0, 4).map((user) => {
-    return <TouchableOpacity onPress={() => handleOnUserPress(user)}>
+    return <TouchableOpacity key={user.id} onPress={() => handleOnUserPress(user)}>
       <Image
         source={{ uri: user.avatarUrl }}
         style={{
