@@ -11,7 +11,7 @@ import UsersList from '../components/UsersList';
 
 const CityDetailsScreen = () => {
   const [city, setCity] = useState({ name: '', country: { name: '' } })
-  const [event, setEvent] = useState([])
+  const [events, setEvents] = useState([])
   const [usersInCity, setUsersInCity] = useState([])
   const [isCurrentUsersOpen, setIsCurrentUsersOpen] = useState(false)
 
@@ -31,7 +31,7 @@ const CityDetailsScreen = () => {
     React.useCallback(() => {
       getEventsByLocationId(cityId)
         .then(json => {
-          setEvent(json);
+          setEvents(json);
         });
     }, [navigation, cityId])
   );
@@ -56,35 +56,90 @@ const CityDetailsScreen = () => {
     setIsCurrentUsersOpen(false)
   }
 
-  return (
-      <ScrollView >
-      <View style={styles.header}>
-        <Text style={styles.headerText}>{city.name}, {city.country.name}</Text>
-      </View>
-      <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl}></Image>
-      <TouchableOpacity style={styles.button} onPress={handleOpenCurrentUsers}>
-        <Text style={styles.buttonText}>Who's here!</Text>
+  const eventsList = events.map((event, index) => {
+    const eventId = event.id
+    return <View key={eventId} style={styles.buttonContainer}>
+      <TouchableOpacity  onPress={() => handleEventPress(event)} style={styles.eventButton}>
+        <Text style={styles.eventTitle}>{event.title}</Text>
       </TouchableOpacity>
-      <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
-        <UsersList users={usersInCity}/>
-      </BottomDrawer>
+    </View>
+    
+  })
 
-      <Text style={styles.eventsHeader}>Events</Text>
-      <FlatList
-        data={event}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={() => handleEventPress(item)} style={styles.eventButton}>
-              <Text style={styles.eventTitle}>{item.title}</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+  const handleOnUserPress = (user) => {
+    navigation.navigate('Single User Detail', { user: user })
+  }
+
+  const topUsersList = usersInCity.slice(0, 4).map((user) => {
+    const userId = user.id
+    return <TouchableOpacity key={userId} onPress={() => handleOnUserPress(user)}>
+      <Image
+        source={{ uri: user.avatarUrl }}
+        style={{
+          width: 50,
+          height: 50,
+          borderRadius: 25,
+          marginLeft: 10,
+        }}
       />
-      <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
-        <Text style={styles.buttonText}>Add Event</Text>
-      </TouchableOpacity>
+
+    </TouchableOpacity>
+  })
+
+  // const topUsersList = () => {
+    
+  // }
+
+
+   return (
+    <View>
+
+      <ScrollView>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>
+            {city.name}, {city.country.name}
+          </Text>
+        </View>
+
+        <Image source={{ uri: city?.imageUrl ? city.imageUrl : placeholderCityImage }} resizeMode="contain" style={styles.imageUrl} />
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>
+            {city.description}
+          </Text>
+        </View>
+
+        <View style={styles.topUserContainer}>
+          <View>
+            <Text style={styles.eventsHeader} Title>
+              Solo'ers in {city.name}
+            </Text>
+            <View style={styles.topUsersItems}>
+              {topUsersList}
+              <TouchableOpacity style={styles.whoIsHereButton} onPress={handleOpenCurrentUsers}>
+                <Text style={styles.whoIsHereButtonText}>
+                  +
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <BottomDrawer visible={isCurrentUsersOpen} onClose={handleCloseCurrentUsers}>
+            <UsersList users={usersInCity} />
+          </BottomDrawer>
+        </View>
+
+        <Text style={styles.eventsHeader}>
+          Events
+        </Text>
+        {eventsList}
+        <TouchableOpacity style={styles.button} onPress={handleAddEventPress}>
+          <Text style={styles.buttonText}>
+            Add Event
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
+
+    </View>
   )
 }
 
@@ -94,6 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#fff',
+
   },
   header: {
     backgroundColor: '#0B909B',
@@ -114,8 +170,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
   },
+  topUserContainer: {
+    alignItems: 'center',
+    marginBottom:10
+  },
+  topUsersItems: {
+    flexDirection: 'row',
+  },
+  descriptionContainer: {
+    marginHorizontal: 10,
+    marginBottom: 15
+  },
+  descriptionText: {
+  },
   eventsHeader: {
-    fontSize: responsiveScreenFontSize(3),
+    fontSize: responsiveScreenFontSize(2.5),
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#254C94',
@@ -167,6 +236,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  whoIsHereButton: {
+    backgroundColor: '#E0AE0E',
+    paddingVertical: 4,
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    marginLeft: 10,
+    marginBottom: 10,
+    alignSelf: 'center',
+  },
+  whoIsHereButtonText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 700,
+  }
+
 });
 
 

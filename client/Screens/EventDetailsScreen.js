@@ -35,21 +35,21 @@ function EventDetailsScreen({ activeUser }) {
       event: { id: event.id },
     };
     try {
-        if (availableSpaces > 0) {
-          const response = await addSignUp(signUp);
-          setAvailableSpaces(Spaces => Spaces - 1);
-          await updateSignUps();
-        } else {
-          Alert.alert('No available spaces', 'Sorry, there are no spaces available for this event.');
-        }
-      } catch (error) {
+      if (availableSpaces > 0) {
+        const response = await addSignUp(signUp);
+        setAvailableSpaces(Spaces => Spaces - 1);
+        await updateSignUps();
+      } else {
+        Alert.alert('No available spaces', 'Sorry, there are no spaces available for this event.');
+      }
+    } catch (error) {
       console.error(error);
     }
   };
 
   const handleCancelAttendance = async () => {
     try {
-      const userProfile = await getUserProfile(activeUser.activeUser[0].id); 
+      const userProfile = await getUserProfile(activeUser.activeUser[0].id);
       const signUps = await getSignUpsByEventId(event.id);
       const signUp = signUps.find((signUp) => signUp.userProfile.id === userProfile.id);
       const response = await deleteSignUp(signUp.id);
@@ -63,11 +63,12 @@ function EventDetailsScreen({ activeUser }) {
 
   const handleDeleteEvent = async () => {
     Alert.alert(
-        'Delete Event',
-        'Are you sure you want to delete this event?',
-        [
-          { text: 'Cancel', style: 'cancel' },
-          { text: 'Delete', style: 'destructive', onPress: async () => {
+      'Delete Event',
+      'Are you sure you want to delete this event?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete', style: 'destructive', onPress: async () => {
             try {
               // delete all sign-ups for the event
               const signUps = await getSignUpsByEventId(event.id);
@@ -78,9 +79,10 @@ function EventDetailsScreen({ activeUser }) {
             } catch (error) {
               console.error('Error deleting event:', error);
             }
-          } },
-        ],
-        { cancelable: false }
+          }
+        },
+      ],
+      { cancelable: false }
     );
   }
 
@@ -94,10 +96,14 @@ function EventDetailsScreen({ activeUser }) {
     setAvailableSpaces(event.capacity - json.length)
   };
 
-
   const handleAttendeePress = (user) => {
-    navigation.navigate('Attendee Details',{user : user});
+    navigation.navigate('Attendee Details', { user: user });
   };
+
+  const handleGoBack = () => {
+    navigation.goBack()
+  }
+
 
   return (
 
@@ -119,41 +125,41 @@ function EventDetailsScreen({ activeUser }) {
           </Text>
         </View>
         <View style={styles.container}>
-  <View style={styles.eventDetailsContainer}>
-    <Text style={styles.eventTitle}>Event: {event?.title}</Text>
-    <View style={styles.eventDetails}>
-      <Text style={{fontSize: 16}}>Date: {event?.date}</Text>
-      <Text style={{fontSize: 16}}>Time: {event?.time}</Text>
-      <Text style={{fontSize: 16}}>Duration: {event?.duration}</Text>
-      <Text style={{fontSize: 16}}>Description: {event?.description}</Text>
-      <Text style={{fontSize: 16}}>Location: {event?.location.name}, {event.location.country.name}</Text>
-      <Text style={{fontSize: 16}}>Meet-up Point: {event?.meetingPoint}</Text>
-      <Text style={{fontSize: 16}}>Available Spaces: {event?.capacity - sign_ups.length}</Text>
-    </View>
-    {isEventCreator && (
-      <TouchableOpacity style={styles.eventButton} onPress={handleDeleteEvent}>
-        <Text style={styles.eventButtonTitle}>Delete Event</Text>
-      </TouchableOpacity>
-    )}
-    {!isEventCreator && currentUser && (
-      <TouchableOpacity style={styles.eventButton} onPress={handleCancelAttendance}>
-        <Text style={styles.eventButtonTitle}>Cancel Attendance</Text>
-      </TouchableOpacity>
-    )}
-    {!isEventCreator && !currentUser && (
-      <TouchableOpacity style={styles.eventButton} onPress={handleSignUp}>
-        <Text style={styles.eventButtonTitle}>Sign Up</Text>
-      </TouchableOpacity>
-    )}
-    {isEventCreator && (
-      <TouchableOpacity style={styles.eventButton} onPress={handleEditEvent}>
-        <Text style={styles.eventButtonTitle}>Edit Event</Text>
-      </TouchableOpacity>
-    )}
-  </View>
-</View>
+          <View style={styles.eventDetailsContainer}>
+            <Text style={styles.eventTitle}>Event: {event?.title}</Text>
+            <View style={styles.eventDetails}>
+              <Text style={{ fontSize: 16 }}>Date: {event?.date}</Text>
+              <Text style={{ fontSize: 16 }}>Time: {event?.time}</Text>
+              <Text style={{ fontSize: 16 }}>Duration: {event?.duration}</Text>
+              <Text style={{ fontSize: 16 }}>Description: {event?.description}</Text>
+              <Text style={{ fontSize: 16 }}>Location: {event?.location.name}, {event.location.country.name}</Text>
+              <Text style={{ fontSize: 16 }}>Meet-up Point: {event?.meetingPoint}</Text>
+              <Text style={{ fontSize: 16 }}>Available Spaces: {event?.capacity - sign_ups.length}</Text>
+            </View>
+            {isEventCreator && (
+              <TouchableOpacity style={styles.eventButton} onPress={handleDeleteEvent}>
+                <Text style={styles.eventButtonTitle}>Delete Event</Text>
+              </TouchableOpacity>
+            )}
+            {!isEventCreator && currentUser && (
+              <TouchableOpacity style={styles.eventButton} onPress={handleCancelAttendance}>
+                <Text style={styles.eventButtonTitle}>Cancel Attendance</Text>
+              </TouchableOpacity>
+            )}
+            {!isEventCreator && !currentUser && (
+              <TouchableOpacity style={styles.eventButton} onPress={handleSignUp}>
+                <Text style={styles.eventButtonTitle}>Sign Up</Text>
+              </TouchableOpacity>
+            )}
+            {isEventCreator && (
+              <TouchableOpacity style={styles.eventButton} onPress={handleEditEvent}>
+                <Text style={styles.eventButtonTitle}>Edit Event</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
         <View style={styles.attendeesContainer}>
-        <Text style={styles.attendeesHeaderText}>Attendees:</Text>
+          <Text style={styles.attendeesHeaderText}>Attendees:</Text>
           {sign_ups.map((sign_up) => (
             <TouchableOpacity onPress={() => handleAttendeePress(sign_up)} key={sign_up.id} style={styles.attendeeContainer}>
               <Image
@@ -170,11 +176,16 @@ function EventDetailsScreen({ activeUser }) {
             </TouchableOpacity>
           ))}
         </View>
+        <View style={styles.goBackContainer}>
+          <TouchableOpacity style={styles.eventButton} onPress={handleGoBack}>
+            <Text style={styles.eventButtonTitle}>Go Back</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
-  
+
 const styles = StyleSheet.create({
   container: {
     margin: 10,
@@ -184,7 +195,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#002060'
   },
-  createdBy: {   
+  createdBy: {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 18,
@@ -245,6 +256,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     fontWeight: 'bold',
   },
+  goBackContainer:{
+    marginLeft:90,
+    marginTop:10,
+    marginBottom:20,
+  }
 });
 
 export default EventDetailsScreen;

@@ -141,7 +141,8 @@ public class DataLoader implements ApplicationRunner {
         UserProfile user1 = new UserProfile("Johnny Sweden", "https://ca.slack-edge.com/T0TN401HD-U049AFWFYBD-6aa802517482-512", "Gothernberg, Sweden", "Scotland", 37, munich, "Ice Hockey, Meatballs, Going to IKEA with the missus", "Vxj1gKvrTFOQBkqv2nQnduRp8Xl1");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile("Ben Barlow", "https://ca.slack-edge.com/T0TN401HD-U049AJUBB34-93680e4cc47f-512", "Paisley, Scotland", "Scotland", 39, munich, "Pizza, Football, Darwin Nunez", "2si5bEZ02pTJtK72rRTlI0UqQtw2");
+        UserProfile user2 = new UserProfile("Ben Barlow", "https://ca.slack-edge.com/T0TN401HD-U049AJUBB34-93680e4cc47f-512", "Paisley, Scotland", "Scotland", 39, munich, "Pizza, Football, Darwin Nunez", "gAjsUXk75pg0JZ3PQLnPywR1Hro1");
+
         userProfileRepository.save(user2);
 
         UserProfile user3 = new UserProfile("Maggie Amin", "https://ca.slack-edge.com/T0TN401HD-U049P8B5HU1-5520e1f8828b-512", "Cairo, Egypt", "Egypt", 28, berlin, "Puppies, Long walks on the beach, Architecture", "sTVxexzZ6hhytl8tPWHF5H2k46n2");
