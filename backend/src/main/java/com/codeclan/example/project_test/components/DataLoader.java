@@ -233,7 +233,7 @@ public class DataLoader implements ApplicationRunner {
         Event event2 = new Event("Bayern Munich v Union Berlin", "15:00 PM", "02hr(s) 30mins", "FOOTBALL", munich, "30 March 2023", user2, 6, "Meeting at Marienplatz, then walking to the stadium");
         eventRepository.save(event2);
 
-        Event event3 = new Event("KitKat Club", "23:00 PM", "12hr(s) 00mins", "Wear dark clothes and don't skimp on the your latex ;)", berlin, "29 March 2023", user5, 6, "In front of the club, next to the pink neon sign");
+        Event event3 = new Event("River Spree Boat Tour", "11:00 AM", "12hr(s) 00mins", "View Berlin from a different perspective", berlin, "29 March 2023", user5, 6, "Nikolaiviertel Pier");
         eventRepository.save(event3);
 
         Event event4 = new Event("Pub Crawl", "20:00 PM", "03hr(s) 00mins", "A famous tour across the Grassmarket and Cowgate", edinburgh, "25 March 2023", user5, 15, "Meeting outside The Last Drop pub, 74-78 Grassmarket");
