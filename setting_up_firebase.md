@@ -1,18 +1,21 @@
-Setup and load Firebase:
-Video tutorial starting from firebase setup
+# Setting up and loading Firebase:
 
-Go to Firebase
-Click Get Started
-Click Add Project give project a name then click Continue
-De-select google analytics, then click Continue
-When project finishes building click web icon </>
-Add a project name to register with (same as project name) then click Register App
-Once app is registered copy the authentications from the firebaseConfig, to us in the next step.
-in terminal:
-npx expo install firebase
-in VSCode in the project root create firebase.js
-then add the following code (email signup) to the file replacing the auths with the ones previously copied:
+### In Firebase console
+* Go to [Firebase](https://firebase.google.com/)
+* Click Get Started
+* Click Add Project give project a name then click Continue
+* De-select google analytics, then click Continue
+* When project finishes building click web icon </>
+* Add a project name to register with (same as project name) then click Register App
+* Once app is registered copy the authentications from the firebaseConfig, to us in the next step.
 
+### In terminal:
+* npx expo install firebase
+
+### In VSCode (or your chosen editor) 
+* in the project root create a file named firebase.js
+* add the following code to the file replacing the auths with the ones previously copied:
+```
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
@@ -31,7 +34,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 export { auth }
-Return to firebase console
-Click Authentication then click Get Started
-Click pencil2 Edit Configuration on Email/Password
-Check Enable then click Save
+```
+
+### Return to the Firebase console
+* Click Authentication then click Get Started
+* Click :pencil2: Edit Configuration on Email/Password
+* Check Enable then click Save
