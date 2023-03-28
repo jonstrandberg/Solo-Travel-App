@@ -5,21 +5,20 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { getLocations } from "../services/LocationService"
 import CityDetailsScreen from "./CityDetailsScreen"
 import EventDetailsScreen from "./EventDetailsScreen"
-
 import EditEventScreen from "./EditEventScreen";
 import AddEventScreen from "./AddEventScreen"
-
 import Header from "../components/Header"
 import AttendeeDetailsScreen from "./AttendeeDetailsScreen"
-import SingleUserDetailScreen from "./SingleUserDetailScreen" 
+import SingleUserDetailScreen from "./SingleUserDetailScreen"
 
-const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
 
 const Stack = createStackNavigator()
 
 const CitiesList = () => {
   const [location, setLocation] = useState([]);
   const navigation = useNavigation();
+
+  const placeholderCitiyImage = 'https://media.istockphoto.com/photos/alberta-wilderness-near-banff-picture-id583809524?b=1&k=20&m=583809524&s=612x612&w=0&h=ZH0lrJI2ypyxvWQRtpwYcBFZoLLI4XdHWX5xP3JKkKQ='
 
   useEffect(() => {
     getLocations().then((json) => {
@@ -28,7 +27,7 @@ const CitiesList = () => {
   }, []);
 
   const handleCityPress = (city) => {
-    navigation.navigate('City Details', { cityId : city.id })
+    navigation.navigate('City Details', { cityId: city.id })
   };
 
   return (
@@ -66,38 +65,38 @@ const HomeScreen = (activeUser) => {
     <Stack.Navigator>
       <Stack.Screen
         name='Explore Cities'
-        children={() => <CitiesList activeUser={activeUser}/>}
+        children={() => <CitiesList activeUser={activeUser} />}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name='City Details'
-        children={() => <CityDetailsScreen activeUser={activeUser}/>}
+        children={() => <CityDetailsScreen activeUser={activeUser} />}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name='Event Details'
-        children={() => <EventDetailsScreen activeUser={activeUser}/>}
+        children={() => <EventDetailsScreen activeUser={activeUser} />}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name='Add Event'
-        children={() => <AddEventScreen activeUser={activeUser}/>}
+        children={() => <AddEventScreen activeUser={activeUser} />}
         options={{ title: 'Add Event', headerShown: false }}
       />
       <Stack.Screen
         name='Attendee Details'
-        children={() => <AttendeeDetailsScreen activeUser={activeUser}/>}
+        children={() => <AttendeeDetailsScreen activeUser={activeUser} />}
         options={{ title: 'Add Event', headerShown: false }}
       />
       <Stack.Screen
         name='Single User Detail'
-        children={() => <SingleUserDetailScreen activeUser={activeUser}/>}
+        children={() => <SingleUserDetailScreen activeUser={activeUser} />}
         options={{ title: 'Add Event', headerShown: false }}
       />
-       <Stack.Screen 
-       name="Edit Event" 
-       children={() => <EditEventScreen activeUser={activeUser}/>}
-       options={{ title: 'Edit Event', headerShown: false }} />
+      <Stack.Screen
+        name="Edit Event"
+        children={() => <EditEventScreen activeUser={activeUser} />}
+        options={{ title: 'Edit Event', headerShown: false }} />
 
     </Stack.Navigator>
 
