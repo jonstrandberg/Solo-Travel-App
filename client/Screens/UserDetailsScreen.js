@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { StyleSheet, SafeAreaView, View, Text, TextInput, TouchableOpacity, Alert } from "react-native"
+import { StyleSheet, SafeAreaView, View, Text, TextInput, TouchableOpacity, Alert, Image} from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { addUserProfile } from "../services/UserService"
 import { auth } from "../firebase"
@@ -56,8 +56,11 @@ const UserDetailsScreen = () => {
             style={styles.container}
             behaviour="padding"
         >
+            <View style={styles.logoContainer}>
+                <Image source={require('../img/VLarge.png')} style={styles.logo} />
+            </View>
             <View style={styles.inputContainer}>
-                <Text>Complete Registration</Text>
+                <Text style={styles.regText}>Complete Your Registration</Text>
                 <TextInput
                     placeholder="Name"
                     value={displayName}
@@ -122,16 +125,24 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#254C94'
+    },
+    regText:{
+        color:'#FFF',
+        fontWeight: 600,
     },
     inputContainer: {
         width: '80%',
     },
     input: {
-        backgroundColor: 'white',
-        paddingHorizontal: 10,
-        paddingVertical: 10,
+        height: 50,
+        width: '95%',
+        marginTop: 5,
+        borderWidth: 1,
         borderRadius: 10,
-        marginTop: 5
+        padding: 10,
+        borderColor: '#BDBDBD',
+        backgroundColor: 'white',
     },
     buttonContainer: {
         width: '60%',
@@ -149,6 +160,17 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontWeight: '700',
-        fontSize: 16
+        fontSize: 18
     },
+    logoContainer: {
+        backgroundColor: '#254C94',
+        paddingTop: 6,
+        paddingBottom: 40,
+        alignItems: 'center',
+    },
+    logo: {
+        width: 300,
+        height: 100,
+        resizeMode: 'contain',
+    }
 })
