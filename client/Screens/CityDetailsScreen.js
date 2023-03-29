@@ -92,7 +92,7 @@ const CityDetailsScreen = () => {
 
 
    return (
-    <View>
+    <SafeAreaView>
 
       <ScrollView>
         <View style={styles.header}>
@@ -139,7 +139,7 @@ const CityDetailsScreen = () => {
         </TouchableOpacity>
       </ScrollView>
 
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -157,7 +157,6 @@ const styles = StyleSheet.create({
     height: responsiveHeight(8),
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
   },
   headerText: {
     color: '#fff',
