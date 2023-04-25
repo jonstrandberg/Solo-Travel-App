@@ -148,7 +148,7 @@ public class DataLoader implements ApplicationRunner {
         UserProfile user3 = new UserProfile("Maggie Amin", "https://ca.slack-edge.com/T0TN401HD-U049P8B5HU1-5520e1f8828b-512", "Cairo, Egypt", "Egypt", 28, berlin, "Puppies, Long walks on the beach, Architecture", "sTVxexzZ6hhytl8tPWHF5H2k46n2");
         userProfileRepository.save(user3);
 
-        UserProfile user4 = new UserProfile("Gareth Evans", "https://ca.slack-edge.com/T0TN401HD-U049D2VFCJY-a61e16c3db6f-512", "Lossiemouth, Scotland", "Scotland", 30, edinburgh, "Football, Sobriety, Puns", "dButkBOV7xcHqWs0DmwZd4f9Uyq1");
+        UserProfile user4 = new UserProfile("Gareth Evans", "https://ca.slack-edge.com/T0TN401HD-U049D2VFCJY-a61e16c3db6f-512", "Lossiemouth, Scotland", "Scotland", 30, edinburgh, "Football, Sobriety, Puns", "BBACYo8acNa11Y3TXbZHfd0ZsEh1");
         userProfileRepository.save(user4);
 
         UserProfile user5 = new UserProfile("The Almighty Creator", "https://xsgames.co/randomusers/assets/avatars/male/5.jpg", "Heaven", "Godly", 30, null, "Church, Resurrection, Smiting", "Wkdd3oJeZlWMA8xktKyszQgnB4g1");
