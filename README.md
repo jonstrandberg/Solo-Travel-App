@@ -1,4 +1,4 @@
-# Sol:earth_americas: Travel MeetUp App :flight_departure:	
+# Solo Travel MeetUp App :flight_departure:	:earth_americas:
 Solo allows solo travels to connect with others travelling alone by creating events to see the sites in a city and make new friends. The aim is to use technology to connect people, instead of being limited to staying in hostels to meet people. The app features a React-Native front end with a Java Spring backend and a PostgreSQL database. This was produced in two weeks for our Capstone Project as the final part of our studies on the Professional Software Development course at [CodeClan](https://codeclan.com/)
 
 ## The Team :wave:	
