@@ -123,6 +123,4 @@ npx expo start
 
 select the ios simulator to load the app (note you will need the simulator and expo installed on your device to start)
 
-### Demo
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OmbYlXWyp3A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
